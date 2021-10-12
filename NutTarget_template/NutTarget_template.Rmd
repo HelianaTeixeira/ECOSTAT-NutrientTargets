@@ -1,0 +1,124 @@
+---
+title: "Methods used to set management objectives for nutrients - ECOSTAT Questionnaire"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::robobook:
+    highlight: kate
+---
+
+
+```{r setup, include=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+ECOSTAT has a mandate to compare methods used by Member States to set management objectives  for nutrients that are compatible with good ecological status and good environmental status.
+
+This questionnaire aims to understand national approaches for setting and implementing management objectives for nutrients and to help Member States and collaborating countries to improve their approaches and, thereby, achieve the objectives of the Water Framework Directive (WFD) and Marine Strategy Framework Directive (MSFD).
+
+```{r load packages, include=FALSE}
+library(tidyverse)
+library(tidytext)
+library(here)
+library(knitr)
+library(kableExtra)
+```
+
+```{r load data, include=FALSE}
+FName.dat <-here::here("Data","PartA.csv")
+dat.PartA<- read.csv(file = FName.dat, sep=";", header = TRUE) #fileEncoding="latin1"
+```
+
+```{r pre-treatment, include=FALSE}
+dat.PartA <- type.convert(dat.PartA) #convert data automatic as appropriate
+
+dat.PartA$BE<-as.integer(dat.PartA$BE)
+dat.PartA$BE.Br<-as.integer(dat.PartA$BE.Br)
+dat.PartA$BE.Fl<-as.integer(dat.PartA$BE.Fl)
+
+dat.PartA$WaterCategory<-factor(dat.PartA$WaterCategory, levels=c("Lakes","Rivers","Transitional","Coastal","Marine")) #order factor levels
+
+PartA.long <-pivot_longer(dat.PartA, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
+
+PartA.long <- PartA.long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+PartA.long$Acronym <- as.factor(PartA.long$Acronym)
+```
+
+#### Overview of countries participationg in questionnaire
+
+```{r countries data, }
+dat.countries <- read.csv(file = here::here("Data","Countries.csv"), sep=";", header = TRUE)
+dat.countries$Type <- factor(dat.countries$Type, levels = c("EU Member States", "EFTA Member States", "EU Candidate Countries"))
+
+#left join countries full name and info
+PartA.long <- left_join( PartA.long, dat.countries, by = "Acronym", keep = FALSE) 
+PartA.long$Countries <- as.factor(PartA.long$Countries)
+
+Tab1 <- PartA.long %>% filter(Reply == 1)%>%
+  select(c(WaterCategory, Acronym, Countries))%>%
+  count(WaterCategory, Acronym, Countries)%>%
+  mutate(n = ifelse(n < 100, "y", n)) #replace number of replies just to get countries per wat cat
+
+#Table 1  
+options(knitr.kable.NA = '')
+Tab1 %>% spread(key = WaterCategory, value = n) %>%
+  knitr::kable(format = "html",col.names = c("Acronym"," ","Lakes","Rivers","Transitional","Coastal","Marine"), align = "llccccc", caption = "Table 1. Countries* participating in survey per water category.", table.attr = "style='width:70%;'") %>%
+  kableExtra::add_header_above(header = c("Country" = 2, "Water Category" = 5),align = "centre")
+
+```
+
+ *Iceland and Norway (EFTA Members) and Turkey (EU candidate) are not EU Member States. 
+
+## How are management objectives for nutrients derived (methods)? (Part A)
+
+## Q1. Have you set management objectives for nutrients for waters bodies that are exposed to nutrient pollution?
+
+```{r Q1,fig.cap="Figure 1. Number of countries responding, overview by water category."}
+#select data Q1
+PartA.Q1 <- dat.PartA %>% filter(QuestionNo_b==1)
+
+#run function to display the sample size at y=0
+give.n <- function(x){
+  return(c(y = -1, label = x))#length(x)
+}
+  
+plotQ1 <- ggplot(PartA.Q1, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotQ1
+```
+
+```{r Countries detail Q1,  }
+
+
+```
+
+Countries bla bla...
+
+## Q2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
+
