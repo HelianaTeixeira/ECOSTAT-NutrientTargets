@@ -5,6 +5,6 @@ This work was developed within the Water Framework Directive (WFD) Common Implem
 
 This repository contains the files necessary to complete this Report on Nutrient Targets due in 2022.
 
-authors: Heliana Teixeira and Martyn G. Kelly
-
-contacts: heliana.teixeira@ua.pt; mgkelly@bowburn-consultancy.co.uk
+- authors: Heliana Teixeira and Martyn G. Kelly
+- contacts: heliana.teixeira@ua.pt; mgkelly@bowburn-consultancy.co.uk
+- date created: 2021.10.12
