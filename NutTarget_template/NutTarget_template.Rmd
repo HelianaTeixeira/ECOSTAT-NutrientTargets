@@ -127,31 +127,6 @@ PartA.Q1long <- PartA.Q1long %>% mutate(Acronym=Country) %>%
 
 PartA.Q1long$Acronym <- as.factor(PartA.Q1long$Acronym)
 
-Tab2 <- PartA.Q1long%>%
-  select(c(WaterCategory, Acronym, ResponseOptionRef))
-
-  count(WaterCategory, ResponseOptionRef, Acronym)%>%
-  mutate(n = ifelse(n < 100, "y", n)) #replace number of replies just to get countries per wat cat
-
-#Table 2  
-options(knitr.kable.NA = '')
-Tab2 %>% spread(key = WaterCategory, value = n) %>%
-  knitr::kable(format = "html",col.names = c("Acronym","Lakes","Rivers","Transitional","Coastal","Marine"), align = "lccccc", caption = "Table 2. Countries* participating in survey per water category.", table.attr = "style='width:70%;'") %>%
-  kableExtra::add_header_above(header = c("Country" = 2, "Water Category" = 5),align = "centre")
-
-Countr.list1.1<-select(c(PartA.Q1long$WaterCategory,PartA.Q1long$Country,PartA.Q1long$ResponseOptionText))
-                       
-Countr.list1.1<-PartA.Q1long%>%select(grep("some",PartA.Q1long$ResponseOptionText))
-
-           
-           filter(grep("some", PartA.Q1long$ResponseOptionText))
-
-
-
-
-Country)) 
-  print(WaterCategory, Country)
-
 
 ```
 
