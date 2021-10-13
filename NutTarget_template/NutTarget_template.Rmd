@@ -118,7 +118,82 @@ plotQ1
 
 ```
 
-Countries bla bla...
+Add here a summary paragraph on the graph results.
 
+Add here a critical analysis paragraph.
+ 
 ## Q2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
 
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph. (namely, refer to the why they did this as they were asked to explicitly mention it)
+
+## Q3. If you have set management objectives for nutrients, please indicate which methodology has been used. 
+
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Countries also provided a short description of the methodology (including links to background reports or publications). According to their description, only XX countries have considered pressure-response relationships: XX, XX,...
+
+Add here a critical analysis paragraph.
+
+## Q4. Do you determine the maximum critical load or a load reduction target that is compatible with good status for nutrient sensitive BQEs? 
+
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a summary paragraph on (What methodology do you use?) open replies.
+
+Add here a critical analysis paragraph of the graph and of the open question.
+
+## Q5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
+
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q6. If you have set management objectives for nutrients, please specify which policy the management objectives are meant to address.
+
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q7. Countries which have not set management objectives for nutrients. 
+
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+(see word doc for the reasons and information on how they achieve the WFD and/or MSFD objectives instead for water bodies exposed to nutrient pollution.)
+Add here a critical analysis paragraph.
+
+## BLA BLA BLA (Part B) 
+
+
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
