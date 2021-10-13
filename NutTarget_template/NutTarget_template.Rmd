@@ -94,6 +94,8 @@ Tab1 %>% spread(key = WaterCategory, value = n) %>%
 #select data Q1
 PartA.Q1 <- dat.PartA %>% filter(QuestionNo_b==1)
 
+PartA.Q1$ResponseOptionText <- str_trim(PartA.Q1$ResponseOptionText)
+
 #run function to display the sample size at y=0
 give.n <- function(x){
   return(c(y = -1, label = x))#length(x)
@@ -114,6 +116,41 @@ plotQ1
 ```
 
 ```{r Countries detail Q1,  }
+PartA.Q1long <-pivot_longer(PartA.Q1, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
+
+PartA.Q1long <- PartA.Q1long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+PartA.Q1long$Acronym <- as.factor(PartA.Q1long$Acronym)
+
+Tab2 <- PartA.Q1long%>%
+  select(c(WaterCategory, Acronym, ResponseOptionRef))
+
+  count(WaterCategory, ResponseOptionRef, Acronym)%>%
+  mutate(n = ifelse(n < 100, "y", n)) #replace number of replies just to get countries per wat cat
+
+#Table 2  
+options(knitr.kable.NA = '')
+Tab2 %>% spread(key = WaterCategory, value = n) %>%
+  knitr::kable(format = "html",col.names = c("Acronym","Lakes","Rivers","Transitional","Coastal","Marine"), align = "lccccc", caption = "Table 2. Countries* participating in survey per water category.", table.attr = "style='width:70%;'") %>%
+  kableExtra::add_header_above(header = c("Country" = 2, "Water Category" = 5),align = "centre")
+
+Countr.list1.1<-select(c(PartA.Q1long$WaterCategory,PartA.Q1long$Country,PartA.Q1long$ResponseOptionText))
+                       
+Countr.list1.1<-PartA.Q1long%>%select(grep("some",PartA.Q1long$ResponseOptionText))
+
+           
+           filter(grep("some", PartA.Q1long$ResponseOptionText))
+
+
+
+
+Country)) 
+  print(WaterCategory, Country)
 
 
 ```
@@ -124,13 +161,13 @@ Add here a critical analysis paragraph.
  
 ## Q2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
 
-```{r}
+```{r Q2, fig.cap="Figure 2. Number of countries responding, overview by water category."}
 
 ```
 
 Add here a summary paragraph on the graph results.
 
-Add here a critical analysis paragraph. (namely, refer to the why they did this as they were asked to explicitly mention it)
+Add here a critical analysis paragraph. (namely, refer why they did this as they were asked to explicitly mention it)
 
 ## Q3. If you have set management objectives for nutrients, please indicate which methodology has been used. 
 
