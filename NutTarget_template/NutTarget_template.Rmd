@@ -127,7 +127,7 @@ PartA.Q1long <- PartA.Q1long %>% mutate(Acronym=Country) %>%
 
 PartA.Q1long$Acronym <- as.factor(PartA.Q1long$Acronym)
 
-
+# Heliana Left here
 ```
 
 Add here a summary paragraph on the graph results.
