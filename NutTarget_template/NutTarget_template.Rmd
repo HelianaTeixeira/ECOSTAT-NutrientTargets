@@ -25,7 +25,7 @@ opts_knit$set(width=75)
 
 ECOSTAT has a mandate to compare methods used by Member States to set management objectives  for nutrients that are compatible with good ecological status and good environmental status.
 
-This questionnaire aims to understand national approaches for setting and implementing management objectives for nutrients and to help Member States and collaborating countries to improve their approaches and, thereby, achieve the objectives of the Water Framework Directive (WFD) and Marine Strategy Framework Directive (MSFD).
+This questionnaire aims to understand national approaches for setting and implementing management objectives for nutrients and to help Member States and collaborating countries to improve their approaches and, thereby, achieve the objectives of the Water Framework Directive (WFD) and the Marine Strategy Framework Directive (MSFD).
 
 ```{r load packages, include=FALSE}
 library(tidyverse)
@@ -62,6 +62,8 @@ PartA.long$Acronym <- as.factor(PartA.long$Acronym)
 ```
 
 #### Overview of countries participationg in questionnaire
+
+Twenty-six countries participated in this survey, five of which are land-locked countries.
 
 ```{r countries data, }
 dat.countries <- read.csv(file = here::here("Data","Countries.csv"), sep=";", header = TRUE)
@@ -115,7 +117,7 @@ plotQ1 <- ggplot(PartA.Q1, aes(reorder_within(ResponseOptionText,ResponseOptionR
 plotQ1
 ```
 
-```{r Countries detail Q1,  }
+```{r Countries detail Q1, include=FALSE}
 PartA.Q1long <-pivot_longer(PartA.Q1, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
 
 PartA.Q1long <- PartA.Q1long %>% mutate(Acronym=Country) %>%
@@ -125,14 +127,35 @@ PartA.Q1long <- PartA.Q1long %>% mutate(Acronym=Country) %>%
     Acronym == "BE.Wa" ~ "BE",
     TRUE ~ as.character(Acronym)))
 
-PartA.Q1long$Acronym <- as.factor(PartA.Q1long$Acronym)
+id.count1 <- PartA.Q1long %>% 
+  filter(!is.na(Reply)) %>%
+  select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
+  unite (WCreply, WaterCategory:ResponseOptionText)
 
-# Heliana Left here
+#function to extract countries list per reply
+CntryListfunction <- function(dat) {
+      #i is a unique WaterCategory - ResponseOptionText combination
+      #dat is a subset of the data of interest
+  WCreply_levels<- unique(dat$WCreply)
+  Lists<-list()# prepare a container
+       #loop through WaterCategory - ResponseOptionText unique combinations
+  for (i in 1:length(WCreply_levels)) {
+  acronym_list<- dat$Acronym[which(dat$WCreply==WCreply_levels[i])]
+  Lists[i] <- list(acronym_list)
+  #print(Lists)
+  }
+  return(Lists)
+}
+
+unique(id.count1$WCreply) #levels with country replies
+xx <-CntryListfunction (id.count1)#countries replying
+#xx[[11]] # use [[?]] to extract values directly in text
 ```
 
-Add here a summary paragraph on the graph results.
+The majority of countries have set management objectives for all water bodies exposed to nutrient pollution in all water categories, with few countries considering only some of their nutrient polluted water bodies (`r xx[[2]]` in lakes; `r xx[[5]]` rivers; `r xx[[8]]` in transitional waters; and `r xx[[11]]` in marine waters). Only `r xx[[3]]` in lakes, `r xx[[6]]` in rivers, `r xx[[12]]` in marine waters have not set management objectives for water bodies exposed to nutrient pollution. Results show that France ("FR") does not follow a standardised national approach, varying according to water agency (but confirm this).
 
-Add here a critical analysis paragraph.
+(tbc Martyn) Add here a critical analysis paragraph for freshwater categories.
+(tbc Heliana) Add here a critical analysis paragraph for marine water categories.
  
 ## Q2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
 
