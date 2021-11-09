@@ -63,7 +63,7 @@ PartA.long$Acronym <- as.factor(PartA.long$Acronym)
 
 #### Overview of countries participationg in questionnaire
 
-Twenty-six countries participated in this survey, five of which are land-locked countries.
+Twenty-six countries participated in this survey, five of which are land-locked countries reporting only for freshwater categories.
 
 ```{r countries data, }
 dat.countries <- read.csv(file = here::here("Data","Countries.csv"), sep=";", header = TRUE)
@@ -98,7 +98,7 @@ PartA.Q1 <- dat.PartA %>% filter(QuestionNo_b==1)
 
 PartA.Q1$ResponseOptionText <- str_trim(PartA.Q1$ResponseOptionText)
 
-#run function to display the sample size at y=0
+#run function to display the sample size at y= -1
 give.n <- function(x){
   return(c(y = -1, label = x))#length(x)
 }
@@ -148,48 +148,160 @@ CntryListfunction <- function(dat) {
 }
 
 unique(id.count1$WCreply) #levels with country replies
-xx <-CntryListfunction (id.count1)#countries replying
-#xx[[11]] # use [[?]] to extract values directly in text
+xx1 <-CntryListfunction (id.count1)#countries replying
+#xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-The majority of countries have set management objectives for all water bodies exposed to nutrient pollution in all water categories, with few countries considering only some of their nutrient polluted water bodies (`r xx[[2]]` in lakes; `r xx[[5]]` rivers; `r xx[[8]]` in transitional waters; and `r xx[[11]]` in marine waters). Only `r xx[[3]]` in lakes, `r xx[[6]]` in rivers, `r xx[[12]]` in marine waters have not set management objectives for water bodies exposed to nutrient pollution. Results show that France ("FR") does not follow a standardised national approach, varying according to water agency (but confirm this).
+Most countries have set management objectives for all water bodies exposed to nutrient pollution in the different water categories, with few countries considering only some of the nutrient polluted water bodies (`r xx[[2]]` in lakes; `r xx1[[5]]` rivers; `r xx1[[8]]` in transitional waters; and `r xx1[[11]]` in marine waters). Only `r xx1[[3]]` in lakes, `r xx1[[6]]` in rivers, and `r xx1[[12]]` in marine waters have not set management objectives for water bodies exposed to nutrient pollution. Results show that France (FR) does not follow a standardised national approach, varying according to water agency (but confirm this).
 
 (tbc Martyn) Add here a critical analysis paragraph for freshwater categories.
+
 (tbc Heliana) Add here a critical analysis paragraph for marine water categories.
  
 ## Q2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
 
 ```{r Q2, fig.cap="Figure 2. Number of countries responding, overview by water category."}
+#select data Q2
+PartA.Q2 <- dat.PartA %>% filter(QuestionNo_b==2)
 
+PartA.Q2$ResponseOptionText <- str_trim(PartA.Q2$ResponseOptionText)
+  
+plotQ2 <- ggplot(PartA.Q2, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotQ2
 ```
 
-Add here a summary paragraph on the graph results.
+```{r Countries detail Q2, include=FALSE}
+PartA.Q2long <-pivot_longer(PartA.Q2, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
 
-Add here a critical analysis paragraph. (namely, refer why they did this as they were asked to explicitly mention it)
+PartA.Q2long <- PartA.Q2long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+id.count2 <- PartA.Q2long %>%
+  filter(!is.na(Reply)) %>%
+  select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
+  unite (WCreply, WaterCategory:ResponseOptionText)
+
+unique(id.count2$WCreply) #levels with country replies
+xx2 <-CntryListfunction (id.count2)#countries replying
+#xx?[[11]] # use [[?]] to extract values directly in text
+```
+
+Responses reflect, to a large extent, an interplay between biogeography and local pressures. Most countries focus on reducing both nitrogen and phosphorus whatever the water category considered; those who focussed on one or the other did so because local circumstances meant that this was the most likely reason for problems. That would be, for example, the case of phosphorus reduction in lakes, adopted by nine countries (`r xx2[[1]]`), or nitrogen in lakes (`r xx2[[2]]`) and rivers (`r xx2[[6]]`) or in coastal (`r xx2[[13]]`) and marine waters (`r xx2[[16]]`). UWWTD, ND and WFD were all cited as regulatory drivers for these actions. Responses focussed on the consequences of nutrients on transitional water ecosystems, but there was also some acknowledgment of the role of transitional waters as conduits of nutrients to coastal and marine waters too.
+
+The limiting nutrient approach is more commonly assumed in freshwater categories (lakes: `r xx2[[4]]`; rivers: `r xx2[[8]]`) than in marine influenced systems (transitional: `r xx2[[12]]`, coastal: `r  xx2[[15]]`).  What is not clear from the response is how the limiting nutrient is determined in any given situation.  Several responses referred to prevailing dogma that nitrogen and phosphorus are the nutrients most likely to be limiting (and, therefore, responsible for eutrophication when present in excess) and some (e.g. PL) indicated that targets were to achieve concentrations consistent with the good/moderate boundary.  This, in turn, presumes a good quantitative understanding of causal relationships between nutrients and measures of the condition of the flora and fauna which can be difficult to obtain for transitional waters (Salas-Herrero et al., 2019).   It can probably be assumed that exceeding supporting element standards for nitrogen and phosphorus is the default criterion for recognising a need for nutrient management.  However, as Phillips et al. (2018) point out, there are a variety of approaches to setting nutrient standards, with different levels of precaution.   No mention is made of more targeted, case specific approaches in the responses; however, this does not mean that they are not used in individual countries.
 
 ## Q3. If you have set management objectives for nutrients, please indicate which methodology has been used. 
 
-```{r}
+```{r Q3, fig.cap="Figure 3. Number of countries responding, overview by water category."}
+#select data Q3
+PartA.Q3 <- dat.PartA %>% filter(QuestionNo_b==3)
 
+PartA.Q3$ResponseOptionText <- str_trim(PartA.Q3$ResponseOptionText)
+  
+plotQ3 <- ggplot(PartA.Q3, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotQ3
 ```
 
-Add here a summary paragraph on the graph results.
+```{r Countries detail Q3, include=FALSE}
+PartA.Q3long <-pivot_longer(PartA.Q3, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
 
-Countries also provided a short description of the methodology (including links to background reports or publications). According to their description, only XX countries have considered pressure-response relationships: XX, XX,...
+PartA.Q3long <- PartA.Q3long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
 
-Add here a critical analysis paragraph.
+id.count3 <- PartA.Q3long %>%
+  filter(!is.na(Reply)) %>%
+  select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
+  unite (WCreply, WaterCategory:ResponseOptionText)
+
+unique(id.count3$WCreply) #levels with country replies
+xx3 <-CntryListfunction (id.count3)#countries replying
+#xx?[[11]] # use to extract values directly in text
+```
+
+The most commonly used method to derive nutrient targets in all water categories was based on modeled pressure-response relationships between nutrient(s) and biological quality elements (BQE) (add formula to id countries in each Water category here?). According to their description, phytoplankton (chlorophyll) and macrophytes (confirm this) were the BQEs that countries have most frequently (?) considered for establishing such pressure-response relationships. 
+
+Add more details on the type of modeling, rational, BQEs selected, and modeled variables (loads?, etc..)
+
+(tbc Martyn/Heliana) Historical data and expert judgment are also frequently used methods...
+
+(tbc Martyn/Heliana) Add here a critical analysis paragraph.
+
+Countries have provided a short description of the methodology, including links to background reports or publications that can be consulted for further details in the report compiling "EC ECOSTAT Nutrients Questionnaire Responses" (add link to report). 
 
 ## Q4. Do you determine the maximum critical load or a load reduction target that is compatible with good status for nutrient sensitive BQEs? 
 
-```{r}
+```{r Q4, fig.cap="Figure 4. Number of countries responding, overview by water category."}
+PartA.Q4 <- dat.PartA %>% filter(QuestionNo_b==4)
 
+PartA.Q4$ResponseOptionText <- str_trim(PartA.Q4$ResponseOptionText)
+
+plotQ4 <- ggplot(PartA.Q4, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotQ4 + theme(legend.position = "none") 
 ```
 
-Add here a summary paragraph on the graph results.
+```{r Countries detail Q4, include=FALSE}
+PartA.Q4long <-pivot_longer(PartA.Q4, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
 
-Add here a summary paragraph on (What methodology do you use?) open replies.
+PartA.Q4long <- PartA.Q4long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
 
-Add here a critical analysis paragraph of the graph and of the open question.
+id.count4 <- PartA.Q4long %>%
+  filter(!is.na(Reply)) %>%
+  select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
+  unite (WCreply, WaterCategory:ResponseOptionText)
+
+unique(id.count4$WCreply) #levels with country replies
+xx4 <-CntryListfunction (id.count4)#countries replying
+#xx?[[11]] # use to extract values directly in text
+```
+
+Nutrient critical loads or load reduction targets compatible with good status of nutrient sensitive BQEs are set by only half of the reporting countries in lakes (`r xx4[[1]]`), rivers (`r xx4[[3]]`), transitional (`r xx4[[5]]`), coastal (`r xx4[[7]]`) and marine waters (`r xx4[[9]]`).
+
+(tbc Martyn/Heliana) Add here a summary paragraph on (What methodology do you use?) open replies.
+
+(tbc Martyn/Heliana) Add here a critical analysis paragraph of the graph and of the open question.
 
 ## Q5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
 
