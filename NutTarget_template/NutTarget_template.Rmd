@@ -297,26 +297,84 @@ xx4 <-CntryListfunction (id.count4)#countries replying
 #xx?[[11]] # use to extract values directly in text
 ```
 
-Nutrient critical loads or load reduction targets compatible with good status of nutrient sensitive BQEs are set by only half of the reporting countries in lakes (`r xx4[[1]]`), rivers (`r xx4[[3]]`), transitional (`r xx4[[5]]`), coastal (`r xx4[[7]]`) and marine waters (`r xx4[[9]]`).
+Nutrient critical loads or load reduction targets compatible with good status of nutrient sensitive BQEs are only set by half or less of the reporting countries in lakes (`r xx4[[1]]`), rivers (`r xx4[[3]]`), transitional (`r xx4[[5]]`), coastal (`r xx4[[7]]`) and marine waters (`r xx4[[9]]`).
 
-(tbc Martyn/Heliana) Add here a summary paragraph on (What methodology do you use?) open replies.
-
-(tbc Martyn/Heliana) Add here a critical analysis paragraph of the graph and of the open question.
+(tbc Martyn/Heliana)  Based on open replies, add here a paragraph on What methodology do you use?
+(tbc Martyn/Heliana)  Add here a critical analysis paragraph (see the open replies).
 
 ## Q5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
 
-```{r}
+```{r Q5, fig.cap="Figure 5. Number of countries responding, overview by water category."}
+#select data Q5
+PartA.Q5 <- dat.PartA %>% filter(QuestionNo_b==5)
 
+PartA.Q5$ResponseOptionText <- str_trim(PartA.Q5$ResponseOptionText)
+
+PartA.Q5$ResponseOptionText <- case_when(PartA.Q5$ResponseOptionText == "Yes, the management objective is to reach the nutrient concentration at good/moderate boundary" ~ "Yes, management objective is to reach the nutrient concentration at G/M boundary",
+                                        PartA.Q5$ResponseOptionText == "Yes, the management objective is to reach the mid-point of good status (between the high/good and the good/moderate boundary) as defined by the biological quality elements" ~ "Yes,  management objective is to reach the mid-point of G status as defined by the BQEs",
+                                      PartA.Q5$ResponseOptionText == "Yes, the management target is to reach the mid-point of good status (between the high/good and the good/moderate boundary) as defined by the biological quality elements" ~ "Yes,  management objective is to reach the mid-point of G status as defined by the BQEs",
+                                      TRUE ~ as.character(PartA.Q5$ResponseOptionText))
+
+plotQ5 <- ggplot(PartA.Q5, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotQ5
 ```
 
-Add here a summary paragraph on the graph results.
+```{r Countries detail Q5, include=FALSE}
+PartA.Q5long <-pivot_longer(PartA.Q5, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
 
-Add here a critical analysis paragraph.
+PartA.Q5long <- PartA.Q5long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+id.count5 <- PartA.Q5long %>%
+  filter(!is.na(Reply)) %>%
+  select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
+  unite (WCreply, WaterCategory:ResponseOptionText)
+
+unique(id.count5$WCreply) #levels with country replies
+xx5 <-CntryListfunction (id.count5)#countries replying
+#xx?[[11]] # use to extract values directly in text
+```
+
+Most countries acknowledge that there is a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status, and most commonly the management objective is to reach the nutrient concentration at good/moderate boundary. In some cases the management objective is  slightly more ambitious and aims to reach the mid-point between the high/good and the good/moderate boundary as defined by the biological quality elements (lakes: `r xx5[[2]]`, rivers:  `r xx5[[5]]`, transitional:  `r xx5[[8]]`, coastal:  `r xx5[[11]]`).
+
+Some countries used another approach to set their management objective (lakes: `r xx5[[3]]`, rivers:  `r xx5[[6]]`, transitional:  `r xx5[[9]]`, coastal:  `r xx5[[12]]`, marine: `r xx5[[14]]`)
+
+(tbc Martyn/Heliana) Add here a critical analysis paragraph based also on the open replies
 
 ## Q6. If you have set management objectives for nutrients, please specify which policy the management objectives are meant to address.
 
-```{r}
+```{r Q6, fig.cap="Figure 6. Number of countries responding, overview by water category."}
+#select data Q6
+PartA.Q6 <- dat.PartA %>% filter(QuestionNo_b==6)
 
+PartA.Q6$ResponseOptionText <- str_trim(PartA.Q6$ResponseOptionText)
+  
+plotQ6 <- ggplot(PartA.Q6, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotQ6
 ```
 
 Add here a summary paragraph on the graph results.
@@ -325,11 +383,47 @@ Add here a critical analysis paragraph.
 
 ## Q7. Countries which have not set management objectives for nutrients. 
 
-```{r}
+```{r Q7, fig.cap="Figure 7. Number of countries responding, overview by water category."}
+#select data Q6
+PartA.Q7 <- dat.PartA %>% filter(QuestionNo_b==7)
+
+PartA.Q7$ResponseOptionText <- str_trim(PartA.Q7$ResponseOptionText)
+  
+plotQ7 <- ggplot(PartA.Q7, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+#plotQ7
 
 ```
+```{r Countries detail Q7, include=FALSE}
+PartA.Q7long <-pivot_longer(PartA.Q7, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
 
-Add here a summary paragraph on the graph results.
+PartA.Q7long <- PartA.Q7long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+id.count7 <- PartA.Q7long %>%
+  filter(!is.na(Reply)) %>%
+  select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
+  unite (WCreply, WaterCategory:ResponseOptionText)
+
+unique(id.count7$WCreply) #levels with country replies
+xx7 <-CntryListfunction (id.count7)#countries replying
+#xx?[[11]] # use to extract values directly in text
+```
+
+Countries which have not set management objectives for nutrients in lakes (`r xx7[[1]]`), rivers, (`r xx7[[2]]`, transitional (`r xx7[[3]]`), coastal (`r xx7[[4]]`), marine (`r xx7[[5]]`).
 
 (see word doc for the reasons and information on how they achieve the WFD and/or MSFD objectives instead for water bodies exposed to nutrient pollution.)
 Add here a critical analysis paragraph.
