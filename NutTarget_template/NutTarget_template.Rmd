@@ -156,7 +156,7 @@ Most countries have set management objectives for all water bodies exposed to nu
 
 (tbc Martyn) Add here a critical analysis paragraph for freshwater categories.
 I don't think that there is anything that needs to be added here.   
-
+Try again
 
 (tbc Heliana) Add here a critical analysis paragraph for marine water categories.
  
@@ -251,6 +251,7 @@ xx3 <-CntryListfunction (id.count3)#countries replying
 The most commonly used method to derive nutrient targets in all water categories was based on modeled pressure-response relationships between nutrient(s) and biological quality elements (BQE) (add formula to id countries in each Water category here?). According to their description, phytoplankton (chlorophyll) and macrophytes (confirm this) were the BQEs that countries have most frequently (?) considered for establishing such pressure-response relationships. 
 
 Add more details on the type of modeling, rational, BQEs selected, and modeled variables (loads?, etc..)
+Freshwaters: the four possible answers are not exclusive, with several countries using more than one approach.  For example, a modelling approach might be combined with historical information by an expert to give a more nuanced target than would be provided by any approach in isolation.  The term “modelling”, itself, covers a wide range of possibiltilies.  BQE-response relationships are often strong in lakes and are well-suited to deriving standards following the methods in the Best Practice Guide [how should this be cited here?] but a range of other modelling approaches are employed.   Few respondents mentioned which BQE was used.   Of those who did, phytoplankton, phytobenthos, macrophytes, invertebrates and fish were all mentioned, depending on specific contexts.  There is also a distinction between those countries that set targets in terms of concentrations and those who use loads.  A further distinction is between those who used mass balance models and those who used dynamic process models although details in questionnaire responses did not always explain the mechanisms behind their models.   Lakes are well suited to the use of historical information, through the use of palaeoecology; historical information is also used in rivers by eight countries, though none of these provided more information on how this was done. 
 
 (tbc Martyn/Heliana) Historical data and expert judgment are also frequently used methods...
 
@@ -304,6 +305,8 @@ Nutrient critical loads or load reduction targets compatible with good status of
 (tbc Martyn/Heliana)  Based on open replies, add here a paragraph on What methodology do you use?
 (tbc Martyn/Heliana)  Add here a critical analysis paragraph (see the open replies).
 
+Detailed responses to this question were ambiguous, with 16 (lakes) and 18 (rivers) answering “no” to the question, implying that they did not determine the maximum critical load or a load reduction target, whereas some of the more comments send by these same countries suggested that they did.  What seems to be clear is that many see target setting as a process that needs to be applied to individual water bodies, rather than derived as a guide value for all water bodies within a broadly-defined type.   Where targets are defined as concentrations rather than loads there is an inference that some form of mass balance model is also employed in order to work out how a target may be achieved for any individual water body.
+
 ## Q5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
 
 ```{r Q5, fig.cap="Figure 5. Number of countries responding, overview by water category."}
@@ -355,7 +358,7 @@ Most countries acknowledge that there is a relationship between the management o
 
 Some countries used another approach to set their management objective (lakes: `r xx5[[3]]`, rivers:  `r xx5[[6]]`, transitional:  `r xx5[[9]]`, coastal:  `r xx5[[12]]`, marine: `r xx5[[14]]`)
 
-(tbc Martyn/Heliana) Add here a critical analysis paragraph based also on the open replies
+Setting nutrient boundaries that are consistent with the G/M boundary will not necessarily equate with achieving good status for BQEs, particularly as G/M boundaries are usually type- rather than site-specific.  Further questions will need to be asked to elucidate how countries address the inevitable mismatches between chemical and ecological status.   If ecology does not achieve good status after nutrient reductions to the G/M boundary, then what actions does each country take?   This could be a situation where “less stringent objectives” are invoked, rather than reviewing evidence specific to a particular water body.   
 
 ## Q6. If you have set management objectives for nutrients, please specify which policy the management objectives are meant to address.
 
@@ -379,9 +382,9 @@ plotQ6 <- ggplot(PartA.Q6, aes(reorder_within(ResponseOptionText,ResponseOptionR
 plotQ6
 ```
 
-Add here a summary paragraph on the graph results.
+For all water categories except Marine, the WFD is the most important driver, though the Urban Wastewater and Nitrates Directive are also cited by several countries across all water types.   For Marine waters the MFSD and Regional Sea Conventions  are both important.   Those who selected “other” cited the Industrial Emissions Directive, Common Agricultural Policy and EU regulations on phosphate-free detergents as also influencing management directives, along with national legislation (e.g. SE has a policy on “zero eutrophication”: https://www.sverigesmiljomal.se/environmental-objectives/).    
 
-Add here a critical analysis paragraph.
+
 
 ## Q7. Countries which have not set management objectives for nutrients. 
 
