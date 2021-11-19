@@ -4,12 +4,24 @@ date: "`r Sys.Date()`"
 output:
   rmdformats::robobook:
     highlight: kate
+  pdf_document:
+    template: my_html_document (template = "/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmdformats/templates/template.html")
+    toc: yes
+    toc_depth: 3
+    keep_tex: yes
 ---
 
-
 ```{r setup, include=FALSE}
-library(knitr)
 library(rmdformats)
+library(tinytex)
+library(rmarkdown)
+#library(pandoc)
+
+library(tidyverse)
+library(tidytext)
+library(here)
+library(knitr)
+library(kableExtra)
 
 ## Global options
 options(max.print="75")
@@ -21,26 +33,40 @@ opts_chunk$set(echo=FALSE,
                message=FALSE,
                warning=FALSE)
 opts_knit$set(width=75)
+
+# custom format function which first calls rmarkdown::html_document with the "default" template (to retain MathJax functionality), but then modifies the pandoc template setting
+my_html_document <- function(template = "path_to_custom_template", ...) {
+  base_format <- rmarkdown::html_document(...)
+
+  template_arg <- which(base_format$pandoc$args == "--template") + 1L
+  base_format$pandoc$args[template_arg] <- template
+
+  base_format
+}
+
+# Get output document type and use as the format argument in kable function
+table_format = if(is_html_output()) {
+  "html"
+} else if(is_latex_output()) {
+  "latex"
+}
 ```
 
 ECOSTAT has a mandate to compare methods used by Member States to set management objectives  for nutrients that are compatible with good ecological status and good environmental status.
 
 This questionnaire aims to understand national approaches for setting and implementing management objectives for nutrients and to help Member States and collaborating countries to improve their approaches and, thereby, achieve the objectives of the Water Framework Directive (WFD) and the Marine Strategy Framework Directive (MSFD).
 
-```{r load packages, include=FALSE}
-library(tidyverse)
-library(tidytext)
-library(here)
-library(knitr)
-library(kableExtra)
-```
-
 ```{r load data, include=FALSE}
 FName.dat <-here::here("Data","PartA.csv")
+FName.datB <-here::here("Data","PartB.csv")
+FName.datC <-here::here("Data","PartC.csv")
+
 dat.PartA<- read.csv(file = FName.dat, sep=";", header = TRUE) #fileEncoding="latin1"
+dat.PartB<- read.csv(file = FName.datB, sep=";", header = TRUE) #fileEncoding="latin1"
+dat.PartC<- read.csv(file = FName.datC, sep=";", header = TRUE) #fileEncoding="latin1"
 ```
 
-```{r pre-treatment, include=FALSE}
+```{r pre-treatment A, include=FALSE}
 dat.PartA <- type.convert(dat.PartA) #convert data automatic as appropriate
 
 dat.PartA$BE<-as.integer(dat.PartA$BE)
@@ -81,7 +107,8 @@ Tab1 <- PartA.long %>% filter(Reply == 1)%>%
 #Table 1  
 options(knitr.kable.NA = '')
 Tab1 %>% spread(key = WaterCategory, value = n) %>%
-  knitr::kable(format = "html",col.names = c("Acronym"," ","Lakes","Rivers","Transitional","Coastal","Marine"), align = "llccccc", caption = "Table 1. Countries* participating in survey per water category.", table.attr = "style='width:70%;'") %>%
+  knitr::kable(format = table_format,col.names = c("Acronym","  ","Lakes","Rivers","Transitional","Coastal","Marine"), align = "llccccc", caption = "Table 1. Countries* participating in survey per water category.") %>%#,table.attr = "style='width:70%;'"
+  kableExtra::kable_styling (position = "c") %>%
   kableExtra::add_header_above(header = c("Country" = 2, "Water Category" = 5),align = "centre")
 
 ```
@@ -156,7 +183,6 @@ Most countries have set management objectives for all water bodies exposed to nu
 
 (tbc Martyn) Add here a critical analysis paragraph for freshwater categories.
 I don't think that there is anything that needs to be added here.   
-
 
 (tbc Heliana) Add here a critical analysis paragraph for marine water categories.
  
@@ -430,9 +456,314 @@ Countries which have not set management objectives for nutrients in lakes (`r xx
 (see word doc for the reasons and information on how they achieve the WFD and/or MSFD objectives instead for water bodies exposed to nutrient pollution.)
 Add here a critical analysis paragraph.
 
-## BLA BLA BLA (Part B) 
+## How are the current nutrient loads estimated? (Part B)
+```{r pre-treatment B, include=FALSE}
+dat.PartB <- type.convert(dat.PartB) #convert data automatic as appropriate
+
+dat.PartB$BE<-as.integer(dat.PartB$BE)
+dat.PartB$BE.Br<-as.integer(dat.PartB$BE.Br)
+dat.PartB$BE.Fl<-as.integer(dat.PartB$BE.Fl)
+
+PartB.long <-pivot_longer(dat.PartB, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
+
+PartB.long <- PartB.long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+PartB.long$Acronym <- as.factor(PartB.long$Acronym)
+```
+
+## Q1. Do you calculate current nutrient loads in order to achieve management objectives for nutrients?
+```{r BQ1, fig.cap="Figure 7. Number of countries responding."}
+PartB.Q1 <- dat.PartB %>% filter(QuestionNo_b==1)
+
+PartB.Q1$ResponseOptionText <- str_trim(PartB.Q1$ResponseOptionText)
+
+plotBQ1 <- ggplot(PartB.Q1, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotBQ1 + theme(legend.position = "none") 
+```
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q2. If yes, what methods do you use to calculate nutrient loads?
+```{r BQ2, fig.cap="Figure 8. Number of countries responding."}
+#select data BQ2
+PartB.Q2 <- dat.PartB %>% filter(QuestionNo_b==2)
+
+PartB.Q2$ResponseOptionText <- str_trim(PartB.Q2$ResponseOptionText)
+  
+plotBQ2 <- ggplot(PartB.Q2, aes(ResponseOptionText, ResponsesPerOption)) + 
+  scale_x_discrete(limits = rev(c("Loads are calculated from monitoring of nutrient concentrations multiplied with flow in the inflows to the water body", "Loads are calculated from estimates of emissions from different sources", "Both approaches are used", "Other approaches are used")),
+                   labels = rev(c("Loads are calculated from monitoring\nof nutrient concentrations multiplied\nwith flow in the inflows to the water body", "Loads are calculated from estimates\nof emissions from different sources", "Both approaches are used", "Other approaches are used"))) +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotBQ2
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
+```{r BQ3, fig.cap="Figure 9. Number of countries responding."}
+PartB.Q3 <- dat.PartB %>% filter(QuestionNo_b==3)
+
+PartB.Q3$ResponseOptionText <- str_trim(PartB.Q3$ResponseOptionText)
+
+PartBQ3 <- ggplot(PartB.Q3, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+PartBQ3 + theme(legend.position = "none") 
+```
+
+```{r Countries detail BQ3, include=FALSE}
+PartB.Q3long <-pivot_longer(PartB.Q3, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
+
+PartB.Q3long <- PartB.Q3long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+id.countBQ3 <- PartB.Q3long %>%
+  filter(!is.na(Reply)) %>%
+  select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
+  unite (WCreply, WaterCategory:ResponseOptionText)
+
+unique(id.countBQ3$WCreply) #levels with country replies
+xxBQ3 <-CntryListfunction (id.countBQ3)#countries replying
+#xx?[[11]] # use [[?]] to extract values directly in text
+```
+
+Catchment models that quantify the nutrient emissions/nutrient losses to surface waters are used by 19 countries, namely: `r xxBQ3[[1]]`. (HT-MK) to complete this paragraph extract relevant information from this open question "If yes, please provide a short description of the type of model you use considering the aspects above and provide links to relevant publications/reports where possible)
+
+Add here a critical analysis paragraph.
+
+## Q4. If yes, at what spatial level do the models operate?
+```{r BQ4, fig.cap="Figure 10. Number of countries responding."}
+#select data BQ2
+PartB.Q4 <- dat.PartB %>% filter(QuestionNo_b==5)
+
+PartB.Q4$ResponseOptionText <- str_trim(PartB.Q4$ResponseOptionText)
+  
+plotBQ4 <- ggplot(PartB.Q4, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete(limits = rev(c("Catchment", "Sub-Catchment", "Water Body", "Specific Spatial Unit - see Word Doc for info")),
+                   labels = rev(c("Catchment", "Sub-Catchment", "Water Body", "Specific Spatial Unit"))) +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotBQ4
+
+```
+
+Add here a summary paragraph on the graph results. (note regarding the Specific Spatial Unit we need to see Word Doc for additional info)
+
+Add here a critical analysis paragraph.
+
+## Q5. If yes, how large are the uncertainties in these models and how do you deal with these uncertainties?
+```{r Countries detail BQ5, include=FALSE}
+PartB.Q5 <- dat.PartB %>% filter(QuestionNo_b==6)
+
+PartB.Q5long <-pivot_longer(PartB.Q5, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
+
+PartB.Q5long <- PartB.Q5long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+id.countBQ5 <- PartB.Q5long %>%
+  filter(!is.na(Reply)) %>%
+  select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
+  unite (WCreply, WaterCategory:ResponseOptionText)
+
+unique(id.countBQ5$WCreply) #levels with country replies
+xxBQ5 <-CntryListfunction (id.countBQ5)#countries replying
+#xx?[[11]] # use [[?]] to extract values directly in text
+```
+
+Uncertainties in the models that are used to quantify the nutrient emissions and/or nutrient losses to surface waters were addressed by 16 of countries, namely: `r xxBQ5[[1]]`. (HT-MK: Complete this summary paragraph on the open answers of countries from the word documents)
+
+Add here a critical analysis paragraph.
+
+## How are measures to reach management objectives for nutrients defined? (Part C)
+```{r pre-treatment C, include=FALSE}
+dat.PartC <- type.convert(dat.PartC) #convert data automatic as appropriate
+
+dat.PartC$BE<-as.integer(dat.PartC$BE)
+dat.PartC$BE.Br<-as.integer(dat.PartC$BE.Br)
+dat.PartC$BE.Fl<-as.integer(dat.PartC$BE.Fl)
+
+dat.PartC$WaterCategory<-factor(dat.PartC$WaterCategory, levels=c("Lakes", "Rivers", 
+                                         "Transitional", "Coastal", "Marine", 
+                                         "All", "Point sources", "Diffuse sources"))#order factor levels
+
+PartC.long <-pivot_longer(dat.PartC, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
+
+PartC.long <- PartC.long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+PartC.long$Acronym <- as.factor(PartC.long$Acronym)
+```
 
 
+## Q1. When is nutrient reduction decided to be necessary?
+(note to self) Attention: marine waters less categorical options but merge if possible
+```{r pre-treat CQ1 labels, include=FALSE}
+#pretreatment of some answer options: too long  names
+#case_when QuestionNo_b ==1 then change the following ResponseOptionText
+"When a water body is classified as failing good status according to nutrient-sensitive-biological quality elements (BQEs)" ~ "Water body failing good status according to nutrient-sensitive-BQEs"
+
+"When a water body is classified failing good status according to nutrient good/moderate boundaries (if yes, please specify if this applies to both P and N, or only to the limiting nutrient)" ~"Water body failing good status according to nutrient good/moderate boundaries" 
+
+"When a water body is classified as failing good status according to both nutrient-sensitive-BQEs and nutrients"  ~ "Water body failing good status according to both nutrient-sensitive-BQEs and nutrients"
+
+"When a water body is classified as good status for nutrient-sensitive BQEs, but deteriorating towards moderate due to increasing pressures or impacts (precautionary principle)" ~"Water body in good status for nutrient-sensitive BQEs, but deteriorating towards moderate due to increasing pressures or impacts (precautionary principle)"
+
+"When criterion D5C1 “nutrient concentrations” fails to achieve good status (if yes, please specify if this applies to both P and N, or only to the limiting nutrient)" ~ "When criterion D5C1 “nutrient concentrations” fails to achieve good status"
+
+```
+
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+(note to HT and MK: namely considering where option 2 is selected by any MS, check if they have specified if that applied to both P and N, or only to the limiting nutrient, as requested)  
+```{r CQ1 option 2 explore, include=FALSE}
+
+#see if here or directly in text
+#id countries selecting ResponseOptionRef == "2.2" or "1.4.2" or "1.3.2" or "1.2.2" or "1.1.2"
+```
+
+Add here a critical analysis paragraph.
+
+## Q2. Are you undertaking pollution accounting to identify the sources of nutrient pollution?
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q3. If yes, which point and diffuse sources are included?
+(HT note to self) here merge into a single graph point and diffuse using factor WaterCategory
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+(open question) Describe the methodology that is used for the pollution accounting.
+Add here a summary paragraph on the open answers and add number of countries replying (directly with formula).
+
+Add here a critical analysis paragraph.
+
+## Q4. What criteria and considerations do you use to select which measures to implement in order to reduce nutrient inputs?
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+(from here Yes/No graphs:)
+## Q5. Are past policy measures such as a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture taken into account when planning new measures, e.g. trying to achieve a fair sharing of the nutrient reductions between different sectors according to a pollution account?
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q6. Is the delay in the response of the ecosystem to reduced nutrient inputs taken into account when planning new measures?
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q7. Do you estimate the effect of measures on the reduction of the nutrient load or concentration in water? 
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q8. Do you have mechanisms for managing management objectives for nutrients across political boundaries (either within or between Member States)? 
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q9. Do you consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning the nutrient reduction measures?
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q10. Do you consider nature-based solutions (restoring riparian zones, wetlands, flood plains etc.) when planning the nutrient reduction measures? 
+```{r}
+
+```
+
+Add here a summary paragraph on the graph results.
+
+Add here a critical analysis paragraph.
+
+## Q11. Do you consider technical/biological manipulative solutions (removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, management fisheries) when planning the nutrient reduction measures? 
 ```{r}
 
 ```

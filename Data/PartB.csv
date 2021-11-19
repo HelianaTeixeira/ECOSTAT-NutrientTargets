@@ -1,0 +1,15 @@
+﻿Part;WaterCategory;QuestionNo;QuestionNo_a;QuestionNo_b;Question;ResponseType;ResponseOptionRef;ResponseOptionText;ResponsesPerOption;BE;BE-Br;BE-Fl;BE-Wa;BG;CZ;DK;DE;EE;IE;EL;ES;FR;IT;CY;LV;LT;HU;NL;AT;PL;PT;RO;SK;FI;SE;IS;NO;TR
+B;All;1;1;1;Do you calculate current nutrient loads in order to achieve management objectives for nutrients? ;Categorical;1.1;Yes;21;;;;1;;1;1;1;1;1;1;1;1;1;1;1;1;;1;;1;1;1;1;1;1;;1;
+B;All;1;1;1;Do you calculate current nutrient loads in order to achieve management objectives for nutrients? ;Categorical;1.2;No;6;;;;;1;;;;;;;;1;;;;;1;;1;;;;;;;1;;1
+B;All;2;2;2;If yes, what methods do you use? ;Categorical;2.1;Loads are calculated from monitoring of nutrient concentrations multiplied with flow in the inflows to the water body   ;5;;;;;;;1;;;;;;;1;;1;;;1;;;;;1;;;;;
+B;All;2;2;2;If yes, what methods do you use? ;Categorical;2.2;Loads are calculated from estimates of emissions from different sources;8;;;;;;;1;;1;;1;;1;;1;;1;;1;;;;;1;;;;;
+B;All;2;2;2;If yes, what methods do you use? ;Categorical;2.3;Both approaches are used;13;;;;1;;1;1;1;;1;;1;1;;;;;;;;1;1;1;;1;1;;1;
+B;All;2;2;2;If yes, what methods do you use? ;Categorical;2.4;Other approaches are used;6;;;;;;;;;1;;;;;1;;;;;1;;;;;;1;1;;1;
+B;All;3;3;3;Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?;Categorical;3.1;Yes;19;;;;1;;1;1;1;1;1;;1;1;;;1;1;1;1;1;1;1;1;;1;1;;1;
+B;All;3;3;3;Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?;Categorical;3.2;No;7;;;;;1;;;;;;1;;1;1;1;;;;;;;;;1;;;1;;
+B;All;3;3;4;If yes, please provide a short description of the type of model you use considering the aspects above and provide links to relevant publications/reports where possible.;Open;;See Word Doc;19;;;;1;;1;1;1;1;1;;1;1;;;1;1;1;1;1;1;1;1;;1;1;;1;
+B;All;3;3;5;If yes, at what spatial level do the models operate?;Categorical;3.1.1;Catchment;8;;;;;;;;;1;1;;1;1;;;;;;1;;;;1;;1;;;1;
+B;All;3;3;5;If yes, at what spatial level do the models operate?;Categorical;3.1.2;Sub-Catchment;10;;;;;;;;;1;1;;1;1;;;;;;1;1;;1;1;;1;;;1;
+B;All;3;3;5;If yes, at what spatial level do the models operate?;Categorical;3.1.3;Water Body;10;;;;1;;;;;;1;;;1;;;1;;1;1;;1;;;;1;1;;1;
+B;All;3;3;5;If yes, at what spatial level do the models operate?;Categorical;3.1.4;Specific Spatial Unit - see Word Doc for info;8;;;;;;1;1;1;;;;;1;;;;1;;;;1;;1;;1;;;;
+B;All;4;4;6;If yes, how large are the uncertainties in these models and how do you deal with these uncertainties?;Open;;See Word Doc;16;;;;1;;1;1;1;1;1;;;1;;;1;1;1;1;;1;;1;;1;1;;1;
