@@ -776,9 +776,6 @@ plotCQ3 <- ggplot(PartC.Q3,
   stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
 
 plotCQ3
-
-scale_x_discrete(limits = rev(c("Catchment", "Sub-Catchment", "Water Body", "Specific Spatial Unit - see Word Doc for info")),
-                   labels = rev(c("Catchment", "Sub-Catchment", "Water Body", "Specific Spatial Unit"))) +
 ```
 
 Add here a summary paragraph on the graph results.
