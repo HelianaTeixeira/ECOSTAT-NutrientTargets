@@ -650,35 +650,73 @@ PartC.long <- PartC.long %>% mutate(Acronym=Country) %>%
 PartC.long$Acronym <- as.factor(PartC.long$Acronym)
 ```
 
-
 ## Q1. When is nutrient reduction decided to be necessary?
 (note to self) Attention: marine waters less categorical options but merge if possible
-```{r pre-treat CQ1 labels, include=FALSE}
-#pretreatment of some answer options: too long  names
-#case_when QuestionNo_b ==1 then change the following ResponseOptionText
-"When a water body is classified as failing good status according to nutrient-sensitive-biological quality elements (BQEs)" ~ "Water body failing good status according to nutrient-sensitive-BQEs"
+```{r CQ1, fig.cap="Figure 11. Number of countries responding."}
+#select data CQ1
+PartC.Q1 <- dat.PartC %>% filter(QuestionNo_b==1)
 
-"When a water body is classified failing good status according to nutrient good/moderate boundaries (if yes, please specify if this applies to both P and N, or only to the limiting nutrient)" ~"Water body failing good status according to nutrient good/moderate boundaries" 
+#new variable to order replies
+PartC.Q1 <- PartC.Q1 %>%
+  mutate(Ordered = str_sub(ResponseOptionRef, start = -1), .after = ResponsesPerOption)
 
-"When a water body is classified as failing good status according to both nutrient-sensitive-BQEs and nutrients"  ~ "Water body failing good status according to both nutrient-sensitive-BQEs and nutrients"
+#trim spaces
+PartC.Q1$ResponseOptionText <- str_trim(PartC.Q1$ResponseOptionText)
 
-"When a water body is classified as good status for nutrient-sensitive BQEs, but deteriorating towards moderate due to increasing pressures or impacts (precautionary principle)" ~"Water body in good status for nutrient-sensitive BQEs, but deteriorating towards moderate due to increasing pressures or impacts (precautionary principle)"
+#shorten replies (ResponseOptionText) labels
+PartC.Q1 <- PartC.Q1 %>%
+  mutate(ResponseOptionText = case_when(ResponseOptionText == "When a water body is classified as failing good status according to nutrient-sensitive-biological quality elements (BQEs)" ~ "Water body failing good status according to nutrient-sensitive-BQEs",
+            ResponseOptionText == "When a water body is classified as failing good status according to nutrient-sensitive-biological quality elements (BQEs)" ~ "Water body failing good status according to nutrient-sensitive-BQEs",
+            ResponseOptionText == "When a water body is classified failing good status according to nutrient good/moderate boundaries (if yes, please specify if this applies to both P and N, or only to the limiting nutrient)" ~"Water body failing good status according to nutrient good/moderate boundaries",
+            ResponseOptionText == "When a water body is classified as failing good status according to both nutrient-sensitive-BQEs and nutrients" ~ "Water body failing good status according to both nutrient-sensitive-BQEs and nutrients", 
+            ResponseOptionText == "When a water body is classified as good status for nutrient-sensitive BQEs, but deteriorating towards moderate due to increasing pressures or impacts (precautionary principle)" ~"Water body in good status for nutrient-sensitive BQEs, but deteriorating due to increasing pressures",
+            ResponseOptionText == "When criterion D5C1 “nutrient concentrations” fails to achieve good status (if yes, please specify if this applies to both P and N, or only to the limiting nutrient)" ~ "When criterion D5C1 “nutrient concentrations” fails to achieve good status",
+             ResponseOptionText == "When the integrated assessment for MSFD descriptor 5 fails to achieve good status" ~"When the integrated assessment for MSFD D5 fails to achieve good status",
+            TRUE ~ as.character(ResponseOptionText)))
 
-"When criterion D5C1 “nutrient concentrations” fails to achieve good status (if yes, please specify if this applies to both P and N, or only to the limiting nutrient)" ~ "When criterion D5C1 “nutrient concentrations” fails to achieve good status"
+plotCQ1 <- ggplot(PartC.Q1,
+                  aes(reorder_within(ResponseOptionText,Ordered,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
 
+plotCQ1
 ```
 
-```{r}
+```{r CQ1 option 2 explore, include=FALSE}
+#WB fails to achieve good status due to nutrients
+#(if yes, please specify if this applies to both P and N, or only to the limiting nutrient)
+#ResponseOptionRef ("2.2" or "1.4.2" or "1.3.2" or "1.2.2" or "1.1.2") corresponds to Ordered == 2
 
+PartC.Q1long <-pivot_longer(PartC.Q1, 12:40, names_to = "Country", values_to = "Reply") #transpose countries data
+
+PartC.Q1long <- PartC.Q1long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+id.countCQ1opt2 <- PartC.Q1long %>% #id countries selecting option 2
+  filter(!is.na(Reply)) %>%
+  filter(Ordered==2) %>%
+  select(c(WaterCategory,Ordered, Acronym)) %>%
+  unite (WCreply, WaterCategory:Ordered)
+
+unique(id.countCQ1opt2$WCreply) #levels with country replies
+xxCQ1opt2 <-CntryListfunction (id.countCQ1opt2) #countries replying
+#xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
 Add here a summary paragraph on the graph results.
-(note to HT and MK: namely considering where option 2 is selected by any MS, check if they have specified if that applied to both P and N, or only to the limiting nutrient, as requested)  
-```{r CQ1 option 2 explore, include=FALSE}
 
-#see if here or directly in text
-#id countries selecting ResponseOptionRef == "2.2" or "1.4.2" or "1.3.2" or "1.2.2" or "1.1.2"
-```
+(paragraph tbc completed yet) Some countries considered that nutrient reduction would be necessary in the case that water bodies failed to achieve good status due to nutrient concentrations at good/moderate (or not good status) boundaries. This approach was referred in all water categories by several countries, namely by `r xxCQ1opt2[[1]]` in lakes; by `r xxCQ1opt2[[2]]` in rivers; by `r xxCQ1opt2[[3]]` in transitional waters;, by `r xxCQ1opt2[[4]]` in coastal and by `r xxCQ1opt2[[5]]` in marine waters.  (See if, as requested, countries added additional info specifying if this applied to both P and N, or only to the limiting nutrient)
 
 Add here a critical analysis paragraph.
 
