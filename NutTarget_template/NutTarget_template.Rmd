@@ -64,6 +64,10 @@ FName.datC <-here::here("Data","PartC.csv")
 dat.PartA<- read.csv(file = FName.dat, sep=";", header = TRUE) #fileEncoding="latin1"
 dat.PartB<- read.csv(file = FName.datB, sep=";", header = TRUE) #fileEncoding="latin1"
 dat.PartC<- read.csv(file = FName.datC, sep=";", header = TRUE) #fileEncoding="latin1"
+
+#correct a minor error in Part C data
+dat.PartC <- dat.PartC %>% mutate (WaterCategory = case_when(QuestionNo_a == 3 & QuestionNo_b == 2 ~ "All",
+                                                              TRUE ~ as.character(WaterCategory)))
 ```
 
 ```{r pre-treatment A, include=FALSE}
@@ -180,15 +184,6 @@ xx1 <-CntryListfunction (id.count1)#countries replying
 ```
 
 Most countries have set management objectives for all water bodies exposed to nutrient pollution in the different water categories, with few countries considering only some of the nutrient polluted water bodies (`r xx1[[2]]` in lakes; `r xx1[[5]]` rivers; `r xx1[[8]]` in transitional waters; and `r xx1[[11]]` in marine waters). Only `r xx1[[3]]` in lakes, `r xx1[[6]]` in rivers, and `r xx1[[12]]` in marine waters have not set management objectives for water bodies exposed to nutrient pollution. Results show that France (FR) does not follow a standardised national approach, varying according to water agency (but confirm this).
-
-(tbc Martyn) Add here a critical analysis paragraph for freshwater categories.
-I don't think that there is anything that needs to be added here.   
-<<<<<<< HEAD
-=======
-Try again
->>>>>>> 2195281edf58a864e90d28003c6538451fe2c835
-
-(tbc Heliana) Add here a critical analysis paragraph for marine water categories.
  
 ## Q2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
 
@@ -592,7 +587,6 @@ plotBQ4 <- ggplot(PartB.Q4, aes(ResponseOptionText, ResponsesPerOption)) +
   stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
 
 plotBQ4
-
 ```
 
 Add here a summary paragraph on the graph results. (note regarding the Specific Spatial Unit we need to see Word Doc for additional info)
@@ -714,25 +708,77 @@ xxCQ1opt2 <-CntryListfunction (id.countCQ1opt2) #countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Add here a summary paragraph on the graph results.
+Add here a summary paragraph on the graph overall results.
 
 (paragraph tbc completed yet) Some countries considered that nutrient reduction would be necessary in the case that water bodies failed to achieve good status due to nutrient concentrations at good/moderate (or not good status) boundaries. This approach was referred in all water categories by several countries, namely by `r xxCQ1opt2[[1]]` in lakes; by `r xxCQ1opt2[[2]]` in rivers; by `r xxCQ1opt2[[3]]` in transitional waters;, by `r xxCQ1opt2[[4]]` in coastal and by `r xxCQ1opt2[[5]]` in marine waters.  (See if, as requested, countries added additional info specifying if this applied to both P and N, or only to the limiting nutrient)
 
 Add here a critical analysis paragraph.
 
 ## Q2. Are you undertaking pollution accounting to identify the sources of nutrient pollution?
-```{r}
+```{r CQ2, fig.cap="Figure 12. Number of countries responding."}
+PartC.Q2 <- dat.PartC %>% filter(QuestionNo_b==2)
 
+PartC.Q2$ResponseOptionText <- str_trim(PartC.Q2$ResponseOptionText)
+
+PartCQ2 <- ggplot(PartC.Q2, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+PartCQ2 + theme(legend.position = "none") 
 ```
 
-Add here a summary paragraph on the graph results.
+```{r Countries detail CQ2, include=FALSE}
+PartC.Q2long <-pivot_longer(PartC.Q2, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
 
-Add here a critical analysis paragraph.
+PartC.Q2long <- PartC.Q2long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
+
+id.countCQ2 <- PartC.Q2long %>%
+  filter(!is.na(Reply)) %>%
+  select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
+  unite (WCreply, WaterCategory:ResponseOptionText)
+
+unique(id.countCQ2$WCreply) #levels with country replies
+xxCQ2 <-CntryListfunction (id.countCQ2)#countries replying
+#xx?[[11]] # use [[?]] to extract values directly in text
+```
+
+Some kind of pollution accounting is considered by most countries to identify the main sources of nutrient pollution, with the exception of (`r xxCQ2[[2]]`). Iceland did not reply to this question.
 
 ## Q3. If yes, which point and diffuse sources are included?
-(HT note to self) here merge into a single graph point and diffuse using factor WaterCategory
-```{r}
+```{r CQ3, fig.cap="Figure 13. Number of countries responding."}
+#select data CQ3
+PartC.Q3 <- dat.PartC %>% filter(QuestionNo_b==3)
+#note to self: merge into a single graph point and diffuse using factor WaterCategory
 
+PartC.Q3$ResponseOptionText <- str_trim(PartC.Q3$ResponseOptionText)
+
+plotCQ3 <- ggplot(PartC.Q3,
+                  aes(reorder_within(ResponseOptionText,ResponsesPerOption,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered()+
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotCQ3
+
+scale_x_discrete(limits = rev(c("Catchment", "Sub-Catchment", "Water Body", "Specific Spatial Unit - see Word Doc for info")),
+                   labels = rev(c("Catchment", "Sub-Catchment", "Water Body", "Specific Spatial Unit"))) +
 ```
 
 Add here a summary paragraph on the graph results.
