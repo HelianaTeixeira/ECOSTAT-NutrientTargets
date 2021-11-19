@@ -382,7 +382,7 @@ plotQ6 <- ggplot(PartA.Q6, aes(reorder_within(ResponseOptionText,ResponseOptionR
 plotQ6
 ```
 
-For all water categories except Marine, the WFD is the most important driver, though the Urban Wastewater and Nitrates Directive are also cited by several countries across all water types.   For Marine waters the MFSD and Regional Sea Conventions  are both important.   Those who selected “other” cited the Industrial Emissions Directive, Common Agricultural Policy and EU regulations on phosphate-free detergents as also influencing management directives, along with national legislation (e.g. SE has a policy on “zero eutrophication”: https://www.sverigesmiljomal.se/environmental-objectives/).    
+For all water categories except Marine, the WFD is the most important driver, though the Urban Wastewater and Nitrates Directive are also cited by several countries across all water types.   For Marine waters the MFSD and Regional Sea Conventions  are both important.   Those who selected “other” c ited the Industrial Emissions Directive, Common Agricultural Policy and EU regulations on phosphate-free detergents as also influencing management directives, along with national legislation (e.g. SE has a policy on “zero eutrophication”: https://www.sverigesmiljomal.se/environmental-objectives/).    
 
 
 
