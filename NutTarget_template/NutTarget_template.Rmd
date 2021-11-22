@@ -121,7 +121,7 @@ Tab1 %>% spread(key = WaterCategory, value = n) %>%
 
 ## How are management objectives for nutrients derived (methods)? (Part A)
 
-## Q1. Have you set management objectives for nutrients for waters bodies that are exposed to nutrient pollution?
+## AQ1. Have you set management objectives for nutrients for waters bodies that are exposed to nutrient pollution?
 
 ```{r Q1,fig.cap="Figure 1. Number of countries responding, overview by water category."}
 #select data Q1
@@ -185,7 +185,7 @@ xx1 <-CntryListfunction (id.count1)#countries replying
 
 Most countries have set management objectives for all water bodies exposed to nutrient pollution in the different water categories, with few countries considering only some of the nutrient polluted water bodies (`r xx1[[2]]` in lakes; `r xx1[[5]]` rivers; `r xx1[[8]]` in transitional waters; and `r xx1[[11]]` in marine waters). Only `r xx1[[3]]` in lakes, `r xx1[[6]]` in rivers, and `r xx1[[12]]` in marine waters have not set management objectives for water bodies exposed to nutrient pollution. Results show that France (FR) does not follow a standardised national approach, varying according to water agency (but confirm this).
  
-## Q2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
+## AQ2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
 
 ```{r Q2, fig.cap="Figure 2. Number of countries responding, overview by water category."}
 #select data Q2
@@ -231,7 +231,7 @@ Responses reflect, to a large extent, an interplay between biogeography and loca
 
 The limiting nutrient approach is more commonly assumed in freshwater categories (lakes: `r xx2[[4]]`; rivers: `r xx2[[8]]`) than in marine influenced systems (transitional: `r xx2[[12]]`, coastal: `r  xx2[[15]]`).  What is not clear from the response is how the limiting nutrient is determined in any given situation.  Several responses referred to prevailing dogma that nitrogen and phosphorus are the nutrients most likely to be limiting (and, therefore, responsible for eutrophication when present in excess) and some (e.g. PL) indicated that targets were to achieve concentrations consistent with the good/moderate boundary.  This, in turn, presumes a good quantitative understanding of causal relationships between nutrients and measures of the condition of the flora and fauna which can be difficult to obtain for transitional waters (Salas-Herrero et al., 2019).   It can probably be assumed that exceeding supporting element standards for nitrogen and phosphorus is the default criterion for recognising a need for nutrient management.  However, as Phillips et al. (2018) point out, there are a variety of approaches to setting nutrient standards, with different levels of precaution.   No mention is made of more targeted, case specific approaches in the responses; however, this does not mean that they are not used in individual countries.
 
-## Q3. If you have set management objectives for nutrients, please indicate which methodology has been used. 
+## AQ3. If you have set management objectives for nutrients, please indicate which methodology has been used. 
 
 ```{r Q3, fig.cap="Figure 3. Number of countries responding, overview by water category."}
 #select data Q3
@@ -284,7 +284,7 @@ Freshwaters: the four possible answers are not exclusive, with several countries
 
 Countries have provided a short description of the methodology, including links to background reports or publications that can be consulted for further details in the report compiling "EC ECOSTAT Nutrients Questionnaire Responses" (add link to report). 
 
-## Q4. Do you determine the maximum critical load or a load reduction target that is compatible with good status for nutrient sensitive BQEs? 
+## AQ4. Do you determine the maximum critical load or a load reduction target that is compatible with good status for nutrient sensitive BQEs? 
 
 ```{r Q4, fig.cap="Figure 4. Number of countries responding, overview by water category."}
 PartA.Q4 <- dat.PartA %>% filter(QuestionNo_b==4)
@@ -332,7 +332,7 @@ Nutrient critical loads or load reduction targets compatible with good status of
 
 Detailed responses to this question were ambiguous, with 16 (lakes) and 18 (rivers) answering “no” to the question, implying that they did not determine the maximum critical load or a load reduction target, whereas some of the more comments send by these same countries suggested that they did.  What seems to be clear is that many see target setting as a process that needs to be applied to individual water bodies, rather than derived as a guide value for all water bodies within a broadly-defined type.   Where targets are defined as concentrations rather than loads there is an inference that some form of mass balance model is also employed in order to work out how a target may be achieved for any individual water body.
 
-## Q5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
+## AQ5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
 
 ```{r Q5, fig.cap="Figure 5. Number of countries responding, overview by water category."}
 #select data Q5
@@ -385,7 +385,7 @@ Some countries used another approach to set their management objective (lakes: `
 
 Setting nutrient boundaries that are consistent with the G/M boundary will not necessarily equate with achieving good status for BQEs, particularly as G/M boundaries are usually type- rather than site-specific.  Further questions will need to be asked to elucidate how countries address the inevitable mismatches between chemical and ecological status.   If ecology does not achieve good status after nutrient reductions to the G/M boundary, then what actions does each country take?   This could be a situation where “less stringent objectives” are invoked, rather than reviewing evidence specific to a particular water body.   
 
-## Q6. If you have set management objectives for nutrients, please specify which policy the management objectives are meant to address.
+## AQ6. If you have set management objectives for nutrients, please specify which policy the management objectives are meant to address.
 
 ```{r Q6, fig.cap="Figure 6. Number of countries responding, overview by water category."}
 #select data Q6
@@ -411,7 +411,7 @@ For all water categories except Marine, the WFD is the most important driver, th
 
 
 
-## Q7. Countries which have not set management objectives for nutrients. 
+## AQ7. Countries which have not set management objectives for nutrients. 
 
 ```{r Q7, fig.cap="Figure 7. Number of countries responding, overview by water category."}
 #select data Q6
@@ -478,7 +478,7 @@ PartB.long <- PartB.long %>% mutate(Acronym=Country) %>%
 PartB.long$Acronym <- as.factor(PartB.long$Acronym)
 ```
 
-## Q1. Do you calculate current nutrient loads in order to achieve management objectives for nutrients?
+## BQ1. Do you calculate current nutrient loads in order to achieve management objectives for nutrients?
 ```{r BQ1, fig.cap="Figure 7. Number of countries responding."}
 PartB.Q1 <- dat.PartB %>% filter(QuestionNo_b==1)
 
@@ -500,7 +500,7 @@ Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## Q2. If yes, what methods do you use to calculate nutrient loads?
+## BQ2. If yes, what methods do you use to calculate nutrient loads?
 ```{r BQ2, fig.cap="Figure 8. Number of countries responding."}
 #select data BQ2
 PartB.Q2 <- dat.PartB %>% filter(QuestionNo_b==2)
@@ -525,7 +525,7 @@ Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## Q3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
+## BQ3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
 ```{r BQ3, fig.cap="Figure 9. Number of countries responding."}
 PartB.Q3 <- dat.PartB %>% filter(QuestionNo_b==3)
 
@@ -568,7 +568,7 @@ Catchment models that quantify the nutrient emissions/nutrient losses to surface
 
 Add here a critical analysis paragraph.
 
-## Q4. If yes, at what spatial level do the models operate?
+## BQ4. If yes, at what spatial level do the models operate?
 ```{r BQ4, fig.cap="Figure 10. Number of countries responding."}
 #select data BQ2
 PartB.Q4 <- dat.PartB %>% filter(QuestionNo_b==5)
@@ -593,7 +593,7 @@ Add here a summary paragraph on the graph results. (note regarding the Specific 
 
 Add here a critical analysis paragraph.
 
-## Q5. If yes, how large are the uncertainties in these models and how do you deal with these uncertainties?
+## BQ5. If yes, how large are the uncertainties in these models and how do you deal with these uncertainties?
 ```{r Countries detail BQ5, include=FALSE}
 PartB.Q5 <- dat.PartB %>% filter(QuestionNo_b==6)
 
@@ -644,7 +644,7 @@ PartC.long <- PartC.long %>% mutate(Acronym=Country) %>%
 PartC.long$Acronym <- as.factor(PartC.long$Acronym)
 ```
 
-## Q1. When is nutrient reduction decided to be necessary?
+## CQ1. When is nutrient reduction decided to be necessary?
 (note to self) Attention: marine waters less categorical options but merge if possible
 ```{r CQ1, fig.cap="Figure 11. Number of countries responding."}
 #select data CQ1
@@ -714,7 +714,7 @@ Add here a summary paragraph on the graph overall results.
 
 Add here a critical analysis paragraph.
 
-## Q2. Are you undertaking pollution accounting to identify the sources of nutrient pollution?
+## CQ2. Are you undertaking pollution accounting to identify the sources of nutrient pollution?
 ```{r CQ2, fig.cap="Figure 12. Number of countries responding."}
 PartC.Q2 <- dat.PartC %>% filter(QuestionNo_b==2)
 
@@ -753,9 +753,9 @@ xxCQ2 <-CntryListfunction (id.countCQ2)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Some kind of pollution accounting is considered by most countries to identify the main sources of nutrient pollution, with the exception of (`r xxCQ2[[2]]`). Iceland did not reply to this question.
+Some kind of pollution accounting is considered by most countries to identify the main sources of nutrient pollution, with the exception of two countries (`r xxCQ2[[2]]`). Iceland did not reply to this question.
 
-## Q3. If yes, which point and diffuse sources are included?
+## CQ3. If yes, which point and diffuse sources are included?
 ```{r CQ3, fig.cap="Figure 13. Number of countries responding."}
 #select data CQ3
 PartC.Q3 <- dat.PartC %>% filter(QuestionNo_b==3)
@@ -787,9 +787,26 @@ Add here a summary paragraph on the open answers and add number of countries rep
 
 Add here a critical analysis paragraph.
 
-## Q4. What criteria and considerations do you use to select which measures to implement in order to reduce nutrient inputs?
-```{r}
+## CQ4. What criteria and considerations do you use to select which measures to implement in order to reduce nutrient inputs?
+```{r CQ4, fig.cap="Figure 14. Number of countries responding."}
+#select data CQ4
+PartC.Q4 <- dat.PartC %>% filter(QuestionNo_b==5)
 
+PartC.Q4$ResponseOptionText <- str_trim(PartC.Q4$ResponseOptionText)
+
+plotCQ4 <- ggplot(PartC.Q4,
+                  aes(reorder_within(ResponseOptionText,ResponsesPerOption,WaterCategory), ResponsesPerOption)) +
+  scale_x_reordered()+
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col() +
+  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+plotCQ4
 ```
 
 Add here a summary paragraph on the graph results.
@@ -797,63 +814,168 @@ Add here a summary paragraph on the graph results.
 Add here a critical analysis paragraph.
 
 (from here Yes/No graphs:)
-## Q5. Are past policy measures such as a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture taken into account when planning new measures, e.g. trying to achieve a fair sharing of the nutrient reductions between different sectors according to a pollution account?
-```{r}
+## CQ5. Are past policy measures such as a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture taken into account when planning new measures, e.g. trying to achieve a fair sharing of the nutrient reductions between different sectors according to a pollution account?
+```{r CQ5, fig.cap="Figure 15. Number of countries responding."}
+#select data CQ5
+PartC.Q5 <- dat.PartC %>% filter(QuestionNo_b==6)
 
+PartC.Q5$ResponseOptionText <- str_trim(PartC.Q5$ResponseOptionText)
+
+PartCQ5 <- ggplot(PartC.Q5, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+PartCQ5 + theme(legend.position = "none") 
 ```
 
 Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## Q6. Is the delay in the response of the ecosystem to reduced nutrient inputs taken into account when planning new measures?
-```{r}
+## CQ6. Is the delay in the response of the ecosystem to reduced nutrient inputs taken into account when planning new measures?
+```{r CQ6, fig.cap="Figure 16. Number of countries responding."}
+#select data CQ6
+PartC.Q6 <- dat.PartC %>% filter(QuestionNo_b==7)
 
+PartC.Q6$ResponseOptionText <- str_trim(PartC.Q6$ResponseOptionText)
+
+PartCQ6 <- ggplot(PartC.Q6, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+PartCQ6 + theme(legend.position = "none") 
 ```
 
 Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## Q7. Do you estimate the effect of measures on the reduction of the nutrient load or concentration in water? 
-```{r}
+## CQ7. Do you estimate the effect of measures on the reduction of the nutrient load or concentration in water? 
+```{r CQ7, fig.cap="Figure 17. Number of countries responding."}
+#select data CQ7
+PartC.Q7 <- dat.PartC %>% filter(QuestionNo_b==8)
 
+PartC.Q7$ResponseOptionText <- str_trim(PartC.Q7$ResponseOptionText)
+
+PartCQ7 <- ggplot(PartC.Q7, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+PartCQ7 + theme(legend.position = "none") 
 ```
 
 Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## Q8. Do you have mechanisms for managing management objectives for nutrients across political boundaries (either within or between Member States)? 
-```{r}
+## CQ8. Do you have mechanisms for managing management objectives for nutrients across political boundaries (either within or between Member States)? 
+```{r CQ8, fig.cap="Figure 18. Number of countries responding."}
+#select data CQ8
+PartC.Q8 <- dat.PartC %>% filter(QuestionNo_b==9)
 
+PartC.Q8$ResponseOptionText <- str_trim(PartC.Q8$ResponseOptionText)
+
+PartCQ8 <- ggplot(PartC.Q8, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+PartCQ8 + theme(legend.position = "none") 
 ```
 
 Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## Q9. Do you consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning the nutrient reduction measures?
-```{r}
+## CQ9. Do you consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning the nutrient reduction measures?
+```{r CQ9, fig.cap="Figure 19. Number of countries responding."}
+#select data CQ9
+PartC.Q9 <- dat.PartC %>% filter(QuestionNo_b==10)
 
+PartC.Q9$ResponseOptionText <- str_trim(PartC.Q9$ResponseOptionText)
+
+PartCQ9 <- ggplot(PartC.Q9, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+PartCQ9 + theme(legend.position = "none") 
 ```
 
 Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## Q10. Do you consider nature-based solutions (restoring riparian zones, wetlands, flood plains etc.) when planning the nutrient reduction measures? 
-```{r}
+## CQ10. Do you consider nature-based solutions (restoring riparian zones, wetlands, flood plains etc.) when planning the nutrient reduction measures? 
+```{r CQ10, fig.cap="Figure 20. Number of countries responding."}
+#select data CQ10
+PartC.Q10 <- dat.PartC %>% filter(QuestionNo_b==11)
 
+PartC.Q10$ResponseOptionText <- str_trim(PartC.Q10$ResponseOptionText)
+
+PartCQ10 <- ggplot(PartC.Q10, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+PartCQ10 + theme(legend.position = "none") 
 ```
 
 Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## Q11. Do you consider technical/biological manipulative solutions (removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, management fisheries) when planning the nutrient reduction measures? 
-```{r}
+## CQ11. Do you consider technical/biological manipulative solutions (removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, management fisheries) when planning the nutrient reduction measures? 
+```{r CQ11, fig.cap="Figure 21. Number of countries responding."}
+#select data CQ11
+PartC.Q11 <- dat.PartC %>% filter(QuestionNo_b==12)
 
+PartC.Q11$ResponseOptionText <- str_trim(PartC.Q11$ResponseOptionText)
+
+PartCQ11 <- ggplot(PartC.Q11, aes(ResponseOptionText, ResponsesPerOption)) +
+  scale_x_discrete() +
+  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  geom_col(aes(fill=ResponseOptionText)) +
+  labs (y = expression(paste("No. of countries")),x = NULL) +
+  coord_flip()+ 
+  theme_classic()+
+  theme(strip.background=element_rect(linetype = "blank"))+
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+
+PartCQ11 + theme(legend.position = "none") 
 ```
 
 Add here a summary paragraph on the graph results.
