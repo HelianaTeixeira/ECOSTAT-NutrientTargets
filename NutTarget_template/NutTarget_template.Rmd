@@ -641,14 +641,18 @@ Tab2 <- aggregate(Explanation ~., dat.uncert, toString)
 
 Tab2 <- Tab2 %>% rename(Country.Name = Countries , Acronym = Country)
 
+Tab2$Explanation <- str_trim(Tab2$Explanation) #clean white spaces
+
+# Tab2$Explanation <- Tab2$Explanation%>% #to add line breaks within cell in table 2 - tbc HT
+#   str_replace_all("(?<![a-z])\\,", "\n")
+  
 #Table 2  
 options(knitr.kable.NA = '')
 Tab2 %>%
-  #mutate_all(linebreak) %>% #\n add to explanation where , or ,, (1st replace?)
-  knitr::kable(format = table_format,col.names = c("Name","Acronym","Dealing with model uncertainty"), align = "lll", caption = "Table 2. Explanation on how the different countries deal with model uncertainties.") %>%#,table.attr = "style='width:70%;'"
+  #mutate_all(linebreak) %>% 
+  knitr::kable(format = table_format, booktabs = T, escape = F, col.names = c("Name","Acronym","Dealing with model uncertainty"), align = "lll", caption = "Table 2. Explanation on how the different countries deal with model uncertainties.") %>%#,table.attr = "style='width:70%;'"
   kableExtra::kable_styling (position = "c") %>%
   kableExtra::add_header_above(header = c("Country" = 2, " " = 1),align = "centre")
-
 ```
 
 
