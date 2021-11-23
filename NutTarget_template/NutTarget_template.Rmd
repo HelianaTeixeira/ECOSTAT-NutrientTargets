@@ -461,7 +461,8 @@ xx7 <-CntryListfunction (id.count7)#countries replying
 Countries which have not set management objectives for nutrients in lakes (`r xx7[[1]]`), rivers, (`r xx7[[2]]`, transitional (`r xx7[[3]]`), coastal (`r xx7[[4]]`), marine (`r xx7[[5]]`).
 
 (see word doc for the reasons and information on how they achieve the WFD and/or MSFD objectives instead for water bodies exposed to nutrient pollution.)
-Add here a critical analysis paragraph.
+
+The same few countries make similar comments for all water categories.  It might be easiest if we just paste the responses into this document as a table.
 
 ## How are the current nutrient loads estimated? (Part B)
 ```{r pre-treatment B, include=FALSE}
@@ -504,6 +505,7 @@ plotBQ1 + theme(legend.position = "none")
 Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
+(there do not seem to be any justifications for "no" in the report)
 
 ## Q2. If yes, what methods do you use to calculate nutrient loads?
 ```{r BQ2, fig.cap="Figure 8. Number of countries responding."}
@@ -528,7 +530,9 @@ plotBQ2
 
 Add here a summary paragraph on the graph results.
 
-Add here a critical analysis paragraph.
+A wide variety of models are in use, each with differing data requirements.  Responses 
+
+[comment: the responses suggest different levels of technical awareness: I suspect that almost all could have ticked "both", but some list the information that they have to iput, whilst others describe the workings of the model in more detail] 
 
 ## Q3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
 ```{r BQ3, fig.cap="Figure 9. Number of countries responding."}
@@ -573,6 +577,8 @@ Catchment models that quantify the nutrient emissions/nutrient losses to surface
 
 Add here a critical analysis paragraph.
 
+The best way forward might be to include a table that lists all the models used, by country.  Some use more than one.   Many are specific to one country; a few (e.g. MONERIS) seem to be used more widely.  
+
 ## Q4. If yes, at what spatial level do the models operate?
 ```{r BQ4, fig.cap="Figure 10. Number of countries responding."}
 #select data BQ2
@@ -596,6 +602,8 @@ plotBQ4
 ```
 
 Add here a summary paragraph on the graph results. (note regarding the Specific Spatial Unit we need to see Word Doc for additional info)
+
+Modelling is performed at a range of spatial scales.  One problem we have is that definitions of "Water body" are quite vague (eg CIS guidance #2), and can overlap with both "catchment" and "subcatchment".  Different countries may have different understandings of how these terms are applied.  No indication of whether modelling exercises cross national borders but maybe we didn't ask the right questions.
 
 Add here a critical analysis paragraph.
 
@@ -624,7 +632,14 @@ xxBQ5 <-CntryListfunction (id.countBQ5)#countries replying
 
 Uncertainties in the models that are used to quantify the nutrient emissions and/or nutrient losses to surface waters were addressed by 16 of countries, namely: `r xxBQ5[[1]]`. (HT-MK: Complete this summary paragraph on the open answers of countries from the word documents)
 
+Upload the table of open responss, then format with knitr::kable
+
 Add here a critical analysis paragraph.
+
+```{r}
+QB5_responses <- read.delim("QB5_responses.txt")
+```
+
 
 ## How are measures to reach management objectives for nutrients defined? (Part C)
 ```{r pre-treatment C, include=FALSE}
