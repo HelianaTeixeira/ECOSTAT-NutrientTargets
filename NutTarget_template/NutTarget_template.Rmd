@@ -1,14 +1,14 @@
 ---
 title: "Methods used to set management objectives for nutrients - ECOSTAT Questionnaire"
-date: "`r Sys.Date()`"
 output:
-  rmdformats::robobook:
-    highlight: kate
   pdf_document:
+    keep_tex: yes
     template: my_html_document (template = "/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmdformats/templates/template.html")
     toc: yes
     toc_depth: 3
-    keep_tex: yes
+  rmdformats::robobook:
+    highlight: kate
+date: '`r Sys.Date()`'
 ---
 
 ```{r setup, include=FALSE}
@@ -91,7 +91,7 @@ PartA.long <- PartA.long %>% mutate(Acronym=Country) %>%
 PartA.long$Acronym <- as.factor(PartA.long$Acronym)
 ```
 
-#### Overview of countries participationg in questionnaire
+#### Overview of countries participating in questionnaire
 
 Twenty-six countries participated in this survey, five of which are land-locked countries reporting only for freshwater categories.
 
@@ -183,7 +183,7 @@ xx1 <-CntryListfunction (id.count1)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Most countries have set management objectives for all water bodies exposed to nutrient pollution in the different water categories, with few countries considering only some of the nutrient polluted water bodies (`r xx1[[2]]` in lakes; `r xx1[[5]]` rivers; `r xx1[[8]]` in transitional waters; and `r xx1[[11]]` in marine waters). Only `r xx1[[3]]` in lakes, `r xx1[[6]]` in rivers, and `r xx1[[12]]` in marine waters have not set management objectives for water bodies exposed to nutrient pollution. Results show that France (FR) does not follow a standardised national approach, varying according to water agency (but confirm this).
+Most countries have set management objectives for all water bodies exposed to nutrient pollution in the different water categories, with few countries considering only some of the nutrient polluted water bodies (`r xx1[[2]]` in lakes; `r xx1[[5]]` rivers; `r xx1[[8]]` in transitional waters; and `r xx1[[11]]` in marine waters). Only `r xx1[[3]]` in lakes, `r xx1[[6]]` in rivers, and `r xx1[[12]]` in marine waters have not set management objectives for water bodies exposed to nutrient pollution. Results show that France (FR) does not follow a standardised national approach, with water agencies each adopting their own policies (but confirm this).
  
 ## AQ2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
 
@@ -227,9 +227,9 @@ xx2 <-CntryListfunction (id.count2)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Responses reflect, to a large extent, an interplay between biogeography and local pressures. Most countries focus on reducing both nitrogen and phosphorus whatever the water category considered; those who focussed on one or the other did so because local circumstances meant that this was the most likely reason for problems. That would be, for example, the case of phosphorus reduction in lakes, adopted by nine countries (`r xx2[[1]]`), or nitrogen in lakes (`r xx2[[2]]`) and rivers (`r xx2[[6]]`) or in coastal (`r xx2[[13]]`) and marine waters (`r xx2[[16]]`). UWWTD, ND and WFD were all cited as regulatory drivers for these actions. Responses focussed on the consequences of nutrients on transitional water ecosystems, but there was also some acknowledgment of the role of transitional waters as conduits of nutrients to coastal and marine waters too.
+Responses reflect, to a large extent, an interplay between biogeography and local pressures. Most countries focus on reducing both nitrogen and phosphorus whatever the water category considered; those who focussed on one or the other did so because local circumstances meant that this was the most likely reason for problems. That would be, for example, the case of phosphorus reduction in lakes, adopted by nine countries (`r xx2[[1]]`), or nitrogen in lakes (`r xx2[[2]]`), rivers (`r xx2[[6]]`), coastal (`r xx2[[13]]`) or marine waters (`r xx2[[16]]`). Responses focussed on the consequences of nutrients on transitional water ecosystems, but there was also some acknowledgment of the role of transitional waters as conduits of nutrients to coastal and marine waters too.
 
-The limiting nutrient approach is more commonly assumed in freshwater categories (lakes: `r xx2[[4]]`; rivers: `r xx2[[8]]`) than in marine influenced systems (transitional: `r xx2[[12]]`, coastal: `r  xx2[[15]]`).  What is not clear from the response is how the limiting nutrient is determined in any given situation.  Several responses referred to prevailing dogma that nitrogen and phosphorus are the nutrients most likely to be limiting (and, therefore, responsible for eutrophication when present in excess) and some (e.g. PL) indicated that targets were to achieve concentrations consistent with the good/moderate boundary.  This, in turn, presumes a good quantitative understanding of causal relationships between nutrients and measures of the condition of the flora and fauna which can be difficult to obtain for transitional waters (Salas-Herrero et al., 2019).   It can probably be assumed that exceeding supporting element standards for nitrogen and phosphorus is the default criterion for recognising a need for nutrient management.  However, as Phillips et al. (2018) point out, there are a variety of approaches to setting nutrient standards, with different levels of precaution.   No mention is made of more targeted, case specific approaches in the responses; however, this does not mean that they are not used in individual countries.
+The limiting nutrient approach is more commonly assumed in freshwater categories (lakes: `r xx2[[4]]`; rivers: `r xx2[[8]]`) than in marine influenced systems (transitional: `r xx2[[12]]`, coastal: `r  xx2[[15]]`).  What is not clear from the responses is how the limiting nutrient is determined in any given situation.  Several responses referred to prevailing dogma that nitrogen and phosphorus are the nutrients most likely to be limiting (and, therefore, responsible for eutrophication when present in excess) and some (e.g. PL) indicated that targets were to achieve concentrations consistent with the good/moderate boundary.  This, in turn, presumes a good quantitative understanding of causal relationships between nutrients and measures of the condition of the flora and fauna which can be difficult to obtain for transitional waters (Salas-Herrero et al., 2019).   It can probably be assumed that exceeding supporting element standards for nitrogen and phosphorus is the default criterion for recognising a need for nutrient management.  However, as Phillips et al. (2018) point out, there are a variety of approaches to setting nutrient standards, with different levels of precaution.   No mention is made of more targeted, case specific approaches in the responses; however, this does not mean that they are not used in individual countries.
 
 ## AQ3. If you have set management objectives for nutrients, please indicate which methodology has been used. 
 
@@ -275,14 +275,12 @@ xx3 <-CntryListfunction (id.count3)#countries replying
 
 The most commonly used method to derive nutrient targets in all water categories was based on modeled pressure-response relationships between nutrient(s) and biological quality elements (BQE) (add formula to id countries in each Water category here?). According to their description, phytoplankton (chlorophyll) and macrophytes (confirm this) were the BQEs that countries have most frequently (?) considered for establishing such pressure-response relationships. 
 
-Add more details on the type of modeling, rational, BQEs selected, and modeled variables (loads?, etc..)
-Freshwaters: the four possible answers are not exclusive, with several countries using more than one approach.  For example, a modelling approach might be combined with historical information by an expert to give a more nuanced target than would be provided by any approach in isolation.  The term “modelling”, itself, covers a wide range of possibiltilies.  BQE-response relationships are often strong in lakes and are well-suited to deriving standards following the methods in the Best Practice Guide [how should this be cited here?] but a range of other modelling approaches are employed.   Few respondents mentioned which BQE was used.   Of those who did, phytoplankton, phytobenthos, macrophytes, invertebrates and fish were all mentioned, depending on specific contexts.  There is also a distinction between those countries that set targets in terms of concentrations and those who use loads.  A further distinction is between those who used mass balance models and those who used dynamic process models although details in questionnaire responses did not always explain the mechanisms behind their models.   Lakes are well suited to the use of historical information, through the use of palaeoecology; historical information is also used in rivers by eight countries, though none of these provided more information on how this was done. 
 
-(tbc Martyn/Heliana) Historical data and expert judgment are also frequently used methods...
+The four possible answers to this question are not exclusive, with several countries using more than one approach.  For example, a modelling approach might be combined with historical information by an expert to give a more nuanced target than would be provided by any approach in isolation.  The term “modelling”, itself, covers a wide range of possibiltilies.  BQE-response relationships are often strong in lakes and are well-suited to deriving standards following the methods in the Best Practice Guide [how should this be cited here?] but a range of other modelling approaches are employed.   Few respondents mentioned which BQE was used.   Of those who did, phytoplankton, phytobenthos, macrophytes, invertebrates and fish were all mentioned, depending on specific contexts.  There is also a distinction between those countries that set targets in terms of concentrations and those who use loads (this will be explored in more detail later in the report).  A further distinction is between those who used mass balance models and those who used dynamic process models although details in questionnaire responses did not always explain the mechanisms behind their models.   Lakes are well suited to the use of historical information, through the use of palaeoecology; historical information is also used in rivers by eight countries, though none of these provided more information on how this was done. 
 
-(tbc Martyn/Heliana) Add here a critical analysis paragraph.
+[Heliana: do you want to add any extra information about TRAC/marine waters?]
 
-Countries have provided a short description of the methodology, including links to background reports or publications that can be consulted for further details in the report compiling "EC ECOSTAT Nutrients Questionnaire Responses" (add link to report). 
+Several countries have provided a short description of their approach (often including links to reports or publications); these details can be found in the compilation of responses to the EC ECOSTAT Nutrients Questionnaire (add link to report). 
 
 ## AQ4. Do you determine the maximum critical load or a load reduction target that is compatible with good status for nutrient sensitive BQEs? 
 
