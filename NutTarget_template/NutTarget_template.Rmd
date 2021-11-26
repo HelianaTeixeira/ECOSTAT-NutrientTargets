@@ -630,12 +630,12 @@ xxBQ3 <-CntryListfunction (id.countBQ3)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Catchment models that quantify the nutrient emissions/nutrient losses to surface waters are used by `r length(xxBQ3[[1]])` countries, namely: `r xxBQ3[[1]]`. A full list of models cited in this report is given in Table #. 
+Catchment models that quantify the nutrient emissions/nutrient losses to surface waters are used by `r length(xxBQ3[[1]])` countries, namely: `r xxBQ3[[1]]`. A full list of models cited in this report is given in Table #. Based on information given, most of these are best considered as part of networks of specialised models, each passing estimages to subseqeunt modules (e.g. soil leaching of nutrients is estimated by one model, and these estimates are then passed to a hydrological model). As far as we can tell, few of these are explicitly modelling ecological processes, with the end result being an estimate of surface water concentrations.  These are then compared with good-moderate boundary concentrations extimated by emperical models, many of which are based on methods outlined in the BPG.
 
-Add here a critical analysis paragraph.
+
 
 <<<<<<< HEAD
-The best way forward might be to include a table that lists all the models used, by country.  Some use more than one.   Many are specific to one country; a few (e.g. MONERIS) seem to be used more widely.  
+The best way forward might be to include a table that lists all the models used, by country.  Some use more than one.   Many are specific to one country; a few (e.g. MONERIS) seem to be used more widely.  List will exclude emperical models, e.g. Vollenweider, and models covered by BPG.  Also a few references to hydrological and atmospheric models whcih appear to form part of decision-support systems but which do not explicitly model nutrients.  These have also been excluded.
 
 ## Q4. If yes, at what spatial level do the models operate?
 =======
