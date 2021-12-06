@@ -1,7 +1,6 @@
 ---
 title: "Methods used to set management objectives for nutrients - a comparison of national approaches"
 output:
-<<<<<<< HEAD
   rmdformats::robobook:
     highlight: kate
   bookdown::word_document2: 
@@ -10,17 +9,8 @@ output:
     toc_depth: '3'
     pandoc_args: ["--lua-filter", "figure_caption_patch.lua"]
   tufte::tufte_html: default
-always_allow_html: true
-=======
-  pdf_document:
-    keep_tex: yes
-    template: my_html_document (template = "/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmdformats/templates/template.html")
-    toc: yes
-    toc_depth: 3
-  rmdformats::robobook:
-    highlight: kate
-date: '`r Sys.Date()`'
->>>>>>> de985aafd80ec230012f80816ac1fc4a0eaecf96
+  always_allow_html: true
+  date: '`r Sys.Date()`'
 ---
 
 ```{r setup, include=FALSE}
@@ -545,11 +535,9 @@ plotBQ1 <- ggplot(PartB.Q1, aes(ResponseOptionText, ResponsesPerOption)) +
 
 plotBQ1
 ```
-<<<<<<< HEAD
 
 Add here a summary paragraph on the graph results.
-=======
->>>>>>> de985aafd80ec230012f80816ac1fc4a0eaecf96
+
 
 ```{r Countries detail QB1, include=FALSE}
 PartB.Q1long <-pivot_longer(PartB.Q1, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
@@ -662,15 +650,9 @@ Catchment models that quantify the nutrient emissions/nutrient losses to surface
 <<<<<<< HEAD
 The best way forward might be to include a table that lists all the models used, by country.  Some use more than one.   Many are specific to one country; a few (e.g. MONERIS) seem to be used more widely.  List will exclude emperical models, e.g. Vollenweider, and models covered by BPG.  Also a few references to hydrological and atmospheric models whcih appear to form part of decision-support systems but which do not explicitly model nutrients.  These have also been excluded.
 
-## Q4. If yes, at what spatial level do the models operate?
-=======
 ## BQ4. If yes, at what spatial level do the models operate?
 <<<<<<< HEAD
 ```{r BQ4, fig.height = 3, fig.width = 7.5, fig.cap="Figure 10. Number of countries responding."}
-=======
->>>>>>> 8997dc5667aaf8a2d96e8d97976f9dc8621268bb
-```{r BQ4, fig.cap="Figure 10. Number of countries responding."}
->>>>>>> de985aafd80ec230012f80816ac1fc4a0eaecf96
 #select data BQ2
 PartB.Q4 <- dat.PartB %>% filter(QuestionNo_b==5)
 
@@ -726,10 +708,10 @@ Uncertainties in the models that are used to quantify the nutrient emissions and
 # on advice of steering group, I've removed this table, and written a summary paragraph.  Readers can be referred to the Appendix.
 
 #attribute regions to BE
-#dat.uncert <- dat.uncert %>% mutate(Acronym=Country) %>% 
-  mutate (Acronym =case_when(
-    Acronym == "BE-Wa" ~ "BE",
-    TRUE ~ as.character(Acronym)))
+# dat.uncert <- dat.uncert %>% mutate(Acronym=Country) %>% 
+#   mutate (Acronym =case_when(
+#     Acronym == "BE-Wa" ~ "BE",
+#     TRUE ~ as.character(Acronym)))
 
 #match countries full name
 #dat.uncert <- left_join( dat.uncert, dat.countries, by = "Acronym", keep = FALSE) 
@@ -737,8 +719,8 @@ Uncertainties in the models that are used to quantify the nutrient emissions and
 # PartA.long$Countries <- as.factor(PartA.long$Countries)
 # dat.dat.uncert$Type <- factor(dat.countries$Type, levels = c("EU Member States", "EFTA Member States", "EU Candidate Countries"))
 
-#dat.uncert <- dat.uncert %>%
-  select(c(Countries, Country, Explanation))
+# dat.uncert <- dat.uncert %>%
+#   select(c(Countries, Country, Explanation))
 
 # merge responses by country with aggregate from the stats package in the core of R
 #Tab2 <- aggregate(Explanation ~., dat.uncert, toString)
@@ -752,21 +734,14 @@ Uncertainties in the models that are used to quantify the nutrient emissions and
   
 #Table 2  
 #options(knitr.kable.NA = '')
-#Tab2 %>%
-  #mutate_all(linebreak) %>% 
-  knitr::kable(format = table_format, booktabs = T, escape = F, col.names = c("Name","Acronym","Dealing with model uncertainty"), align = "lll", caption = "Table 2. Explanation on how the different countries deal with model uncertainties.") %>%#,table.attr = "style='width:70%;'"
-  kableExtra::kable_styling (position = "c") %>%
-  kableExtra::add_header_above(header = c("Country" = 2, " " = 1),align = "c")
+# Tab2 %>%
+#   #mutate_all(linebreak) %>% 
+#   knitr::kable(format = table_format, booktabs = T, escape = F, col.names = c("Name","Acronym","Dealing with model uncertainty"), align = "lll", caption = "Table 2. Explanation on how the different countries deal with model uncertainties.") %>%#,table.attr = "style='width:70%;'"
+#   kableExtra::kable_styling (position = "c") %>%
+#   kableExtra::add_header_above(header = c("Country" = 2, " " = 1),align = "c")
 ```
 
-<<<<<<< HEAD
-Upload the table of open responss, then format with knitr::kable
-
 Add here a critical analysis paragraph.
-=======
->>>>>>> 8997dc5667aaf8a2d96e8d97976f9dc8621268bb
-
-
 
 ## How are measures to reach management objectives for nutrients defined? (Part C)
 ```{r pre-treatment C, include=FALSE}
