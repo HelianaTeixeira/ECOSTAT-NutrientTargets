@@ -4,18 +4,20 @@ date: "`r Sys.Date()`"
 output:
   rmdformats::robobook:
     highlight: kate
-  pdf_document:
-    template: my_html_document (template = "/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmdformats/templates/template.html")
+  bookdown::word_document2: 
+    reference_docx: mystyles.docx
     toc: yes
-    toc_depth: 3
-    keep_tex: yes
+    toc_depth: '3'
+    pandoc_args: ["--lua-filter", "figure_caption_patch.lua"]
+  tufte::tufte_html: default
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
 library(rmdformats)
 library(tinytex)
 library(rmarkdown)
-#library(pandoc)
+library(tufte)
 
 library(tidyverse)
 library(tidytext)
@@ -44,12 +46,21 @@ my_html_document <- function(template = "path_to_custom_template", ...) {
   base_format
 }
 
-# Get output document type and use as the format argument in kable function
-table_format = if(is_html_output()) {
-  "html"
-} else if(is_latex_output()) {
-  "latex"
+#to achieve multiple output formats (html, pdf, word)
+is_docx_output = function() {
+ knitr::opts_knit$get("rmarkdown.pandoc.to")=="docx"
 }
+is_latex_output = function() {
+ knitr::opts_knit$get("rmarkdown.pandoc.to")=="latex"
+}
+is_html_output = function() {
+ knitr::opts_knit$get("rmarkdown.pandoc.to")=="html"
+}
+
+# Get output document type and use as the format argument in kable function
+table_format = function() {if(is_html_output())
+  "html" else
+    "latex" }
 ```
 
 ECOSTAT has a mandate to compare methods used by Member States to set management objectives  for nutrients that are compatible with good ecological status and good environmental status.
@@ -113,7 +124,7 @@ options(knitr.kable.NA = '')
 Tab1 %>% spread(key = WaterCategory, value = n) %>%
   knitr::kable(format = table_format,col.names = c("Acronym","  ","Lakes","Rivers","Transitional","Coastal","Marine"), align = "llccccc", caption = "Table 1. Countries* participating in survey per water category.") %>%#,table.attr = "style='width:70%;'"
   kableExtra::kable_styling (position = "c") %>%
-  kableExtra::add_header_above(header = c("Country" = 2, "Water Category" = 5),align = "centre")
+  kableExtra::add_header_above(header = c("Country" = 2, "Water Category" = 5),align = "c")
 
 ```
 
@@ -123,7 +134,7 @@ Tab1 %>% spread(key = WaterCategory, value = n) %>%
 
 ## AQ1. Have you set management objectives for nutrients for waters bodies that are exposed to nutrient pollution?
 
-```{r Q1,fig.cap="Figure 1. Number of countries responding, overview by water category."}
+```{r Q1,fig.height = 5, fig.width= 7.5, fig.cap="Figure 1. Number of countries responding, overview by water category."}
 #select data Q1
 PartA.Q1 <- dat.PartA %>% filter(QuestionNo_b==1)
 
@@ -187,7 +198,7 @@ Most countries have set management objectives for all water bodies exposed to nu
  
 ## AQ2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
 
-```{r Q2, fig.cap="Figure 2. Number of countries responding, overview by water category."}
+```{r Q2, fig.height = 5, fig.width = 7.5, fig.cap="Figure 2. Number of countries responding, overview by water category."}
 #select data Q2
 PartA.Q2 <- dat.PartA %>% filter(QuestionNo_b==2)
 
@@ -286,7 +297,7 @@ Countries have provided a short description of the methodology, including links 
 
 ## AQ4. Do you determine the maximum critical load or a load reduction target that is compatible with good status for nutrient sensitive BQEs? 
 
-```{r Q4, fig.cap="Figure 4. Number of countries responding, overview by water category."}
+```{r Q4, fig.height = 5, fig.width = 7.5, fig.cap="Figure 4. Number of countries responding, overview by water category."}
 PartA.Q4 <- dat.PartA %>% filter(QuestionNo_b==4)
 
 PartA.Q4$ResponseOptionText <- str_trim(PartA.Q4$ResponseOptionText)
@@ -334,7 +345,7 @@ Detailed responses to this question were ambiguous, with 16 (lakes) and 18 (rive
 
 ## AQ5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
 
-```{r Q5, fig.cap="Figure 5. Number of countries responding, overview by water category."}
+```{r Q5, fig.height = 5, fig.width = 7.5, fig.cap="Figure 5. Number of countries responding, overview by water category."}
 #select data Q5
 PartA.Q5 <- dat.PartA %>% filter(QuestionNo_b==5)
 
@@ -387,7 +398,7 @@ Setting nutrient boundaries that are consistent with the G/M boundary will not n
 
 ## AQ6. If you have set management objectives for nutrients, please specify which policy the management objectives are meant to address.
 
-```{r Q6, fig.cap="Figure 6. Number of countries responding, overview by water category."}
+```{r Q6, fig.height = 5, fig.width = 7.5, fig.cap="Figure 6. Number of countries responding, overview by water category."}
 #select data Q6
 PartA.Q6 <- dat.PartA %>% filter(QuestionNo_b==6)
 
@@ -413,7 +424,7 @@ For all water categories except Marine, the WFD is the most important driver, th
 
 ## AQ7. Countries which have not set management objectives for nutrients. 
 
-```{r Q7, fig.cap="Figure 7. Number of countries responding, overview by water category."}
+```{r Q7, include=FALSE}
 #select data Q6
 PartA.Q7 <- dat.PartA %>% filter(QuestionNo_b==7)
 
@@ -431,8 +442,8 @@ plotQ7 <- ggplot(PartA.Q7, aes(reorder_within(ResponseOptionText,ResponseOptionR
   stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
 
 #plotQ7
-
 ```
+
 ```{r Countries detail Q7, include=FALSE}
 PartA.Q7long <-pivot_longer(PartA.Q7, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
 
@@ -479,7 +490,7 @@ PartB.long$Acronym <- as.factor(PartB.long$Acronym)
 ```
 
 ## BQ1. Do you calculate current nutrient loads in order to achieve management objectives for nutrients?
-```{r BQ1, fig.cap="Figure 7. Number of countries responding."}
+```{r BQ1, fig.height = 1, fig.width = 5, fig.cap="Figure 7. Number of countries responding."}
 PartB.Q1 <- dat.PartB %>% filter(QuestionNo_b==1)
 
 PartB.Q1$ResponseOptionText <- str_trim(PartB.Q1$ResponseOptionText)
@@ -491,17 +502,18 @@ plotBQ1 <- ggplot(PartB.Q1, aes(ResponseOptionText, ResponsesPerOption)) +
   labs (y = expression(paste("No. of countries")),x = NULL) +
   coord_flip()+ 
   theme_classic()+
-  theme(strip.background=element_rect(linetype = "blank"))+
+  theme(strip.background=element_rect(linetype = "blank"), legend.position = "none")+
   stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
 
-plotBQ1 + theme(legend.position = "none") 
+plotBQ1
 ```
+
 Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
 ## BQ2. If yes, what methods do you use to calculate nutrient loads?
-```{r BQ2, fig.cap="Figure 8. Number of countries responding."}
+```{r BQ2, fig.height = 3, fig.width = 7.5, fig.cap="Figure 8. Number of countries responding."}
 #select data BQ2
 PartB.Q2 <- dat.PartB %>% filter(QuestionNo_b==2)
 
@@ -526,7 +538,7 @@ Add here a summary paragraph on the graph results.
 Add here a critical analysis paragraph.
 
 ## BQ3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
-```{r BQ3, fig.cap="Figure 9. Number of countries responding."}
+```{r BQ3, fig.height = 1, fig.width= 5, fig.cap="Figure 9. Number of countries responding."}
 PartB.Q3 <- dat.PartB %>% filter(QuestionNo_b==3)
 
 PartB.Q3$ResponseOptionText <- str_trim(PartB.Q3$ResponseOptionText)
@@ -569,7 +581,7 @@ Catchment models that quantify the nutrient emissions/nutrient losses to surface
 Add here a critical analysis paragraph.
 
 ## BQ4. If yes, at what spatial level do the models operate?
-```{r BQ4, fig.cap="Figure 10. Number of countries responding."}
+```{r BQ4, fig.height = 3, fig.width = 7.5, fig.cap="Figure 10. Number of countries responding."}
 #select data BQ2
 PartB.Q4 <- dat.PartB %>% filter(QuestionNo_b==5)
 
@@ -652,7 +664,7 @@ Tab2 %>%
   #mutate_all(linebreak) %>% 
   knitr::kable(format = table_format, booktabs = T, escape = F, col.names = c("Name","Acronym","Dealing with model uncertainty"), align = "lll", caption = "Table 2. Explanation on how the different countries deal with model uncertainties.") %>%#,table.attr = "style='width:70%;'"
   kableExtra::kable_styling (position = "c") %>%
-  kableExtra::add_header_above(header = c("Country" = 2, " " = 1),align = "centre")
+  kableExtra::add_header_above(header = c("Country" = 2, " " = 1),align = "c")
 ```
 
 
@@ -682,7 +694,7 @@ PartC.long$Acronym <- as.factor(PartC.long$Acronym)
 
 ## CQ1. When is nutrient reduction decided to be necessary?
 (note to self) Attention: marine waters less categorical options but merge if possible
-```{r CQ1, fig.cap="Figure 11. Number of countries responding."}
+```{r CQ1, fig.height = 10, fig.width = 7.5, fig.cap="Figure 11. Number of countries responding."}
 #select data CQ1
 PartC.Q1 <- dat.PartC %>% filter(QuestionNo_b==1)
 
@@ -751,7 +763,7 @@ Add here a summary paragraph on the graph overall results.
 Add here a critical analysis paragraph.
 
 ## CQ2. Are you undertaking pollution accounting to identify the sources of nutrient pollution?
-```{r CQ2, fig.cap="Figure 12. Number of countries responding."}
+```{r CQ2, fig.height = 1, fig.width= 5, fig.cap="Figure 12. Number of countries responding."}
 PartC.Q2 <- dat.PartC %>% filter(QuestionNo_b==2)
 
 PartC.Q2$ResponseOptionText <- str_trim(PartC.Q2$ResponseOptionText)
@@ -824,7 +836,7 @@ Add here a summary paragraph on the open answers and add number of countries rep
 Add here a critical analysis paragraph.
 
 ## CQ4. What criteria and considerations do you use to select which measures to implement in order to reduce nutrient inputs?
-```{r CQ4, fig.cap="Figure 14. Number of countries responding."}
+```{r CQ4, fig.height = 4, fig.width = 7.5, fig.cap="Figure 14. Number of countries responding."}
 #select data CQ4
 PartC.Q4 <- dat.PartC %>% filter(QuestionNo_b==5)
 
@@ -849,9 +861,8 @@ Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-(from here Yes/No graphs:)
 ## CQ5. Are past policy measures such as a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture taken into account when planning new measures, e.g. trying to achieve a fair sharing of the nutrient reductions between different sectors according to a pollution account?
-```{r CQ5, fig.cap="Figure 15. Number of countries responding."}
+```{r CQ5, fig.height = 1, fig.width= 5, fig.cap="Figure 15. Number of countries responding."}
 #select data CQ5
 PartC.Q5 <- dat.PartC %>% filter(QuestionNo_b==6)
 
@@ -875,7 +886,7 @@ Add here a summary paragraph on the graph results.
 Add here a critical analysis paragraph.
 
 ## CQ6. Is the delay in the response of the ecosystem to reduced nutrient inputs taken into account when planning new measures?
-```{r CQ6, fig.cap="Figure 16. Number of countries responding."}
+```{r CQ6, fig.height = 1, fig.width= 5, fig.cap="Figure 16. Number of countries responding."}
 #select data CQ6
 PartC.Q6 <- dat.PartC %>% filter(QuestionNo_b==7)
 
@@ -899,7 +910,7 @@ Add here a summary paragraph on the graph results.
 Add here a critical analysis paragraph.
 
 ## CQ7. Do you estimate the effect of measures on the reduction of the nutrient load or concentration in water? 
-```{r CQ7, fig.cap="Figure 17. Number of countries responding."}
+```{r CQ7, fig.height = 1, fig.width= 5, fig.cap="Figure 17. Number of countries responding."}
 #select data CQ7
 PartC.Q7 <- dat.PartC %>% filter(QuestionNo_b==8)
 
@@ -923,7 +934,7 @@ Add here a summary paragraph on the graph results.
 Add here a critical analysis paragraph.
 
 ## CQ8. Do you have mechanisms for managing management objectives for nutrients across political boundaries (either within or between Member States)? 
-```{r CQ8, fig.cap="Figure 18. Number of countries responding."}
+```{r CQ8, fig.height = 1, fig.width= 5, fig.cap="Figure 18. Number of countries responding."}
 #select data CQ8
 PartC.Q8 <- dat.PartC %>% filter(QuestionNo_b==9)
 
@@ -947,7 +958,7 @@ Add here a summary paragraph on the graph results.
 Add here a critical analysis paragraph.
 
 ## CQ9. Do you consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning the nutrient reduction measures?
-```{r CQ9, fig.cap="Figure 19. Number of countries responding."}
+```{r CQ9, fig.height = 1, fig.width= 5, fig.cap="Figure 19. Number of countries responding."}
 #select data CQ9
 PartC.Q9 <- dat.PartC %>% filter(QuestionNo_b==10)
 
@@ -971,7 +982,7 @@ Add here a summary paragraph on the graph results.
 Add here a critical analysis paragraph.
 
 ## CQ10. Do you consider nature-based solutions (restoring riparian zones, wetlands, flood plains etc.) when planning the nutrient reduction measures? 
-```{r CQ10, fig.cap="Figure 20. Number of countries responding."}
+```{r CQ10, fig.height = 1, fig.width= 5, fig.cap="Figure 20. Number of countries responding."}
 #select data CQ10
 PartC.Q10 <- dat.PartC %>% filter(QuestionNo_b==11)
 
@@ -995,7 +1006,7 @@ Add here a summary paragraph on the graph results.
 Add here a critical analysis paragraph.
 
 ## CQ11. Do you consider technical/biological manipulative solutions (removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, management fisheries) when planning the nutrient reduction measures? 
-```{r CQ11, fig.cap="Figure 21. Number of countries responding."}
+```{r CQ11, fig.height = 1, fig.width= 5, fig.cap="Figure 21. Number of countries responding."}
 #select data CQ11
 PartC.Q11 <- dat.PartC %>% filter(QuestionNo_b==12)
 
