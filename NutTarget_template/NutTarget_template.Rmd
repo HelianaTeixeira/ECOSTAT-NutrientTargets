@@ -1,16 +1,16 @@
 ---
 title: "Methods used to set management objectives for nutrients - a comparison of national approaches"
+date: "`r Sys.Date()`"
 output:
   rmdformats::robobook:
     highlight: kate
+  tufte::tufte_html: default
   bookdown::word_document2: 
     reference_docx: mystyles.docx
     toc: yes
     toc_depth: '3'
     pandoc_args: ["--lua-filter", "figure_caption_patch.lua"]
-  tufte::tufte_html: default
-  always_allow_html: true
-  date: '`r Sys.Date()`'
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
