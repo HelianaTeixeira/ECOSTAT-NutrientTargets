@@ -57,10 +57,12 @@ is_html_output = function() {
  knitr::opts_knit$get("rmarkdown.pandoc.to")=="html"
 }
 
-# Get output document type and use as the format argument in kable function
-table_format = function() {if(is_html_output())
-  "html" else
-    "latex" }
+#Get output document type and use as the format argument in kable function
+
+table_format = function() {
+  if(is_html_output()) "html" else "latex"
+}
+
 ```
 
 As part of its mandate to understand the approaches taken by Member States and associated countries to managing nutrients in order to achieve good ecological status and good environmental status, ECOSTAT circulated a questionnaire to compare national approaches to setting and implementing management objectives for nutrients.  The work builds on earlier activities that compared good/moderate boundaries by exploring the linkages between the nutrient boundaries set by a country, and the steps taken to manage nutrient loads in order to bring nutrient loads down in order to achieve these boundary concentrations.
@@ -137,6 +139,12 @@ Tab1 %>% spread(key = WaterCategory, value = n) %>%
   kableExtra::kable_styling (position = "c") %>%
   kableExtra::add_header_above(header = c("Country" = 2, "Water Category" = 5),align = "c")
 
+#Countries (MS) by water category (WC)
+MSbyWC<-PartA.long %>% filter(Reply == 1)%>%
+  select(c(WaterCategory, Acronym, Countries))%>%
+  count(WaterCategory, Acronym, Countries)%>%
+  mutate(n = ifelse(n < 100, 1, n)) %>%
+  count(WaterCategory, name = "sumMS")
 ```
 
  *Iceland and Norway (EFTA Members) and Turkey (EU candidate) are not EU Member States. 
@@ -155,12 +163,22 @@ PartA.Q1$ResponseOptionText <- str_trim(PartA.Q1$ResponseOptionText)
 give.n <- function(x){
   return(c(y = -1, label = x))#length(x)
 }
-  
+
+#run function to give sum of countries replying by water category  
+sumMSbyWC <- function(x) {
+  for (i in 1:length (MSbyWC$sumMS)){
+    if (MSbyWC$WaterCategory[i]==PartA.Q1$WaterCategory) {return (MSbyWC$sumMS[i])
+    } else { next
+    }
+  }
+}  #only gets lakes total for all - fix this..
+
 plotQ1 <- ggplot(PartA.Q1, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
   scale_x_reordered() +
-  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
+  #scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
   geom_col() +
-  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
+  facet_wrap(~ WaterCategory, ncol=1,scales = "free_y") +
+  scale_y_continuous(labels = function(x) paste0(round(x/sumMSbyWC(x)*100,1), "%"), breaks=seq(0, sumMSbyWC(x), sumMSbyWC(x)*0.1)) + #%
   labs (y = expression(paste("No. of countries")),x = NULL) +
   coord_flip()+ 
   theme_classic()+
