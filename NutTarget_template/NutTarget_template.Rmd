@@ -59,9 +59,8 @@ is_html_output = function() {
 }
 
 #Get output document type and use as the format argument in kable function
-
 table_format = function() {
-  if(is_html_output()) "html" else "latex"
+  if(is_html_output()) "html" else "simple"
 }
 
 ```
@@ -136,7 +135,7 @@ Tab1 <- PartA.long %>% filter(Reply == 1)%>%
 #Table 1  
 options(knitr.kable.NA = '')
 Tab1 %>% spread(key = WaterCategory, value = n) %>%
-  knitr::kable(format = table_format,col.names = c("Acronym","  ","Lakes","Rivers","Transitional","Coastal","Marine"), align = "llccccc", caption = "Table 1. Countries* participating in survey per water category.") %>%#,table.attr = "style='width:70%;'"
+  knitr::kable(format = "html",col.names = c("Acronym","  ","Lakes","Rivers","Transitional","Coastal","Marine"), align = "llccccc", caption = "Table 1. Countries* participating in survey per water category.") %>%#,table.attr = "style='width:70%;'"
   kableExtra::kable_styling (position = "c") %>%
   kableExtra::add_header_above(header = c("Country" = 2, "Water Category" = 5),align = "c")
 
@@ -607,7 +606,9 @@ PartB.Q2 <- dat.PartB %>% filter(QuestionNo_b==2)
 PartB.Q2$ResponseOptionText <- str_trim(PartB.Q2$ResponseOptionText)
 
 #correct FI mistake in Part B data reporting "other approaches are used" should be "NA"
-PartB.Q2$FI[4]=NA
+PartB.Q2 <- PartB.Q2 %>% mutate (FI = case_when(
+   ResponseOptionRef == "2.4" ~ NA_integer_,
+   TRUE ~ as.integer(FI)))
 
 #plot 
 plotBQ2 <- ggplot(PartB.Q2, aes(ResponseOptionText, ResponsesPerOption)) + 
