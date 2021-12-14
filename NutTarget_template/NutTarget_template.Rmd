@@ -157,7 +157,7 @@ dat.PartA <- left_join( dat.PartA, MSbyWC, by = "WaterCategory", keep = FALSE)
 
 ## AQ1. Have you set management objectives for nutrients for waters bodies that are exposed to nutrient pollution?
 
-```{r Q1,fig.height = 5, fig.width= 7.5, fig.cap="Figure 1. Countries responding, overview by water category."}
+```{r Q1,fig.height = 5, fig.width= 7.5, fig.cap="Figure 1. Countries responding (n and %), overview by water category."}
 #select data Q1
 PartA.Q1 <- dat.PartA %>% filter(QuestionNo_b==1)
 
@@ -168,13 +168,13 @@ PartA.Q1long <-pivot_longer(PartA.Q1, 11:39, names_to = "Country", values_to = "
 
 #run function to display the sample size at y= -1
 give.n <- function(x){
-  return(c(y = -0.01, label = length(x)))#label=x 
+  return(c(y = -0.05, label = length(x)))#label=x 
          }
 #plot
 plotQ1 <- ggplot(PartA.Q1long,aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory)))+
   scale_x_reordered() +
-  geom_bar(mapping = aes(y = ..prop.., group = 1), stat = "count", width= 0.6, position = position_dodge2(preserve = "single")) +
-  scale_y_continuous(labels = scales::label_percent(), limits = c(-0.01,1) , breaks=seq(0,1,by=0.1))+
+  geom_bar(mapping = aes(y = ..prop.., group = 1), stat = "count") +
+  scale_y_continuous(labels = scales::label_percent(accuracy=1), limits = c(-0.05,1) , breaks=seq(0,1,by=0.1))+
   facet_wrap(.~WaterCategory,ncol=1,scales = 'free')+
   labs (y = expression(paste("% countries")),x = NULL) +
   coord_flip()+ 
