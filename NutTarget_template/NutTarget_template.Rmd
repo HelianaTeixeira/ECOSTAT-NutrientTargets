@@ -173,7 +173,7 @@ PartA.Q1long <- PartA.Q1long %>% mutate(Acronym=Country) %>%
     Acronym == "BE.Wa" ~ "BE",
     TRUE ~ as.character(Acronym)))
 
-#run function to display the sample size at y= -1
+#run function to display the sample size at y before origin 0
 give.n <- function(x){
   return(c(y = -0.05, label = length(x)))#label=x 
          }
@@ -376,7 +376,7 @@ The situation for transitional, coastal and marine waters is similar, though pro
 
 ## AQ5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
 
-```{r Q5, fig.height = 5, fig.width = 7.5, fig.cap="Figure 5. Number of countries responding, overview by water category."}
+```{r Q5, fig.height = 5, fig.width = 7.5, fig.cap="Figure 5. Countries responding (n and %), overview by water category."}
 #select data Q5
 PartA.Q5 <- dat.PartA %>% filter(QuestionNo_b==5)
 
@@ -386,23 +386,8 @@ PartA.Q5$ResponseOptionText <- case_when(PartA.Q5$ResponseOptionText == "Yes, th
                                         PartA.Q5$ResponseOptionText == "Yes, the management objective is to reach the mid-point of good status (between the high/good and the good/moderate boundary) as defined by the biological quality elements" ~ "Yes,  management objective is to reach the mid-point of G status as defined by the BQEs",
                                       PartA.Q5$ResponseOptionText == "Yes, the management target is to reach the mid-point of good status (between the high/good and the good/moderate boundary) as defined by the biological quality elements" ~ "Yes,  management objective is to reach the mid-point of G status as defined by the BQEs",
                                       TRUE ~ as.character(PartA.Q5$ResponseOptionText))
-
-plotQ5 <- ggplot(PartA.Q5, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
-  scale_x_reordered() +
-  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
-  geom_col() +
-  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
-  labs (y = expression(paste("No. of countries")),x = NULL) +
-  coord_flip()+ 
-  theme_classic()+
-  theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
-
-plotQ5
-```
-
-```{r Countries detail Q5, include=FALSE}
-PartA.Q5long <-pivot_longer(PartA.Q5, 11:39, names_to = "Country", values_to = "Reply") #transpose countries data
+#transpose countries data
+PartA.Q5long <-pivot_longer(PartA.Q5, 11:39, names_to = "Country", values_to = "Reply", values_drop_na = TRUE) 
 
 PartA.Q5long <- PartA.Q5long %>% mutate(Acronym=Country) %>%
   mutate (Acronym =case_when(
@@ -411,6 +396,21 @@ PartA.Q5long <- PartA.Q5long %>% mutate(Acronym=Country) %>%
     Acronym == "BE.Wa" ~ "BE",
     TRUE ~ as.character(Acronym)))
 
+plotQ5 <- ggplot(PartA.Q5long, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory))) +
+  scale_x_reordered() +
+  geom_bar(mapping = aes(y = ..prop.., group = 1), stat = "count") +
+  scale_y_continuous(labels = scales::label_percent(accuracy=1), limits = c(-0.05,1) , breaks=seq(0,1,by=0.1))+
+  facet_wrap(.~WaterCategory,ncol=1,scales = 'free') +
+  labs (y = expression(paste("% countries")),x = NULL) +
+  coord_flip() + 
+  theme_classic() +
+  theme(strip.background=element_rect(linetype = "blank")) +
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3, mapping=aes(y=0)) #add sample size text
+
+plotQ5
+```
+
+```{r Countries detail Q5, include=FALSE}
 id.count5 <- PartA.Q5long %>%
   filter(!is.na(Reply)) %>%
   select(c(WaterCategory,ResponseOptionText, Acronym)) %>%
@@ -431,22 +431,32 @@ Setting nutrient boundaries that are consistent with the G/M boundary will not n
 
 ## AQ6. If you have set management objectives for nutrients, please specify which policy the management objectives are meant to address.
 
-```{r Q6, fig.height = 5, fig.width = 7.5, fig.cap="Figure 6. Number of countries responding, overview by water category."}
+```{r Q6, fig.height = 5, fig.width = 7.5, fig.cap="Figure 6. Countries responding (n and %), overview by water category."}
 #select data Q6
 PartA.Q6 <- dat.PartA %>% filter(QuestionNo_b==6)
 
 PartA.Q6$ResponseOptionText <- str_trim(PartA.Q6$ResponseOptionText)
+
+#transpose countries data
+PartA.Q6long <-pivot_longer(PartA.Q6, 11:39, names_to = "Country", values_to = "Reply", values_drop_na = TRUE) 
+
+PartA.Q6long <- PartA.Q6long %>% mutate(Acronym=Country) %>%
+  mutate (Acronym =case_when(
+    Acronym == "BE.Br" ~ "BE",
+    Acronym == "BE.Fl" ~ "BE",
+    Acronym == "BE.Wa" ~ "BE",
+    TRUE ~ as.character(Acronym)))
   
-plotQ6 <- ggplot(PartA.Q6, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
+plotQ6 <- ggplot(PartA.Q6long, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory))) +
   scale_x_reordered() +
-  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
-  geom_col() +
-  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
-  labs (y = expression(paste("No. of countries")),x = NULL) +
-  coord_flip()+ 
-  theme_classic()+
-  theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  geom_bar(mapping = aes(y = ..prop.., group = 1), stat = "count") +
+  scale_y_continuous(labels = scales::label_percent(accuracy=1), limits = c(-0.05,1) , breaks=seq(0,1,by=0.1))+
+  facet_wrap(.~WaterCategory,ncol=1,scales = 'free') +
+  labs (y = expression(paste("% countries")),x = NULL) +
+  coord_flip() + 
+  theme_classic() +
+  theme(strip.background=element_rect(linetype = "blank")) +
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3, mapping=aes(y=0)) #add sample size text
 
 plotQ6
 ```
@@ -462,19 +472,6 @@ For all water categories except Marine, the WFD is the most important driver, th
 PartA.Q7 <- dat.PartA %>% filter(QuestionNo_b==7)
 
 PartA.Q7$ResponseOptionText <- str_trim(PartA.Q7$ResponseOptionText)
-  
-plotQ7 <- ggplot(PartA.Q7, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
-  scale_x_reordered() +
-  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
-  geom_col() +
-  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
-  labs (y = expression(paste("No. of countries")),x = NULL) +
-  coord_flip()+ 
-  theme_classic()+
-  theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
-
-#plotQ7
 ```
 
 ```{r Countries detail Q7, include=FALSE}
@@ -554,7 +551,12 @@ PartB.long <- PartB.long %>% mutate(Acronym=Country) %>%
 PartB.long$Acronym <- as.factor(PartB.long$Acronym)
 ```
 
-
+```{r new function give n, include=FALSE}
+#run function to display the sample size at y for non % graphs in part B
+give.nB <- function(x){
+  return(c(y = -0.5 , label = x))#label = length(x) 
+         }
+```
 
 ## BQ1. Do you calculate current nutrient loads in order to achieve management objectives for nutrients?
 ```{r BQ1, fig.height = 1, fig.width = 5, fig.cap="Figure 7. Number of countries responding."}
@@ -570,7 +572,7 @@ plotBQ1 <- ggplot(PartB.Q1, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"), legend.position = "none")+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 plotBQ1
 ```
@@ -595,7 +597,7 @@ unique(id.countB1$WCreply) #levels with country replies
 xxB1 <-CntryListfunction (id.countB1)#countries replying
 #xx?[[11]] # use to extract values directly in text
 ```
-`r length(xxB1[[2]])` countries (`r xxB1[[2]]`) replied "no" to this question, but none provided any explanation., 
+`r length(xxB1[[2]])` countries (`r xxB1[[2]]`) replied "no" to this question, but none provided any explanation. 
 
 ## BQ2. If yes, what methods do you use to calculate nutrient loads?
 ```{r BQ2, fig.height = 3, fig.width = 7.5, fig.cap="Figure 8. Number of countries responding."}
@@ -603,7 +605,11 @@ xxB1 <-CntryListfunction (id.countB1)#countries replying
 PartB.Q2 <- dat.PartB %>% filter(QuestionNo_b==2)
 
 PartB.Q2$ResponseOptionText <- str_trim(PartB.Q2$ResponseOptionText)
-  
+
+#correct FI mistake in Part B data reporting "other approaches are used" should be "NA"
+PartB.Q2$FI[4]=NA
+
+#plot 
 plotBQ2 <- ggplot(PartB.Q2, aes(ResponseOptionText, ResponsesPerOption)) + 
   scale_x_discrete(limits = rev(c("Loads are calculated from monitoring of nutrient concentrations multiplied with flow in the inflows to the water body", "Loads are calculated from estimates of emissions from different sources", "Both approaches are used", "Other approaches are used")),
                    labels = rev(c("Loads are calculated from monitoring\nof nutrient concentrations multiplied\nwith flow in the inflows to the water body", "Loads are calculated from estimates\nof emissions from different sources", "Both approaches are used", "Other approaches are used"))) +
@@ -613,7 +619,7 @@ plotBQ2 <- ggplot(PartB.Q2, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 plotBQ2
 ```
@@ -637,9 +643,7 @@ unique(id.countB2$WCreply) #levels with country replies
 xxB2 <-CntryListfunction (id.countB2)#countries replying
 #xx?[[11]] # use to extract values directly in text
 ```
-Responses reflect the wide variety of models which are used, each with differing data requirements. `r length(xxB2[[4]])` countries (`r xxB2[[4]]`) selected "other approaches are used".  Four of these countries also selcted at least one of the other three response categories.   Of the others, EE does calculate nutrient loads but does not indicate how this is done; whilst FI is a transcription error, with the original questionnaire response indicating "both approaches are used" 
-
-[Heliana: should we just correct this mistake? The original FI response is different that in the collated responses]
+Responses reflect the wide variety of models which are used, each with differing data requirements. `r length(xxB2[[4]])` countries (`r xxB2[[4]]`) selected "other approaches are used".  However, these `r length(xxB2[[4]])` countries also selected at least one of the other three response categories.  Estonia (EE) does calculate nutrient loads but does not indicate how this is done. 
 
 ## BQ3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
 ```{r BQ3, fig.height = 1, fig.width= 5, fig.cap="Figure 9. Number of countries responding."}
