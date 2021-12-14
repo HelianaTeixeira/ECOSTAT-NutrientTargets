@@ -364,7 +364,7 @@ xx4 <-CntryListfunction (id.count4)#countries replying
 
 Nutrient critical loads or load reduction targets compatible with good status of nutrient sensitive BQEs are only set by half or less of the reporting countries in lakes (`r xx4[[1]]`), rivers (`r xx4[[3]]`), transitional (`r xx4[[5]]`), coastal (`r xx4[[7]]`) and marine waters (`r xx4[[9]]`).
 
-Detailed responses to this question were ambiguous, particullary for freshwaters, with 16 (lakes) and 18 (rivers) answering “no” to the question, implying that they did not determine the maximum critical load or a load reduction target, whereas some of the more comments send by these same countries suggested that they did.  What seems to be clear is that many see target setting as a process that needs to be applied to individual water bodies, rather than derived as a guide value for all water bodies within a broadly-defined type.   Where targets are defined as concentrations rather than loads there is an inference that some form of mass balance model is also employed in order to work out how a target may be achieved for any individual water body.
+Detailed responses to this question were ambiguous, particularly for freshwaters, with 16 (lakes) and 18 (rivers) answering “no” to the question, implying that they did not determine the maximum critical load or a load reduction target, whereas some of the more comments send by these same countries suggested that they did.  What seems to be clear is that many see target setting as a process that needs to be applied to individual water bodies, rather than derived as a guide value for all water bodies within a broadly-defined type.   Where targets are defined as concentrations rather than loads there is an inference that some form of mass balance model is also employed in order to work out how a target may be achieved for any individual water body.
 
 The situation for transitional, coastal and marine waters is similar, though proportionately fewer countries replied "no" in each case.   No more than a third of countries who replied "no" offered any explanation.
 
@@ -513,6 +513,23 @@ A variety of reasons are offered including:
 
 A complete list of responses can be found in the Appendix.
 
+## Overview of Part A
+
+•	Most countries already set management objectives for all water bodies exposed to nutrient pollution in the different water categories;
+
+•	Depending on local circumstances, objectives are set for nitrogen, phosphorus or both;
+
+•	A variety of approaches are used to set targets, with modelling based on BQE-response relationships being used most widely.  Many countries support this modelling with other evidence;
+
+•	There is some ambiguity about how critical load or load reduction targets are set by individual countries, and no detailed analysis of these responses was possible;
+
+•	Most countries set targets that are compatible with the nutrient concentration at the good/moderate boundary.   The effectiveness of this approach will depend upon how precautionary these boundaries are.   Other ECOSTAT-sponsored work suggests that many boundaries are relatively lenient so the effectiveness of this strategy will need to be discussed in detail;
+
+•	A variety of policy drivers were cited, with the WFD as the most widely used, but UWWTD, Nitrates Directive, MSFD and Regional Seas Conventions, along with national legislation, all cited;
+
+•	A variety of reasons were cited for not setting management objectives.   Some of these may need further discussion.  For example, is “less stringent objectives” alone sufficient reason?   Justifications for setting less stringent objectives include situations where achieving good status is “infeasible or disproportionately expensive”, both of which imply a need to evaluate the feasibility of measures against targets.  
+
+
 ## How are the current nutrient loads estimated? (Part B)
 ```{r pre-treatment B, include=FALSE}
 dat.PartB <- type.convert(dat.PartB) #convert data automatic as appropriate
@@ -553,8 +570,6 @@ plotBQ1 <- ggplot(PartB.Q1, aes(ResponseOptionText, ResponsesPerOption)) +
 
 plotBQ1
 ```
-
-Add here a summary paragraph on the graph results.
 
 
 ```{r Countries detail QB1, include=FALSE}
@@ -760,6 +775,21 @@ Uncertainties in the models that are used to quantify the nutrient emissions and
 ```
 
 Add here a critical analysis paragraph.
+
+[Heliana: can you remember what this table was about? Do we still need it?]
+
+##Overview of Part B
+•	Most either calculate loads from monitoring data or from estimates of emissions or both;
+
+•	Most also link these to catchment models.  A wide variety are used, but relatively few of these models are used by more than one country;
+
+•	More significantly, there was little evidence of models operating across national boundaries; 
+
+•	Models work at a variety of spatial scales (but this may also indicate different understandings of what the question was asking for); 
+
+•	Most responses recognised that there was considerable uncertainty in these models;
+
+
 
 ## How are measures to reach management objectives for nutrients defined? (Part C)
 ```{r pre-treatment C, include=FALSE}
