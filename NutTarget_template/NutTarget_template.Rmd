@@ -660,7 +660,7 @@ PartBQ3 <- ggplot(PartB.Q3, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 PartBQ3 + theme(legend.position = "none") 
 ```
@@ -685,15 +685,12 @@ xxBQ3 <-CntryListfunction (id.countBQ3)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Catchment models that quantify the nutrient emissions/nutrient losses to surface waters are used by `r length(xxBQ3[[1]])` countries, namely: `r xxBQ3[[1]]`. A full list of models cited in this report is given in Table #. Based on information given, most of these are best considered as part of networks of specialised models, each passing estimages to subseqeunt modules (e.g. soil leaching of nutrients is estimated by one model, and these estimates are then passed to a hydrological model). As far as we can tell, few of these are explicitly modelling ecological processes, with the end result being an estimate of surface water concentrations.  These are then compared with good-moderate boundary concentrations extimated by emperical models, many of which are based on methods outlined in the BPG.
+Catchment models that quantify the nutrient emissions/nutrient losses to surface waters are used by `r length(xxBQ3[[1]])` countries, namely: `r xxBQ3[[1]]`. A full list of models cited in this report is given in Table #. Based on information given, most of these are best considered as part of networks of specialised models, each passing estimates to subsequent modules (e.g. soil leaching of nutrients is estimated by one model, and these estimates are then passed to a hydrological model). As far as we can tell, few of these are explicitly modelling ecological processes, with the end result being an estimate of surface water concentrations.  These are then compared with good-moderate boundary concentrations extimated by empirical models, many of which are based on methods outlined in the BPG.
 
 
-
-<<<<<<< HEAD
-The best way forward might be to include a table that lists all the models used, by country.  Some use more than one.   Many are specific to one country; a few (e.g. MONERIS) seem to be used more widely.  List will exclude emperical models, e.g. Vollenweider, and models covered by BPG.  Also a few references to hydrological and atmospheric models whcih appear to form part of decision-support systems but which do not explicitly model nutrients.  These have also been excluded.
+[The best way forward might be to include a table that lists all the models used, by country.  Some use more than one.   Many are specific to one country; a few (e.g. MONERIS) seem to be used more widely.  List will exclude empirical models, e.g. Vollenweider, and models covered by BPG.  Also a few references to hydrological and atmospheric models which appear to form part of decision-support systems but which do not explicitly model nutrients.  These have also been excluded.]
 
 ## BQ4. If yes, at what spatial level do the models operate?
-<<<<<<< HEAD
 ```{r BQ4, fig.height = 3, fig.width = 7.5, fig.cap="Figure 10. Number of countries responding."}
 #select data BQ2
 PartB.Q4 <- dat.PartB %>% filter(QuestionNo_b==5)
@@ -709,7 +706,7 @@ plotBQ4 <- ggplot(PartB.Q4, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 plotBQ4
 ```
@@ -743,7 +740,7 @@ xxBQ5 <-CntryListfunction (id.countBQ5)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Uncertainties in the models that are used to quantify the nutrient emissions and/or nutrient losses to surface waters were addressed by `r length(xxBQ5[[1]])` countries, namely: `r xxBQ5[[1]]`. Responses to this question can be found in the Appendix.  Most acknowledge that there are several different sources of uncertainty in their models whcih, when combined, can lead to considerable uncertainty in final outcomes.  The uncertainties themselves depend upon the size of the waterbodies being modelled, the time scale and the quality of the data on which the model is calibrated.  Uncertainties are also greater when diffuse sources dominate over point sources.  As a result, some countries (e.g. IE) noted that they did not use models for regulatory purposes, but to guide and direct further field assessments, and to target interventions.
+Uncertainties in the models that are used to quantify the nutrient emissions and/or nutrient losses to surface waters were addressed by `r length(xxBQ5[[1]])` countries, namely: `r xxBQ5[[1]]`. Responses to this question can be found in the Appendix.  Most acknowledge that there are several different sources of uncertainty in their models which, when combined, can lead to considerable uncertainty in final outcomes.  The uncertainties themselves depend upon the size of the waterbodies being modelled, the time scale and the quality of the data on which the model is calibrated.  Uncertainties are also greater when diffuse sources dominate over point sources.  As a result, some countries (e.g. IE) noted that they did not use models for regulatory purposes, but to guide and direct further field assessments, and to target interventions.
 
 ```{r Table 2,}
 #dat.uncert <- read.csv(file = here::here("Data","QB5_Tabl2_Uncert_Respons.csv"), sep=";", header = TRUE)
@@ -783,11 +780,9 @@ Uncertainties in the models that are used to quantify the nutrient emissions and
 #   kableExtra::add_header_above(header = c("Country" = 2, " " = 1),align = "c")
 ```
 
-Add here a critical analysis paragraph.
-
 [Heliana: can you remember what this table was about? Do we still need it?]
 
-##Overview of Part B
+## Overview of Part B
 •	Most either calculate loads from monitoring data or from estimates of emissions or both;
 
 •	Most also link these to catchment models.  A wide variety are used, but relatively few of these models are used by more than one country;
@@ -797,7 +792,6 @@ Add here a critical analysis paragraph.
 •	Models work at a variety of spatial scales (but this may also indicate different understandings of what the question was asking for); 
 
 •	Most responses recognised that there was considerable uncertainty in these models;
-
 
 
 ## How are measures to reach management objectives for nutrients defined? (Part C)
@@ -825,8 +819,7 @@ PartC.long$Acronym <- as.factor(PartC.long$Acronym)
 ```
 
 ## CQ1. When is nutrient reduction decided to be necessary?
-(note to self) Attention: marine waters less categorical options but merge if possible
-```{r CQ1, fig.height = 10, fig.width = 7.5, fig.cap="Figure 11. Number of countries responding."}
+```{r CQ1, fig.height = 9, fig.width = 7.5, fig.cap="Figure 11. Countries responding (n and %), overview by water category."}
 #select data CQ1
 PartC.Q1 <- dat.PartC %>% filter(QuestionNo_b==1)
 
@@ -848,27 +841,8 @@ PartC.Q1 <- PartC.Q1 %>%
              ResponseOptionText == "When the integrated assessment for MSFD descriptor 5 fails to achieve good status" ~"When the integrated assessment for MSFD D5 fails to achieve good status",
             TRUE ~ as.character(ResponseOptionText)))
 
-plotCQ1 <- ggplot(PartC.Q1,
-                  aes(reorder_within(ResponseOptionText,Ordered,WaterCategory), ResponsesPerOption)) +
-  scale_x_reordered() +
-  scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
-  geom_col() +
-  facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
-  labs (y = expression(paste("No. of countries")),x = NULL) +
-  coord_flip()+ 
-  theme_classic()+
-  theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
-
-plotCQ1
-```
-
-```{r CQ1 option 2 explore, include=FALSE}
-#WB fails to achieve good status due to nutrients
-#(if yes, please specify if this applies to both P and N, or only to the limiting nutrient)
-#ResponseOptionRef ("2.2" or "1.4.2" or "1.3.2" or "1.2.2" or "1.1.2") corresponds to Ordered == 2
-
-PartC.Q1long <-pivot_longer(PartC.Q1, 12:40, names_to = "Country", values_to = "Reply") #transpose countries data
+#transpose countries data
+PartC.Q1long <-pivot_longer(PartC.Q1, 12:40, names_to = "Country", values_to = "Reply", values_drop_na = TRUE) 
 
 PartC.Q1long <- PartC.Q1long %>% mutate(Acronym=Country) %>%
   mutate (Acronym =case_when(
@@ -876,6 +850,28 @@ PartC.Q1long <- PartC.Q1long %>% mutate(Acronym=Country) %>%
     Acronym == "BE.Fl" ~ "BE",
     Acronym == "BE.Wa" ~ "BE",
     TRUE ~ as.character(Acronym)))
+
+plotCQ1 <- ggplot(PartC.Q1long,
+                  aes(reorder_within(ResponseOptionText,Ordered,WaterCategory))) +
+  scale_x_reordered() +
+  geom_bar(mapping = aes(y = ..prop.., group = 1), stat = "count", width = 0.6) +
+  geom_bar(position = position_dodge2(preserve = "single")) +
+  scale_y_continuous(labels = scales::label_percent(accuracy=1), limits = c(-0.05,1) , breaks=seq(0,1,by=0.2))+
+  facet_wrap(.~WaterCategory,ncol=1,scales = 'free') +
+  labs (y = expression(paste("% countries")),x = NULL) +
+  coord_flip() + 
+  theme_classic() +
+  theme(strip.background=element_rect(linetype = "blank")) +
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3, mapping=aes(y=0)) #add sample size text
+
+plotCQ1
+```
+
+
+```{r CQ1 option 2 explore, include=FALSE}
+#WB fails to achieve good status due to nutrients
+#(if yes, please specify if this applies to both P and N, or only to the limiting nutrient)
+#ResponseOptionRef ("2.2" or "1.4.2" or "1.3.2" or "1.2.2" or "1.1.2") corresponds to Ordered == 2
 
 id.countCQ1opt2 <- PartC.Q1long %>% #id countries selecting option 2
   filter(!is.na(Reply)) %>%
@@ -888,9 +884,7 @@ xxCQ1opt2 <-CntryListfunction (id.countCQ1opt2) #countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Add here a summary paragraph on the graph overall results.
-
-(paragraph tbc completed yet) Some countries considered that nutrient reduction would be necessary in the case that water bodies failed to achieve good status due to nutrient concentrations at good/moderate (or not good status) boundaries. This approach was referred in all water categories by several countries, namely by `r xxCQ1opt2[[1]]` in lakes; by `r xxCQ1opt2[[2]]` in rivers; by `r xxCQ1opt2[[3]]` in transitional waters;, by `r xxCQ1opt2[[4]]` in coastal and by `r xxCQ1opt2[[5]]` in marine waters.  (See if, as requested, countries added additional info specifying if this applied to both P and N, or only to the limiting nutrient)
+(paragraph tbc completed yet) Some countries considered that nutrient reduction would be necessary in the case that water bodies failed to achieve good status due to nutrient concentrations at good/moderate (or not good status) boundaries. This approach was referred in all water categories by several countries, namely by `r xxCQ1opt2[[1]]` in lakes; by `r xxCQ1opt2[[2]]` in rivers; by `r xxCQ1opt2[[3]]` in transitional waters; by `r xxCQ1opt2[[4]]` in coastal and by `r xxCQ1opt2[[5]]` in marine waters.  (See if, as requested, countries added additional info specifying if this applied to both P and N, or only to the limiting nutrient)
 
 Add here a critical analysis paragraph.
 
@@ -908,7 +902,7 @@ PartCQ2 <- ggplot(PartC.Q2, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 PartCQ2 + theme(legend.position = "none") 
 ```
@@ -947,13 +941,13 @@ plotCQ3 <- ggplot(PartC.Q3,
                   aes(reorder_within(ResponseOptionText,ResponsesPerOption,WaterCategory), ResponsesPerOption)) +
   scale_x_reordered()+
   scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
-  geom_col() +
+  geom_col(width = 0.6) +
   facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
   labs (y = expression(paste("No. of countries")),x = NULL) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 plotCQ3
 ```
@@ -968,7 +962,7 @@ Add here a summary paragraph on the open answers and add number of countries rep
 Add here a critical analysis paragraph.
 
 ## CQ4. What criteria and considerations do you use to select which measures to implement in order to reduce nutrient inputs?
-```{r CQ4, fig.height = 4, fig.width = 7.5, fig.cap="Figure 14. Number of countries responding."}
+```{r CQ4, fig.height = 3, fig.width = 7.5, fig.cap="Figure 14. Number of countries responding."}
 #select data CQ4
 PartC.Q4 <- dat.PartC %>% filter(QuestionNo_b==5)
 
@@ -978,13 +972,13 @@ plotCQ4 <- ggplot(PartC.Q4,
                   aes(reorder_within(ResponseOptionText,ResponsesPerOption,WaterCategory), ResponsesPerOption)) +
   scale_x_reordered()+
   scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
-  geom_col() +
+  geom_col(width = 0.6) +
   facet_wrap(~ WaterCategory, ncol=1, scales = "free_y") +
   labs (y = expression(paste("No. of countries")),x = NULL) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 plotCQ4
 ```
@@ -993,7 +987,7 @@ Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## CQ5. Are past policy measures such as a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture taken into account when planning new measures, e.g. trying to achieve a fair sharing of the nutrient reductions between different sectors according to a pollution account?
+## CQ5. Are past policy measures taken into account when planning new measures?
 ```{r CQ5, fig.height = 1, fig.width= 5, fig.cap="Figure 15. Number of countries responding."}
 #select data CQ5
 PartC.Q5 <- dat.PartC %>% filter(QuestionNo_b==6)
@@ -1008,12 +1002,12 @@ PartCQ5 <- ggplot(PartC.Q5, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 PartCQ5 + theme(legend.position = "none") 
 ```
 
-Add here a summary paragraph on the graph results.
+When asked if past policy measures, such as a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture, had been taken into account when planning new measures, for example, trying to achieve a fair sharing of the nutrient reductions between different sectors according to a pollution account, most countries replied that they were considered. [HT to complete paragraph]
 
 Add here a critical analysis paragraph.
 
@@ -1032,7 +1026,7 @@ PartCQ6 <- ggplot(PartC.Q6, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 PartCQ6 + theme(legend.position = "none") 
 ```
@@ -1056,7 +1050,7 @@ PartCQ7 <- ggplot(PartC.Q7, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 PartCQ7 + theme(legend.position = "none") 
 ```
@@ -1080,7 +1074,7 @@ PartCQ8 <- ggplot(PartC.Q8, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 PartCQ8 + theme(legend.position = "none") 
 ```
@@ -1104,7 +1098,7 @@ PartCQ9 <- ggplot(PartC.Q9, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 PartCQ9 + theme(legend.position = "none") 
 ```
@@ -1128,7 +1122,7 @@ PartCQ10 <- ggplot(PartC.Q10, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 PartCQ10 + theme(legend.position = "none") 
 ```
@@ -1137,7 +1131,9 @@ Add here a summary paragraph on the graph results.
 
 Add here a critical analysis paragraph.
 
-## CQ11. Do you consider technical/biological manipulative solutions (removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, management fisheries) when planning the nutrient reduction measures? 
+## CQ11. Do you consider technical/biological manipulative solutions when planning the nutrient reduction measures? 
+By technical/biological manipulative solutions consider as example the removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, management fisheries, etc.
+
 ```{r CQ11, fig.height = 1, fig.width= 5, fig.cap="Figure 21. Number of countries responding."}
 #select data CQ11
 PartC.Q11 <- dat.PartC %>% filter(QuestionNo_b==12)
@@ -1152,11 +1148,14 @@ PartCQ11 <- ggplot(PartC.Q11, aes(ResponseOptionText, ResponsesPerOption)) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.nB, geom = "text", color="darkgray", size=3) #add sample size text
 
 PartCQ11 + theme(legend.position = "none") 
 ```
 
-Add here a summary paragraph on the graph results.
+Only slightly above half of the countries referred to consider technical and/or biological manipulative solutions when planning the nutrient reduction measures. [HT to complete paragraph on the graph results.]
 
 Add here a critical analysis paragraph.
+
+## Overview of Part C
+•	tbc by HT;
