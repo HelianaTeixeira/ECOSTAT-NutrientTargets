@@ -24,6 +24,7 @@ library(tidytext)
 library(here)
 library(knitr)
 library(kableExtra)
+library(scales)
 
 ## Global options
 options(max.print="75")
@@ -145,6 +146,9 @@ MSbyWC<-PartA.long %>% filter(Reply == 1)%>%
   count(WaterCategory, Acronym, Countries)%>%
   mutate(n = ifelse(n < 100, 1, n)) %>%
   count(WaterCategory, name = "sumMS")
+
+#map MS replying by WC (MSbyWC) into dat.PartA for graphs
+dat.PartA <- left_join( dat.PartA, MSbyWC, by = "WaterCategory", keep = FALSE)
 ```
 
  *Iceland and Norway (EFTA Members) and Turkey (EU candidate) are not EU Member States. 
@@ -153,39 +157,35 @@ MSbyWC<-PartA.long %>% filter(Reply == 1)%>%
 
 ## AQ1. Have you set management objectives for nutrients for waters bodies that are exposed to nutrient pollution?
 
-```{r Q1,fig.height = 5, fig.width= 7.5, fig.cap="Figure 1. Number of countries responding, overview by water category."}
+```{r Q1,fig.height = 5, fig.width= 7.5, fig.cap="Figure 1. Countries responding, overview by water category."}
 #select data Q1
 PartA.Q1 <- dat.PartA %>% filter(QuestionNo_b==1)
 
 PartA.Q1$ResponseOptionText <- str_trim(PartA.Q1$ResponseOptionText)
 
+#transpose countries data
+PartA.Q1long <-pivot_longer(PartA.Q1, 11:39, names_to = "Country", values_to = "Reply", values_drop_na = TRUE)
+
 #run function to display the sample size at y= -1
 give.n <- function(x){
-  return(c(y = -1, label = x))#length(x)
-}
-
-#run function to give sum of countries replying by water category  
-sumMSbyWC <- function(x) {
-  for (i in 1:length (MSbyWC$sumMS)){
-    if (MSbyWC$WaterCategory[i]==PartA.Q1$WaterCategory) {return (MSbyWC$sumMS[i])
-    } else { next
-    }
-  }
-}  #only gets lakes total for all - fix this..
-
-plotQ1 <- ggplot(PartA.Q1, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory), ResponsesPerOption)) +
+  return(c(y = -0.01, label = length(x)))#label=x 
+         }
+#plot
+plotQ1 <- ggplot(PartA.Q1long,aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory)))+
   scale_x_reordered() +
-  #scale_y_continuous(breaks=seq(0, 26, by=2))+ #adjust scale & intervals values
-  geom_col() +
-  facet_wrap(~ WaterCategory, ncol=1,scales = "free_y") +
-  scale_y_continuous(labels = function(x) paste0(round(x/sumMSbyWC(x)*100,1), "%"), breaks=seq(0, sumMSbyWC(x), sumMSbyWC(x)*0.1)) + #%
-  labs (y = expression(paste("No. of countries")),x = NULL) +
+  geom_bar(mapping = aes(y = ..prop.., group = 1), stat = "count", width= 0.6, position = position_dodge2(preserve = "single")) +
+  scale_y_continuous(labels = scales::label_percent(), limits = c(-0.01,1) , breaks=seq(0,1,by=0.1))+
+  facet_wrap(.~WaterCategory,ncol=1,scales = 'free')+
+  labs (y = expression(paste("% countries")),x = NULL) +
   coord_flip()+ 
   theme_classic()+
   theme(strip.background=element_rect(linetype = "blank"))+
-  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3) #add sample size text
+  stat_summary(fun.data = give.n, geom = "text", color="darkgray", size=3, mapping=aes(y=0)) #add sample size text
 
 plotQ1
+
+plotQ1_b <- ggplot_build(plotQ1)
+#plotQ1_b$data[[1]]
 ```
 
 ```{r Countries detail Q1, include=FALSE}
