@@ -648,7 +648,9 @@ unique(id.countB2$WCreply) #levels with country replies
 xxB2 <-CntryListfunction (id.countB2)#countries replying
 #xx?[[11]] # use to extract values directly in text
 ```
-Responses reflect the wide variety of methods which are used, each with differing data requirements. `r length(xxB2[[4]])` countries (`r xxB2[[4]]`) selected "other approaches are used".  However, these `r length(xxB2[[4]])` countries also selected at least one of the other three response categories.  Estonia (EE) does calculate nutrient loads but does not indicate how this is done. 
+Responses reflect the wide variety of methods which are used, each with differing data requirements. `r length(xxB2[[4]])` countries (`r xxB2[[4]]`) selected "other approaches are used".  However, these `r length(xxB2[[4]])` countries also selected at least one of the other three response categories. 
+
+Except for a few countries (e.g. CZ, FR, DE, IE, FI, SE), little detail is given on how nutrient loads are calculated. However, the source and type of pollution, i.e. point or diffuse and urban/industrial or agricultural (incl. animal husbandry and fish farms), dictate the type of data used and the methods adopted  (e.g. DK, EE, FR, CY, LT). Loads derived from estimates (e.g. models, LULC with indices) are often used when larger assessment scales or diffuse sources are considered (e.g. CZ, DE, NL, FR, FI, SE) while for specific or large watercourses as well as for point source emissions countries often use direct monitoring data (e.g. CZ, DK, FR, IE). Nutrient load is in some cases only calculated if the water body status is poor or bad (e.g. EE).
 
 ## BQ3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
 ```{r BQ3, fig.height = 1, fig.width= 5, fig.cap="Figure 9. Number of countries responding."}
