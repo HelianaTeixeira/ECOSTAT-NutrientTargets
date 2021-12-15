@@ -398,7 +398,7 @@ PartA.Q5long <- PartA.Q5long %>% mutate(Acronym=Country) %>%
 plotQ5 <- ggplot(PartA.Q5long, aes(reorder_within(ResponseOptionText,ResponseOptionRef,WaterCategory))) +
   scale_x_reordered() +
   geom_bar(mapping = aes(y = ..prop.., group = 1), stat = "count") +
-  scale_y_continuous(labels = scales::label_percent(accuracy=1), limits = c(-0.05,1) , breaks=seq(0,1,by=0.1))+
+  scale_y_continuous(labels = scales::label_percent(accuracy=1), limits = c(-0.05,1) , breaks=seq(0,1,by=0.2))+
   facet_wrap(.~WaterCategory,ncol=1,scales = 'free') +
   labs (y = expression(paste("% countries")),x = NULL) +
   coord_flip() + 
@@ -610,6 +610,10 @@ PartB.Q2 <- PartB.Q2 %>% mutate (FI = case_when(
    ResponseOptionRef == "2.4" ~ NA_integer_,
    TRUE ~ as.integer(FI)))
 
+PartB.Q2 <- PartB.Q2 %>% mutate (ResponsesPerOption = case_when(
+   ResponsesPerOption == 6 ~ 5,
+   TRUE ~ as.numeric(ResponsesPerOption)))
+
 #plot 
 plotBQ2 <- ggplot(PartB.Q2, aes(ResponseOptionText, ResponsesPerOption)) + 
   scale_x_discrete(limits = rev(c("Loads are calculated from monitoring of nutrient concentrations multiplied with flow in the inflows to the water body", "Loads are calculated from estimates of emissions from different sources", "Both approaches are used", "Other approaches are used")),
@@ -644,7 +648,7 @@ unique(id.countB2$WCreply) #levels with country replies
 xxB2 <-CntryListfunction (id.countB2)#countries replying
 #xx?[[11]] # use to extract values directly in text
 ```
-Responses reflect the wide variety of models which are used, each with differing data requirements. `r length(xxB2[[4]])` countries (`r xxB2[[4]]`) selected "other approaches are used".  However, these `r length(xxB2[[4]])` countries also selected at least one of the other three response categories.  Estonia (EE) does calculate nutrient loads but does not indicate how this is done. 
+Responses reflect the wide variety of methods which are used, each with differing data requirements. `r length(xxB2[[4]])` countries (`r xxB2[[4]]`) selected "other approaches are used".  However, these `r length(xxB2[[4]])` countries also selected at least one of the other three response categories.  Estonia (EE) does calculate nutrient loads but does not indicate how this is done. 
 
 ## BQ3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
 ```{r BQ3, fig.height = 1, fig.width= 5, fig.cap="Figure 9. Number of countries responding."}
