@@ -693,8 +693,7 @@ xxBQ3 <-CntryListfunction (id.countBQ3)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Catchment models that quantify the nutrient emissions/nutrient losses to surface waters are used by `r length(xxBQ3[[1]])` countries, namely: `r xxBQ3[[1]]`. A full list of models cited in this report is given in Table #. Based on information given, most of these are best considered as part of networks of specialised models, each passing estimates to subsequent modules (e.g. soil leaching of nutrients is estimated by one model, and these estimates are then passed to a hydrological model). As far as we can tell, few of these are explicitly modelling ecological processes, with the end result being an estimate of surface water concentrations.  These are then compared with good-moderate boundary concentrations extimated by empirical models, many of which are based on methods outlined in the BPG.
-
+Catchment models that quantify the nutrient emissions/nutrient losses to surface waters are used by `r length(xxBQ3[[1]])` countries, namely: `r xxBQ3[[1]]`. A full list of models cited in this report is given in Table #. Based on information given, most of these are best considered as part of networks of specialised models, each passing estimates to subsequent modules (e.g. soil leaching of nutrients is estimated by one model, and these estimates are then passed to a hydrological model). As far as we can tell, few of these are explicitly modelling ecological processes, with the end result being an estimate of surface water concentrations.  These are then compared with good-moderate boundary concentrations estimated by empirical models, many of which are based on methods outlined in the BPG.
 
 [The best way forward might be to include a table that lists all the models used, by country.  Some use more than one.   Many are specific to one country; a few (e.g. MONERIS) seem to be used more widely.  List will exclude empirical models, e.g. Vollenweider, and models covered by BPG.  Also a few references to hydrological and atmospheric models which appear to form part of decision-support systems but which do not explicitly model nutrients.  These have also been excluded.]
 
@@ -721,9 +720,7 @@ plotBQ4
 
 Once again, many countries ticked multiple boxes, perhaps reflecting regional differences within a country or that models are capable of operating at different spatial scales.   
 
-Modelling is performed at a range of spatial scales.  One problem we have is that definitions of "Water body" are quite vague (eg CIS guidance #2), and can overlap with both "catchment" and "subcatchment".  Different countries may have different understandings of how these terms are applied.  There is no indication of whether modelling exercises cross national borders but maybe we didn't ask the right questions.
-
-
+Modelling is performed at a range of spatial scales.  One problem we have is that definitions of "Water body" are quite vague (e.g. CIS guidance #2), and can overlap with both "catchment" and "subcatchment".  Different countries may have different understandings of how these terms are applied.  There is no indication of whether modelling exercises cross national borders but maybe we didn't ask the right questions.
 
 ## BQ5. If yes, how large are the uncertainties in these models and how do you deal with these uncertainties?
 ```{r Countries detail BQ5, include=FALSE}
@@ -748,7 +745,23 @@ xxBQ5 <-CntryListfunction (id.countBQ5)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Uncertainties in the models that are used to quantify the nutrient emissions and/or nutrient losses to surface waters were addressed by `r length(xxBQ5[[1]])` countries, namely: `r xxBQ5[[1]]`. Responses to this question can be found in the Appendix.  Most acknowledge that there are several different sources of uncertainty in their models which, when combined, can lead to considerable uncertainty in final outcomes.  The uncertainties themselves depend upon the size of the waterbodies being modelled, the time scale and the quality of the data on which the model is calibrated.  Uncertainties are also greater when diffuse sources dominate over point sources.  As a result, some countries (e.g. IE) noted that they did not use models for regulatory purposes, but to guide and direct further field assessments, and to target interventions.
+Uncertainties in the models that are used to quantify the nutrient emissions and/or nutrient losses to surface waters were addressed by `r length(xxBQ5[[1]])` countries, namely: `r xxBQ5[[1]]`. Most acknowledge that there are several different sources of uncertainty in their models which, when combined, can lead to considerable uncertainty in final outcomes.  The uncertainties themselves depend upon e.g. the size of the waterbodies being modelled, the time scale and the quality of the data on which the model is calibrated.  Uncertainties are also greater when diffuse sources dominate over point sources.  As a result, some countries (e.g. IE) noted that they did not use models for regulatory purposes, but to guide and direct further field assessments, and to target interventions.
+
+Below we list the main sources of uncertainty in the models as identified by the countries: 
+- the quality of model input data (e.g. use of parameters estimates versus field measurements; quality control data);
+- uncertainty on reference or baseline values, due to natural variability (e.g. geological substrates);
+- biogeographic variability when using extrapolated or transferred values;
+- no information or variability associated with impact(s) of relevant pressures (e.g. LULC; variability across agricultural practices; pressure intensity);
+- uncertainty related with the model type;
+- potentially higher uncertainty for diffuse sources than point sources of nutrients;
+- associated with individual emission pathways;
+- scale and/or size of the system modeled;
+- temporal fluctuations (yearly variation, daily variation);
+- hydrological and biogeochemical processes not explicitly represented in the models.
+
+Dealing with uncertainty in model outputs is acknowledge by most countries as a difficult task, and even when the sources of uncertainty can be identified they are not always possible to be quantified. Nonetheless, the countries referred several ways in which they attempt to reduce uncertainty associated with the main identified sources in their models. In the majority of cases these include: continuous validation of model outputs with new data; applying regional corrections; the use of experimental data, meaningful time series and long-term mean monitoring data to validate model results; run sensitivity analysis of model individual parameters; perform some pressure/impact characterization to guide expectations on model results; and compare model outputs with other evidence data.
+
+Country specific uncertainty approaches can be found in the Appendix.
 
 ```{r Table 2,}
 #dat.uncert <- read.csv(file = here::here("Data","QB5_Tabl2_Uncert_Respons.csv"), sep=";", header = TRUE)
@@ -788,8 +801,6 @@ Uncertainties in the models that are used to quantify the nutrient emissions and
 #   kableExtra::add_header_above(header = c("Country" = 2, " " = 1),align = "c")
 ```
 
-[Heliana: can you remember what this table was about? Do we still need it?]
-
 ## Overview of Part B
 •	Most either calculate loads from monitoring data or from estimates of emissions or both;
 
@@ -799,7 +810,7 @@ Uncertainties in the models that are used to quantify the nutrient emissions and
 
 •	Models work at a variety of spatial scales (but this may also indicate different understandings of what the question was asking for); 
 
-•	Most responses recognised that there was considerable uncertainty in these models;
+•	Most responses recognised that there was considerable uncertainty in these models.
 
 
 ## How are measures to reach management objectives for nutrients defined? (Part C)
@@ -875,6 +886,7 @@ plotCQ1 <- ggplot(PartC.Q1long,
 plotCQ1
 ```
 
+The majority of countries considered that nutrient reduction would be necessary in the case that water bodies in any water category fail to achieve good status due to one of the two following criteria: nutrient concentrations not in good status or nutrient-sensitive-biological quality elements (BQEs) below good status. Some countries consider, however, that both these criteria should apply before nutrient reduction measures are needed. 
 
 ```{r CQ1 option 2 explore, include=FALSE}
 #WB fails to achieve good status due to nutrients
@@ -892,9 +904,11 @@ xxCQ1opt2 <-CntryListfunction (id.countCQ1opt2) #countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-(paragraph tbc completed yet) Some countries considered that nutrient reduction would be necessary in the case that water bodies failed to achieve good status due to nutrient concentrations at good/moderate (or not good status) boundaries. This approach was referred in all water categories by several countries, namely by `r xxCQ1opt2[[1]]` in lakes; by `r xxCQ1opt2[[2]]` in rivers; by `r xxCQ1opt2[[3]]` in transitional waters; by `r xxCQ1opt2[[4]]` in coastal and by `r xxCQ1opt2[[5]]` in marine waters.  (See if, as requested, countries added additional info specifying if this applied to both P and N, or only to the limiting nutrient)
+Failing to reach good status due to nutrient concentrations at good/moderate (or not good status) boundaries is nonetheless the dominant approach in all water categories, followed by `r xxCQ1opt2[[1]]` in lakes; by `r xxCQ1opt2[[2]]` in rivers; by `r xxCQ1opt2[[3]]` in transitional waters; by `r xxCQ1opt2[[4]]` in coastal and by `r xxCQ1opt2[[5]]` in marine waters. Not all countries provided details but when they did this criterion was usually applied to both N and P. However, only few countries clearly specified that nutrient reduction is considered when any of the nutrients exceeds the proposed good/moderate boundaries, be it P or N, in a OOAO kind of approach. In some cases Phosphorus or Nitrogen may be preferentially targeted, depending on the water category (e.g. TP in lakes) and the relevant anthropogenic pressures (e.g. phosphorus compounds for point sources of pollution from discharges of wastewater from settlements and some industrial plant; nitrogen for diffuse loads from agriculture). Very few countries use the limiting nutrient as guidance, often for specific water categories (e.g. lakes, transitional) and often dependent on information availability (e.g. BE, EE, CY, IE).
 
-Add here a critical analysis paragraph.
+Where countries referred to follow "Other" approaches to decide whether or not nutrient reduction is necessary, it was often related with the implementation of other nutrient policy regulations (e.g. UWWT and Nitrate Directive) or with specific environmental and conservation objectives such as waste water re-use in agriculture or enhancement of riparian zones. The integration of nutrients with other evidence or criteria was also mentioned (e.g. eutrophication symptoms leading to primary producers shifts; compliance with additional RSC's criteria; pressure analysis).  Very rarely was nutrient pollution not being an issue in a particular water category (e.g. IS or marine waters in IE) the reason pointed out to follow other approach not based on nutrient concentrations.
+
+Finally, results also showed that increasing pressures or downstream water bodies failing to reach good status due to nutrient pollution are less likely to trigger nutrient reduction actions showing that the precautionary principle is not commonly applied in the management of aquatic ecosystems in general. However, some countries expressed concerns regarding this aspect and the intention to adjust measures either targeting upstream water categories or sectoral measures to promote reduction at source and downstream aquatic systems protection (e.g. DK, FR, NL, CZ). 
 
 ## CQ2. Are you undertaking pollution accounting to identify the sources of nutrient pollution?
 ```{r CQ2, fig.height = 1, fig.width= 5, fig.cap="Figure 12. Number of countries responding."}
@@ -935,7 +949,7 @@ xxCQ2 <-CntryListfunction (id.countCQ2)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Some kind of pollution accounting is considered by most countries to identify the main sources of nutrient pollution, with the exception of two countries (`r xxCQ2[[2]]`). Iceland did not reply to this question.
+Most countries undertake some kind of pollution accounting to identify the main sources of nutrient pollution, with the exception of two countries (`r xxCQ2[[2]]`). Iceland did not reply to this question, as nutrient pollution is not considered an issue in their water bodies (see previous question CQ1).
 
 ## CQ3. If yes, which point and diffuse sources are included?
 ```{r CQ3, fig.cap="Figure 13. Number of countries responding."}
@@ -960,14 +974,17 @@ plotCQ3 <- ggplot(PartC.Q3,
 plotCQ3
 ```
 
-Add here a summary paragraph on the graph results.
+Beside the main sources identified in Figure 13, other point sources such as aquaculture/fish farming, rain water management and peat production (FI) were also pointed as relevant sources to be considered. Regarding diffuse sources, countries identified in addition other unspecified discharges and urban/rural settlements run off, in particular triggered by rainfall events, sewage systems leakage, non-collective waste water management, erosion.  Associated with agricultural practices, the use of manure as well as pasture areas were also highlighted as relevant contributors to be  considered.
 
-Add here a critical analysis paragraph.
+Methods for pollution accounting vary greatly across the 22 countries that provided details on their approaches, which may also differ by region or RBMP. Methods presented integrate usually rely on a wide range of distinct information but they can primarily be distinguished according to if point or diffuse source of pollution is being considered. 
 
-(open question) Describe the methodology that is used for the pollution accounting.
-Add here a summary paragraph on the open answers and add number of countries replying (directly with formula).
+Point sources accounting takes complementary data and /or information often gathered from e.g. national databases, historical data, administrative information (such as e.g. sectoral declared emissions, users permits data, type of discharge characteristics), discharge monitoring or measured loads from point sources, as well as land use and land cover typologies, areal info, which are all integrated into a final accounting.
 
-Add here a critical analysis paragraph.
+Modeling approaches are more frequently considered to account for diffuse pollution sources and used e.g. to model rainwater flows; to predict atmospheric deposition from monitoring data incorporated into transport and diffusion models coupled with atmospheric hindcasting modeling; to estimate nutrient flows and/ or loads from diffuse source (e.g. agriculture) considering data such as e.g. users permit values and discharge monitoring data, LU classes for determining characteristic exportation values through run off, etc... The spatial scale of the models also varies greatly.
+
+Other approaches include RBMP-risk analysis and methodologies for the identification of anthropogenic pressures and their impacts, considering often expert analysis.
+
+Details on each country approach are available in the Appendix.
 
 ## CQ4. What criteria and considerations do you use to select which measures to implement in order to reduce nutrient inputs?
 ```{r CQ4, fig.height = 3, fig.width = 7.5, fig.cap="Figure 14. Number of countries responding."}
