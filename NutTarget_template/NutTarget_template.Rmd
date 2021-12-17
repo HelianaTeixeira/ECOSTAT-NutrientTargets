@@ -974,15 +974,9 @@ plotCQ3 <- ggplot(PartC.Q3,
 plotCQ3
 ```
 
-Beside the main sources identified in Figure 13, other point sources such as aquaculture/fish farming, rain water management and peat production (FI) were also pointed as relevant sources to be considered. Regarding diffuse sources, countries identified in addition other unspecified discharges and urban/rural settlements run off, in particular triggered by rainfall events, sewage systems leakage, non-collective waste water management, erosion.  Associated with agricultural practices, the use of manure as well as pasture areas were also highlighted as relevant contributors to be  considered.
+Beside the main sources identified in Figure 13, other point sources such as aquaculture/fish farming, rain water management and peat production were also pointed as relevant sources to be considered. Regarding diffuse sources, countries identified in addition other unspecified discharges and urban/rural settlements run off, in particular triggered by rainfall events, sewage systems leakage, non-collective waste water management, erosion.  Associated with agricultural practices, the use of manure as well as pasture areas were also highlighted as relevant contributors to be  considered.
 
-Methods for pollution accounting vary greatly across the 22 countries that provided details on their approaches, which may also differ by region or RBMP. Methods presented integrate usually rely on a wide range of distinct information but they can primarily be distinguished according to if point or diffuse source of pollution is being considered. 
-
-Point sources accounting takes complementary data and /or information often gathered from e.g. national databases, historical data, administrative information (such as e.g. sectoral declared emissions, users permits data, type of discharge characteristics), discharge monitoring or measured loads from point sources, as well as land use and land cover typologies, areal info, which are all integrated into a final accounting.
-
-Modeling approaches are more frequently considered to account for diffuse pollution sources and used e.g. to model rainwater flows; to predict atmospheric deposition from monitoring data incorporated into transport and diffusion models coupled with atmospheric hindcasting modeling; to estimate nutrient flows and/ or loads from diffuse source (e.g. agriculture) considering data such as e.g. users permit values and discharge monitoring data, LU classes for determining characteristic exportation values through run off, etc... The spatial scale of the models also varies greatly.
-
-Other approaches include RBMP-risk analysis and methodologies for the identification of anthropogenic pressures and their impacts, considering often expert analysis.
+Methods for pollution accounting vary greatly across the 22 countries that provided details on their approaches, which may also differ by region or RBMP. Methods presented integrate usually rely on a wide range of distinct information but they can primarily be distinguished according to if point or diffuse source of pollution is being considered.  Point sources accounting takes complementary data and /or information often gathered from e.g. national databases, historical data, administrative information (such as e.g. sectoral declared emissions, users permits data, type of discharge characteristics), discharge monitoring or measured loads from point sources, as well as land use and land cover typologies, areal info, which are all integrated into a final accounting.  Modeling approaches are more frequently considered to account for diffuse pollution sources and used e.g. to model rainwater flows; to predict atmospheric deposition from monitoring data incorporated into transport and diffusion models coupled with atmospheric hindcasting modeling; to estimate nutrient flows and/ or loads from diffuse source (e.g. agriculture) considering data such as e.g. users permit values and discharge monitoring data, LU classes for determining characteristic exportation values through run off, etc... The spatial scale of the models also varies greatly.  Other approaches include e.g. RBMP risk analysis and the identification of anthropogenic pressures and their impacts, and expert analysis is also often considered.
 
 Details on each country approach are available in the Appendix.
 
@@ -1008,9 +1002,9 @@ plotCQ4 <- ggplot(PartC.Q4,
 plotCQ4
 ```
 
-Add here a summary paragraph on the graph results.
+Cost-efficiency analysis helps to prioritise measures to be included in the PoMs of RBMPs and is a formal requirement of the WFD and also of the MSFD, so it is no surprise that most countries consider this criterion when selecting which measures to implement in order to reduce nutrient inputs. Nonetheless countries often select more than one option, reflecting the need to consider other criteria driven by constraints associated with e.g. sectoral priorites, economic context, institutional capacity to implement measures, full implementation and synergies across European Union Directives, but also with regional and national policies, and with the need to adapt to climate change. The scope of the measure such as for e.g. the impact on other waterbodies or the fact that a measure is likely to impact more than one target are also mentioned as positive criteria influencing measure selection.
 
-Add here a critical analysis paragraph.
+Details on each country approach are available in the Appendix.
 
 ## CQ5. Are past policy measures taken into account when planning new measures?
 ```{r CQ5, fig.height = 1, fig.width= 5, fig.cap="Figure 15. Number of countries responding."}
@@ -1032,9 +1026,9 @@ PartCQ5 <- ggplot(PartC.Q5, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ5 + theme(legend.position = "none") 
 ```
 
-When asked if past policy measures, such as a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture, had been taken into account when planning new measures, for example, trying to achieve a fair sharing of the nutrient reductions between different sectors according to a pollution account, most countries replied that they were considered. [HT to complete paragraph]
+Most countries consider the influence of past policy measures (e.g. a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture) when planning new measures (Figure 15), in an attempt to achieve a fair sharing of the nutrient reductions between different sectors in a pollution account system. While seeking to share responsibility across sectors for managing reduction efforts and achieve the environmental objectives, countries recognise that the main efforts are still mainly focused on measures for industrial sectors and urban waste water treatment and in optimizing the contribution of WWTP to further reduce inputs from these point sources. Although many also recognise that the agriculture sector is a major contributor to a significant share of nutrient inputs in aquatic ecosystems, the difficulties in putting into practice measures targeting agricultural areas are often mentioned. Despite this challenge, and given the observed improvement on point sources management, many countries expressed the intention to shift efforts to further invest on treating diffuse sources of pollution, through for e.g. increasing the number of potential reduction measures, or revise fertiliser ordinances.
 
-Add here a critical analysis paragraph.
+Even countries replying "No" still refer that past policies are considered but not to meet specific environmental objectives on a policy-by-policy basis but rather to consider all sources of pollution and select measures on the basis of the most relevant criteria (see Figure 14 for details).
 
 ## CQ6. Is the delay in the response of the ecosystem to reduced nutrient inputs taken into account when planning new measures?
 ```{r CQ6, fig.height = 1, fig.width= 5, fig.cap="Figure 16. Number of countries responding."}
@@ -1056,9 +1050,11 @@ PartCQ6 <- ggplot(PartC.Q6, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ6 + theme(legend.position = "none") 
 ```
 
-Add here a summary paragraph on the graph results.
+Overall countries acknowledge a time-lag in the ecological response following nutrient reduction measures, which can differ widely across water categories (e.g. lakes vs. rivers) and typologies. This may be less influential for well-studied/monitored systems but may produce unexpected outcomes in other water bodies. In addition, from the uptake to the implementation of measures proposed for a WFD six-year cycle these may only reflect in a water body improvement in the subsequent cycle, and expected biophysical recovery delays should be considered at the water body status assessment and reporting stages and also when reviewing of the next programme of measures (PoMs).
 
-Add here a critical analysis paragraph.
+The fact that the delay in the response is highly system-dependent was indicated as reason to disregard time-lag of the response when planning new measures. The geographical scope of the actions to be carried out, the economic and social impacts were additional aspects mentioned to interfere with PoMs implementation and influencing system recovery time.
+
+Given the status of EU waters, this is a key aspect in order to understand whether or not enough and effective measures are being put forward to revert the current situation across Europe within the expected time-frame or if additional focus should be placed on the implementation of measures.  
 
 ## CQ7. Do you estimate the effect of measures on the reduction of the nutrient load or concentration in water? 
 ```{r CQ7, fig.height = 1, fig.width= 5, fig.cap="Figure 17. Number of countries responding."}
@@ -1080,9 +1076,9 @@ PartCQ7 <- ggplot(PartC.Q7, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ7 + theme(legend.position = "none") 
 ```
 
-Add here a summary paragraph on the graph results.
-
-Add here a critical analysis paragraph.
+Most countries say they estimate the effect of the measures implemented on the reduction of the nutrient load or concentration in water. Most state that the observed result (e.g. loads and/or concentrations, or other measure specific target such as BQE improvement) should be possible to be measured and compared with the estimated value expected from the planned measures effect, however the effect of measures is difficult to quantify.  The effectiveness of measures is a complex exercise as it depends on multiple factors which may be difficult to understand due to e.g. the lack of reliable data or the effects of multiple (interacting) stressors masking the biological effects of nutrient reduction. To better deal with this, some countries use models under different scenarios to better understand the impact of measures on overall water quality. Many countries adopt thus a holistic approach, where nutrient reduction is an integral part to reach the biggest effects and, eventually, all environmental objectives.
+ 
+Besides evaluating measures against environmental targets, other countries are in addition developing methodologies to evaluate measures themselves, for e.g. (from HELCOM) a “sufficiency of measures” (SOM) seeking to gain understanding of where measures have failed; or proposing a scale of effectiveness of the measure (e.g.: very effective, moderately effective, etc.).
 
 ## CQ8. Do you have mechanisms for managing management objectives for nutrients across political boundaries (either within or between Member States)? 
 ```{r CQ8, fig.height = 1, fig.width= 5, fig.cap="Figure 18. Number of countries responding."}
@@ -1104,9 +1100,7 @@ PartCQ8 <- ggplot(PartC.Q8, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ8 + theme(legend.position = "none") 
 ```
 
-Add here a summary paragraph on the graph results.
-
-Add here a critical analysis paragraph.
+Most countries refer the relevance of the role and the importance of the work done by many and diverse cross-border working groups within international initiatives in place (e.g. international commissions for transboundary rivers and lakes; cross border catchment R&D projects; countries special agreements within transboundary river basins; international catchment co-governance; regional sea conventions; bilateral cooperation) and within the nationally coordinated working groups (e.g. in federal states, across RBMPs). These cooperation is critical to discuss and evaluate management objectives across political-administrative borders that influence the status of water bodies. Within these working groups, management targets at the "limnic-marine boundary" have also been set by some countries to protect downstream waters.
 
 ## CQ9. Do you consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning the nutrient reduction measures?
 ```{r CQ9, fig.height = 1, fig.width= 5, fig.cap="Figure 19. Number of countries responding."}
