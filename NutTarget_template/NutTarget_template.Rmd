@@ -1102,6 +1102,8 @@ PartCQ8 + theme(legend.position = "none")
 
 Most countries refer the relevance of the role and the importance of the work done by many and diverse cross-border working groups within international initiatives in place (e.g. international commissions for transboundary rivers and lakes; cross border catchment R&D projects; countries special agreements within transboundary river basins; international catchment co-governance; regional sea conventions; bilateral cooperation) and within the nationally coordinated working groups (e.g. in federal states, across RBMPs). These cooperation is critical to discuss and evaluate management objectives across political-administrative borders that influence the status of water bodies. Within these working groups, management targets at the "limnic-marine boundary" have also been set by some countries to protect downstream waters.
 
+Small and with government centralised administration countries such as CY or non-EU Member States such as TR, do not consider transboundary issues. Other countries not referring explicit mechanisms to deal with transboundary issues were: BE (WA region), BG, DK, EE, 3 water agencies in FR for continental waters, IT, and LV.
+
 ## CQ9. Do you consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning the nutrient reduction measures?
 ```{r CQ9, fig.height = 1, fig.width= 5, fig.cap="Figure 19. Number of countries responding."}
 #select data CQ9
@@ -1122,9 +1124,7 @@ PartCQ9 <- ggplot(PartC.Q9, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ9 + theme(legend.position = "none") 
 ```
 
-Add here a summary paragraph on the graph results.
-
-Add here a critical analysis paragraph.
+Climate change is an emerging priority of the EU COM. It is expected to have significant influence in shaping the environmental conditions in aquatic ecosystems and influence relevant phenomenons for water quality such as sea-level rise, flash floods and run_off. Despite being a challenging issue, 15 countries already consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning their nutrient reduction measures. Approaches are quite diverse, with some reflected e.g. on the revisions of targets/quality objectives; CC included in models; and others foreseeing new measures for dealing with draining large amounts of torrential rainwater and control with pollution loads. BUt most are at the stage of developing approaches to accommodate CC.
 
 ## CQ10. Do you consider nature-based solutions (restoring riparian zones, wetlands, flood plains etc.) when planning the nutrient reduction measures? 
 ```{r CQ10, fig.height = 1, fig.width= 5, fig.cap="Figure 20. Number of countries responding."}
@@ -1132,6 +1132,15 @@ Add here a critical analysis paragraph.
 PartC.Q10 <- dat.PartC %>% filter(QuestionNo_b==11)
 
 PartC.Q10$ResponseOptionText <- str_trim(PartC.Q10$ResponseOptionText)
+
+#correct HU mistake in Part C data reporting "N" should be "Y"
+PartC.Q10 <- PartC.Q10 %>% mutate (HU = case_when(
+   ResponseOptionRef == "10.2" ~ NA_integer_,
+   TRUE ~ as.integer(HU)))
+
+PartC.Q10 <- PartC.Q10 %>% mutate (ResponsesPerOption = case_when(
+   ResponsesPerOption == 5 ~ 4,
+   TRUE ~ as.numeric(ResponsesPerOption)))
 
 PartCQ10 <- ggplot(PartC.Q10, aes(ResponseOptionText, ResponsesPerOption)) +
   scale_x_discrete() +
@@ -1145,10 +1154,9 @@ PartCQ10 <- ggplot(PartC.Q10, aes(ResponseOptionText, ResponsesPerOption)) +
 
 PartCQ10 + theme(legend.position = "none") 
 ```
+Nature-based solutions are considered by most countries, and a wide varied of approaches has been described. Landscape interventions that go from green strips along the rivers to strengthen the ban on the use of fertilizers and pesticides; temporary flood zones; riparian and wetlands rehabilitation; grass belts; river course re-shape; anti-erosion sediment reservoirs.
 
-Add here a summary paragraph on the graph results.
-
-Add here a critical analysis paragraph.
+Details of country specific solutions described in the Appendix.
 
 ## CQ11. Do you consider technical/biological manipulative solutions when planning the nutrient reduction measures? 
 By technical/biological manipulative solutions consider as example the removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, management fisheries, etc.
@@ -1172,9 +1180,26 @@ PartCQ11 <- ggplot(PartC.Q11, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ11 + theme(legend.position = "none") 
 ```
 
-Only slightly above half of the countries referred to consider technical and/or biological manipulative solutions when planning the nutrient reduction measures. [HT to complete paragraph on the graph results.]
+Only slightly above half of the countries referred to consider technical and/or biological manipulative solutions when planning the nutrient reduction measures.  Among the most common solutions considered by countries are:
+-	Aeration and/or destratification of bottom waters
+-	Precipitation of phosphorus in the tributaries of the reservoir
+-	Biomanipulation with fish stock (e.g. removal of planktivore fish; introducing predatory fish)
+-	Addition of phosphorus binding chemical (although some consider a politically unacceptable measure)
+- Removal of nutrient rich sediment 
+- Removal of macrophyte vegetation periodically
+- Mussel substrate introduction
+- Extractive aquaculture (again using mussels or seaweeds)
+-	Liming measures, adding Gypsum (CaO or Ca(OH)2) in soil/agricultural areas
+- Floating wetlands
 
-Add here a critical analysis paragraph.
+Details of country specific solutions described in the Appendix.
 
 ## Overview of Part C
-•	tbc by HT;
+•	A wide variety of measures is in place to reach management objectives for nutrients;
+
+•	Measures effectiveness is in general assumed very difficult to evaluate directly;
+
+•	Ecological time-lag response is often difficult to incorporate or predict and likely to miss single WFD cycles and thus require PoMs adjustment.
+
+•	Countries are devoting great efforts to develop new measures that can better accommodate CC effects and which will be more effective in restoring ecosystems, namely focussing on nature-based and advanced technical/biological manipulative solutions. 
+
