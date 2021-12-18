@@ -307,7 +307,7 @@ Responses reflect, to a large extent, an interplay between biogeography and loca
 
 The limiting nutrient approach is more commonly assumed in freshwater categories (lakes: `r xx2[[4]]`; rivers: `r xx2[[8]]`) than in marine influenced systems (transitional: `r xx2[[12]]`, coastal: `r  xx2[[15]]`).What is not clear from the responses is how the limiting nutrient is determined in any given situation.  Several responses referred to prevailing dogma that nitrogen and phosphorus are the nutrients most likely to be limiting (and, therefore, responsible for eutrophication when present in excess) and some (e.g. PL) indicated that targets were set to achieve concentrations consistent with the good/moderate boundary.  This, in turn, presumes a good quantitative understanding of causal relationships between nutrients and measures of the condition of the flora and fauna which can be difficult to obtain for transitional waters (Salas-Herrero et al., 2019).   It can probably be assumed that exceeding supporting element standards for nitrogen and phosphorus is the default criterion for recognising a need for nutrient management.  However, as Phillips et al. (2018) point out, there are a variety of approaches to setting nutrient standards, with different levels of precaution.   No mention is made of more targeted, case specific approaches in the responses; however, this does not mean that they are not used in individual countries.
 
-## AQ3. If you have set management objectives for nutrients, please indicate which method has been used. 
+## A3. If you have set management objectives for nutrients, please indicate which method has been used. 
 
 ```{r Q3, fig.height = 6, fig.width= 7.5, fig.cap="Figure 3. Countries responding (n and %), overview by water category."}
 #select data Q3
@@ -595,7 +595,7 @@ give.nB <- function(x){
          }
 ```
 
-## BQ1. Do you calculate current nutrient loads in order to achieve management objectives for nutrients?
+## B1. Do you calculate current nutrient loads in order to achieve management objectives for nutrients?
 ```{r BQ1, fig.height = 1, fig.width = 5, fig.cap="Figure 7. Number of countries responding."}
 PartB.Q1 <- dat.PartB %>% filter(QuestionNo_b==1)
 
@@ -636,7 +636,7 @@ xxB1 <-CntryListfunction (id.countB1)#countries replying
 ```
 `r length(xxB1[[2]])` countries (`r xxB1[[2]]`) replied "no" to this question, but none gave any explanation. 
 
-## BQ2. If yes, what methods do you use to calculate nutrient loads?
+## B2. If yes, what methods do you use to calculate nutrient loads?
 ```{r BQ2, fig.height = 3, fig.width = 7.5, fig.cap="Figure 8. Number of countries responding."}
 #select data BQ2
 PartB.Q2 <- dat.PartB %>% filter(QuestionNo_b==2)
@@ -735,7 +735,7 @@ Catchment models that quantify the nutrient emissions/nutrient losses to surface
 
 [The best way forward might be to include a table that lists all the models used, by country.  Some use more than one.   Many are specific to one country; a few (e.g. MONERIS) seem to be used more widely.  List will exclude empirical models, e.g. Vollenweider, and models covered by BPG.  Also a few references to hydrological and atmospheric models which appear to form part of decision-support systems but which do not explicitly model nutrients.  These have also been excluded.]
 
-## BQ4. If yes, at what spatial level do the models operate?
+## B4. If yes, at what spatial level do the models operate?
 ```{r BQ4, fig.height = 3, fig.width = 7.5, fig.cap="Figure 10. Number of countries responding."}
 #select data BQ2
 PartB.Q4 <- dat.PartB %>% filter(QuestionNo_b==5)
@@ -784,6 +784,7 @@ xxBQ5 <-CntryListfunction (id.countBQ5)#countries replying
 Uncertainties in the models that are used to quantify the nutrient emissions and/or nutrient losses to surface waters were addressed by `r length(xxBQ5[[1]])` countries (`r xxBQ5[[1]]`). Most acknowledge that there are several different sources of uncertainty in their models which, when combined, can lead to considerable uncertainty in final outcomes. Uncertainties are also greater when diffuse sources dominate over point sources.  As a result, some countries (e.g. IE) noted that they did not use models for regulatory purposes, but to guide and direct further field assessments, and to target interventions.
 
 The main sources of uncertainty in the models as identified by respondents are: 
+
 - the quality of model input data (e.g. use of parameters estimates versus field measurements; quality control data);
 - uncertainty on reference or baseline values, due to natural variability (e.g. geological substrates);
 - biogeographic variability when using extrapolated or transferred values;
@@ -1184,7 +1185,7 @@ Nature-based solutions are considered by most countries, and a wide variety of a
 
 Details of country-specific solutions described in the Appendix.
 
-## CQ11. Do you consider technical/biological manipulative solutions when planning the nutrient reduction measures? 
+## C11. Do you consider technical/biological manipulative solutions when planning the nutrient reduction measures? 
 
 ```{r CQ11, fig.height = 1, fig.width= 5, fig.cap="Figure 21. Number of countries responding."}
 #select data CQ11
@@ -1208,6 +1209,7 @@ PartCQ11 + theme(legend.position = "none")
 Examples of such aspproaches include the removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, fisheries management etc.
 
 Only slightly above half of the countries answered "yes" to this question.  Among the most common solutions considered by countries are:
+
 -	Aeration and/or destratification of bottom waters
 -	Precipitation of phosphorus in the tributaries of the reservoir
 -	Biomanipulation with fish stock (e.g. removal of planktivore fish; introducing predatory fish)
@@ -1216,7 +1218,7 @@ Only slightly above half of the countries answered "yes" to this question.  Amon
 - Removal of macrophyte vegetation periodically
 - Mussel substrate introduction
 - Extractive aquaculture (again using mussels or seaweeds)
--	Liming measures, adding Gypsum (CaO or Ca(OH)2) in soil/agricultural areas
+- Liming measures, adding Gypsum (CaO or Ca(OH)2) in soil/agricultural areas
 - Floating wetlands
 
 Details of country specific solutions described in the Appendix.
