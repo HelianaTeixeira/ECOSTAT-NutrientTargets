@@ -1,5 +1,5 @@
 ---
-title: "Methods used to set management objectives for nutrients - a comparison of national approaches"
+title: "Methods used to set management objectives for nutrients: a comparison of national approaches"
 date: "`r Sys.Date()`"
 output:
   rmdformats::robobook:
@@ -64,7 +64,46 @@ table_format = function() {
 }
 
 ```
+# Summary and recommendations
+## Part A: approaches to setting management objectives
 
+•	Most countries already set management objectives for all water bodies exposed to nutrient pollution in the different water categories;
+
+•	Depending on local circumstances, objectives are set for nitrogen, phosphorus or both;
+
+•	A variety of approaches are used to set targets, with modelling based on BQE-response relationships being used most widely.  Many countries support this modelling with other evidence;
+
+•	There is some ambiguity about how critical load or load reduction targets are set by individual countries, and no detailed analysis of these responses was possible;
+
+•	Most countries set targets that are compatible with the nutrient concentration at the good/moderate boundary.   The effectiveness of this approach will depend upon how precautionary these boundaries are.   Other ECOSTAT-sponsored work suggests that many boundaries are relatively lenient so the effectiveness of this strategy will need to be discussed in detail;
+
+•	A variety of policy drivers were cited, with the WFD as the most widely used, but UWWTD, Nitrates Directive, MSFD and Regional Seas Conventions, along with national legislation, all cited;
+
+•	A variety of reasons were cited for not setting management objectives.   Some of these may need further discussion.  For example, is “less stringent objectives” alone sufficient reason?   Justifications for setting less stringent objectives include situations where achieving good status is “infeasible or disproportionately expensive”, both of which imply a need to evaluate the feasibility of measures against targets. 
+
+## Part B: approaches to calculating nutrient loads
+•	Most countries calculate loads either from monitoring data or from estimates of emissions or both;
+
+•	Most also link these to catchment models.  A wide variety are used, but relatively few of these models are used by more than one country;
+
+•	More significantly, there was little evidence of models operating across national boundaries; 
+
+•	Models work at a variety of spatial scales (but this may also indicate different understandings of what the question was asking for); 
+
+•	Most responses recognised that there was considerable uncertainty in these models.
+
+## Part C: methods and approaches for achieving management objectives
+•	A wide variety of measures is in place to reach management objectives for nutrients;
+
+•	Effectiveness of measures is, in general, difficult to evaluate directly;
+
+•	The time-lag of ecological responses is often difficult to incorporate or predict and improvements are unlikely to be achieved within a single WFD cycle and thus require PoMs adjustment.
+
+•	Countries are devoting great efforts to develop new measures that can better accommodate CC effects and which will be more effective in restoring ecosystems, namely focussing on nature-based and advanced technical/biological manipulative solutions. 
+
+
+
+# Introduction
 As part of its mandate to understand the approaches taken by Member States and associated countries to managing nutrients in order to achieve good ecological status and good environmental status, ECOSTAT circulated a questionnaire to compare national approaches to setting and implementing management objectives for nutrients.  The work builds on earlier activities that compared good/moderate boundaries by exploring the linkages between the nutrient boundaries set by a country, and the steps taken to manage nutrient loads in order to bring nutrient loads down in order to achieve these boundary concentrations.
   
 The questionnaire was divided into three sections:
@@ -77,7 +116,6 @@ The questionnaire was divided into three sections:
   
 This report presents an overview of responses.   In order to keep the report to a manageable length, the detailed responses from countries have not been included except where national practices differ from the main trends identified.   Comments that are not referred to directly in the report can be found in the appendix to this report. 
   
-[I suggest that the collated responses is retitled as an appendix to this report]
 
 
 ```{r load data, include=FALSE}
@@ -117,7 +155,7 @@ PartA.long$Acronym <- as.factor(PartA.long$Acronym)
 
 #### Overview of countries participating in questionnaire
 
-Twenty-six countries participated in this survey, five of which are land-locked countries reporting only for freshwater categories, as well as Bulgaria. All countries reported on rivers, 24 on lakes, 13 on transitional waters, and 20 and 15 on coastal and marine waters respectively.
+Twenty-six countries participated in this survey (Table 1), five of which are land-locked countries reporting only for freshwater categories, as well as Bulgaria. All countries reported on rivers, 24 on lakes, 13 on transitional waters, and 20 and 15 on coastal and marine waters respectively.
 
 ```{r countries data, }
 dat.countries <- read.csv(file = here::here("Data","Countries.csv"), sep=";", header = TRUE)
@@ -152,11 +190,11 @@ dat.PartA <- left_join( dat.PartA, MSbyWC, by = "WaterCategory", keep = FALSE)
 
  *Iceland and Norway (EFTA Members) and Turkey (EU candidate) are not EU Member States. 
 
-## How are management objectives for nutrients derived (methods)? (Part A)
+## Part A: How are management objectives for nutrients derived? 
 
-## AQ1. Have you set management objectives for nutrients for waters bodies that are exposed to nutrient pollution?
+## A1. Have you set management objectives for nutrients for waters bodies that are exposed to nutrient pollution?
 
-```{r Q1,fig.height = 5, fig.width= 7.5, fig.cap="Figure 1. Countries responding (n and %), overview by water category."}
+```{r Q1,fig.height = 5, fig.width= 7.5, fig.cap="Figure 2. Countries responding (n and %), overview by water category."}
 #select data Q1
 PartA.Q1 <- dat.PartA %>% filter(QuestionNo_b==1)
 
@@ -220,9 +258,9 @@ xx1 <-CntryListfunction (id.count1)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Most countries have set management objectives for all water bodies exposed to nutrient pollution in the different water categories, with few countries considering only some of the nutrient polluted water bodies (`r xx1[[2]]` in lakes; `r xx1[[5]]` rivers; `r xx1[[8]]` in transitional waters; and `r xx1[[11]]` in marine waters). Only `r xx1[[3]]` in lakes, `r xx1[[6]]` in rivers, and `r xx1[[12]]` in marine waters have not set management objectives for water bodies exposed to nutrient pollution. Results show that France (FR) does not follow a standardised national approach, with water agencies each adopting their own policies (but confirm this).
+Most countries have set management objectives for all water bodies exposed to nutrient pollution in the different water categories, with a few countries considering only some of their nutrient polluted water bodies (`r xx1[[2]]` in lakes; `r xx1[[5]]` rivers; `r xx1[[8]]` in transitional waters; and `r xx1[[11]]` in marine waters). Only `r xx1[[3]]` in lakes, `r xx1[[6]]` in rivers, and `r xx1[[12]]` in marine waters have not set management objectives for water bodies exposed to nutrient pollution. Judging from responses France (FR) does not have a standardised national approach, with water agencies each adopting their own policies.
  
-## AQ2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
+## A2. When setting management objectives for nutrients, is there a focus on reduction of phosphorus, nitrogen, or both or on the limiting nutrient?
 
 ```{r Q2, fig.height = 5, fig.width = 7.5, fig.cap="Figure 2. Countries responding (n and %), overview by water category."}
 #select data Q2
@@ -265,11 +303,11 @@ xx2 <-CntryListfunction (id.count2)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Responses reflect, to a large extent, an interplay between biogeography and local pressures. Most countries focus on reducing both nitrogen and phosphorus whatever the water category considered; those who focussed on one or the other did so because local circumstances meant that this was the most likely reason for problems. That would be, for example, the case of phosphorus reduction in lakes, adopted by nine countries (`r xx2[[1]]`), or nitrogen in lakes (`r xx2[[2]]`), rivers (`r xx2[[6]]`), coastal (`r xx2[[13]]`) or marine waters (`r xx2[[16]]`). Responses focussed on the consequences of nutrients on transitional water ecosystems, but there was also some acknowledgment of the role of transitional waters as conduits of nutrients to coastal and marine waters too.
+Responses reflect, to a large extent, an interplay between biogeography and local pressures. Most countries focus on reducing both nitrogen and phosphorus whatever the water category considered; those who focussed on one or the other did so because local circumstances meant that this was the most likely reason for problems. This is the case, for example, for phosphorus reduction in lakes, adopted by nine countries (`r xx2[[1]]`), or nitrogen in lakes (`r xx2[[2]]`), rivers (`r xx2[[6]]`), coastal (`r xx2[[13]]`) or marine waters (`r xx2[[16]]`). Responses focussed on the consequences of nutrients on transitional water ecosystems, but there was also some acknowledgment of the role of transitional waters as conduits of nutrients to coastal and marine waters too.
 
-The limiting nutrient approach is more commonly assumed in freshwater categories (lakes: `r xx2[[4]]`; rivers: `r xx2[[8]]`) than in marine influenced systems (transitional: `r xx2[[12]]`, coastal: `r  xx2[[15]]`). [Heliana: what do you mean in this sentence?  Don't all assume limiting nutrients but differ in whether they focus on N or P? ]  What is not clear from the responses is how the limiting nutrient is determined in any given situation.  Several responses referred to prevailing dogma that nitrogen and phosphorus are the nutrients most likely to be limiting (and, therefore, responsible for eutrophication when present in excess) and some (e.g. PL) indicated that targets were to achieve concentrations consistent with the good/moderate boundary.  This, in turn, presumes a good quantitative understanding of causal relationships between nutrients and measures of the condition of the flora and fauna which can be difficult to obtain for transitional waters (Salas-Herrero et al., 2019).   It can probably be assumed that exceeding supporting element standards for nitrogen and phosphorus is the default criterion for recognising a need for nutrient management.  However, as Phillips et al. (2018) point out, there are a variety of approaches to setting nutrient standards, with different levels of precaution.   No mention is made of more targeted, case specific approaches in the responses; however, this does not mean that they are not used in individual countries.
+The limiting nutrient approach is more commonly assumed in freshwater categories (lakes: `r xx2[[4]]`; rivers: `r xx2[[8]]`) than in marine influenced systems (transitional: `r xx2[[12]]`, coastal: `r  xx2[[15]]`).What is not clear from the responses is how the limiting nutrient is determined in any given situation.  Several responses referred to prevailing dogma that nitrogen and phosphorus are the nutrients most likely to be limiting (and, therefore, responsible for eutrophication when present in excess) and some (e.g. PL) indicated that targets were set to achieve concentrations consistent with the good/moderate boundary.  This, in turn, presumes a good quantitative understanding of causal relationships between nutrients and measures of the condition of the flora and fauna which can be difficult to obtain for transitional waters (Salas-Herrero et al., 2019).   It can probably be assumed that exceeding supporting element standards for nitrogen and phosphorus is the default criterion for recognising a need for nutrient management.  However, as Phillips et al. (2018) point out, there are a variety of approaches to setting nutrient standards, with different levels of precaution.   No mention is made of more targeted, case specific approaches in the responses; however, this does not mean that they are not used in individual countries.
 
-## AQ3. If you have set management objectives for nutrients, please indicate which methodology has been used. 
+## AQ3. If you have set management objectives for nutrients, please indicate which method has been used. 
 
 ```{r Q3, fig.height = 6, fig.width= 7.5, fig.cap="Figure 3. Countries responding (n and %), overview by water category."}
 #select data Q3
@@ -314,15 +352,17 @@ xx3 <-CntryListfunction (id.count3)#countries replying
 #xx?[[11]] # use to extract values directly in text
 ```
 
-The most commonly used method to derive nutrient targets in all water categories was based on modeled pressure-response relationships between nutrient(s) and biological quality elements (BQE) (lakes: `r xx3[[1]]`; rivers: `r xx3[[5]]`; transitional: `r xx3[[9]]`; coastal: `r xx3[[13]]`; marine: `r xx3[[17]]`). A wide range of BQEs have been used to establish these relationships, with phytoplankton (including chlorophyll concentrations and, in a few cases, cyanobacteria abundance or bloom frequency) being most widely used, especially in deeper water. 
+The approach most commonly used  to derive nutrient targets across all water categories was based on modeled pressure-response relationships between nutrient(s) and biological quality elements (BQE) (lakes: `r xx3[[1]]`; rivers: `r xx3[[5]]`; transitional: `r xx3[[9]]`; coastal: `r xx3[[13]]`; marine: `r xx3[[17]]`). A wide range of BQEs have been used to establish these relationships, with phytoplankton (including chlorophyll concentrations and, in a few cases, cyanobacteria abundance or bloom frequency) being most widely used, especially in deeper water. 
 
-The four possible answers to this question are not exclusive, with several countries using more than one approach.  For example, a modelling approach might be combined with historical information by an expert to give a more nuanced target than would be provided by any approach in isolation.  The term “modelling”, itself, covers a wide range of possibiltilies.  BQE-response relationships are often strong in lakes and are well-suited to deriving standards following the methods in the Best Practice Guide [how should this be cited here?] but a range of other modelling approaches are employed.   Few respondents mentioned which BQE was used.   Of those who did, phytoplankton, phytobenthos, macrophytes, invertebrates and fish were all mentioned, depending on specific contexts.  There is also a distinction between those countries that set targets in terms of concentrations and those who use loads (this will be explored in more detail later in the report).  A further distinction is between those who used mass balance models and those who used dynamic process models although details in questionnaire responses did not always explain the mechanisms behind their models.   Lakes are well suited to the use of historical information, through the use of palaeoecology; historical information is also used in rivers by eight countries, though none of these provided more information on how this was done. 
+The four possible answers to this question are not exclusive, with several countries using more than one approach.  For example, a modelling approach might be combined with historical information and the outcomes of each evaluated by an expert to give a more nuanced target than would be provided by any approach in isolation.  The term “modelling”, itself, covers a wide range of possibiltilies.  BQE-response relationships are often strong in lakes and are well-suited to deriving standards following the methods in Phillips et al. (2018) but a range of other modelling approaches are employed.   
+
+Few respondents mentioned which BQE was used.   Of those who did, phytoplankton, phytobenthos, macrophytes, invertebrates and fish were all mentioned, depending on specific contexts.  There is also a distinction between those countries that set targets in terms of concentrations and those who use loads (this will be explored in more detail later in the report).  A further distinction is between those who used mass balance models and those who used dynamic process models although questionnaire responses did not always give details of the mechanisms behind their models.   Lakes are well suited to the use of historical information, through the use of palaeoecology; historical information is also used in rivers by eight countries, though none of these provided more information on how this was done. 
 
 A wide range of responses were recorded in the "other" category.  Several of these overlapped with the other three categories, but some countries appear to have derived management objectives purely from physico-chemical criteria (e.g.EL'S usE of the PCQI index of Bald et al., 2005, in transitional waters).
 
 Descriptions of national approaches for the different water categories can be found in the Appendix. 
 
-## AQ4. Do you determine the maximum critical load or a load reduction target that is compatible with good status for nutrient sensitive BQEs? 
+## A4. Do you determine the maximum critical load or a load reduction target that is compatible with good status for nutrient sensitive BQEs? 
 
 ```{r Q4, fig.height = 5, fig.width = 7.5, fig.cap="Figure 4. Countries responding (n and %), overview by water category."}
 PartA.Q4 <- dat.PartA %>% filter(QuestionNo_b==4)
@@ -365,15 +405,13 @@ xx4 <-CntryListfunction (id.count4)#countries replying
 #xx?[[11]] # use to extract values directly in text
 ```
 
-Nutrient critical loads or load reduction targets compatible with good status of nutrient sensitive BQEs are only set by half or less of the reporting countries in lakes (`r xx4[[1]]`), rivers (`r xx4[[3]]`), transitional (`r xx4[[5]]`), coastal (`r xx4[[7]]`) and marine waters (`r xx4[[9]]`).
+Nutrient critical loads or load reduction targets compatible with good status of nutrient sensitive BQEs are set by no more than half of the reporting countries in lakes (`r xx4[[1]]`), rivers (`r xx4[[3]]`), transitional (`r xx4[[5]]`), coastal (`r xx4[[7]]`) and marine waters (`r xx4[[9]]`).
 
 Detailed responses to this question were ambiguous, particularly for freshwaters, with 16 (lakes) and 18 (rivers) answering “no” to the question, implying that they did not determine the maximum critical load or a load reduction target, whereas some of the more comments send by these same countries suggested that they did.  What seems to be clear is that many see target setting as a process that needs to be applied to individual water bodies, rather than derived as a guide value for all water bodies within a broadly-defined type.   Where targets are defined as concentrations rather than loads there is an inference that some form of mass balance model is also employed in order to work out how a target may be achieved for any individual water body.
 
 The situation for transitional, coastal and marine waters is similar, though proportionately fewer countries replied "no" in each case.   No more than a third of countries who replied "no" offered any explanation.
 
-[I suspect that there was a widespread misunderstanding here: cross-matching with other responses by the same country suggests many of the "no" responses should be "yes" but it would take a lot of effort to unravel every national response. ]
-
-## AQ5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
+## A5. Is there a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status? 
 
 ```{r Q5, fig.height = 5, fig.width = 7.5, fig.cap="Figure 5. Countries responding (n and %), overview by water category."}
 #select data Q5
@@ -420,15 +458,15 @@ xx5 <-CntryListfunction (id.count5)#countries replying
 #xx?[[11]] # use to extract values directly in text
 ```
 
-Most countries acknowledge that there is a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status, and most commonly the management objective is to reach the nutrient concentration at good/moderate boundary (lakes: `r xx5[[1]]`, rivers:  `r xx5[[4]]`, transitional:  `r xx5[[7]]`, coastal:  `r xx5[[10]]`). This would reduce the number of mismataches between ecology and nutrients but good status would be unlikely to be achieved in many cases. In some countries the management objective is  slightly more ambitious and aims to reach the mid-point between the high/good and the good/moderate boundary as defined by the biological quality elements (lakes: `r xx5[[2]]`, rivers:  `r xx5[[5]]`, transitional:  `r xx5[[8]]`, coastal:  `r xx5[[11]]`).
+Most countries acknowledge that there is a relationship between the management objectives set for nutrients and the nutrient boundaries set for ecological status. The most common management objective is to reach the nutrient concentration at good/moderate boundary (lakes: `r xx5[[1]]`, rivers:  `r xx5[[4]]`, transitional:  `r xx5[[7]]`, coastal:  `r xx5[[10]]`). This would reduce the number of mismataches between ecology and nutrients but good status would be unlikely to be achieved in many cases. In a few countries the management objective is  slightly more ambitious, aiming to reach the mid-point between the high/good and the good/moderate boundaries (lakes: `r xx5[[2]]`, rivers:  `r xx5[[5]]`, transitional:  `r xx5[[8]]`, coastal:  `r xx5[[11]]`).
 
-Some countries used another approach to set their management objective (lakes: `r xx5[[3]]`, rivers:  `r xx5[[6]]`, transitional:  `r xx5[[9]]`, coastal:  `r xx5[[12]]`, marine: `r xx5[[14]]`)
+Some countries used another approach to set their management objective (lakes: `r xx5[[3]]`, rivers:  `r xx5[[6]]`, transitional:  `r xx5[[9]]`, coastal:  `r xx5[[12]]`, marine: `r xx5[[14]]`).  More details can be found in the appendix.
 
-Setting nutrient boundaries that are consistent with the G/M boundary will not necessarily equate with achieving good status for BQEs, particularly as G/M boundaries are usually type- rather than site-specific.  Further questions will need to be asked to elucidate how countries address the inevitable mismatches between chemical and ecological status.   If ecology does not achieve good status after nutrient reductions to the G/M boundary, then what actions does each country take?   Are targets reassessed or evidence specific to a water body reviewed, or are other solutions (e.g. “less stringent objectives”) considered.   
+Setting nutrient boundaries that are consistent with the good/moderate boundary will not necessarily equate with achieving good status for BQEs, particularly as good/moderate boundaries are usually type- rather than site-specific.  Further questions will need to be asked to elucidate how countries address the inevitable mismatches between chemical and ecological status.   If ecology does not attain good status after nutrient reductions to the good/moderate boundary, then what actions does each country take?   Are targets reassessed or evidence specific to a water body reviewed, or are other solutions (e.g. “less stringent objectives”) considered.   
 
 [Heliana: can you make a comment on marine waters here, as the rules for the MSFD are slightly different?)]
 
-## AQ6. If you have set management objectives for nutrients, please specify which policy the management objectives are meant to address.
+## A6. If you have set management objectives for nutrients, please specify which policy the management objectives are meant to address.
 
 ```{r Q6, fig.height = 5, fig.width = 7.5, fig.cap="Figure 6. Countries responding (n and %), overview by water category."}
 #select data Q6
@@ -464,7 +502,7 @@ For all water categories except Marine, the WFD is the most important driver, th
 
 
 
-## AQ7. Countries which have not set management objectives for nutrients. 
+## A7. Countries which have not set management objectives for nutrients. 
 
 ```{r Q7, include=FALSE}
 #select data Q6
@@ -495,7 +533,7 @@ xx7 <-CntryListfunction (id.count7)#countries replying
 
 Countries which have not set management objectives for nutrients are as follows: lakes (`r xx7[[1]]`), rivers, (`r xx7[[2]]`, transitional (`r xx7[[3]]`), coastal (`r xx7[[4]]`), marine (`r xx7[[5]]`).
 
-A variety of reasons are offered including: 
+A variety of reasons were offered including: 
 
 * remote lakes above any human settlement and, therefore, with no eutrophication pressure (AT, IS); 
 
@@ -530,7 +568,7 @@ A complete list of responses can be found in the Appendix.
 •	A variety of reasons were cited for not setting management objectives.   Some of these may need further discussion.  For example, is “less stringent objectives” alone sufficient reason?   Justifications for setting less stringent objectives include situations where achieving good status is “infeasible or disproportionately expensive”, both of which imply a need to evaluate the feasibility of measures against targets.  
 
 
-## How are the current nutrient loads estimated? (Part B)
+## Part B: How are the current nutrient loads estimated? 
 ```{r pre-treatment B, include=FALSE}
 dat.PartB <- type.convert(dat.PartB) #convert data automatic as appropriate
 
@@ -596,7 +634,7 @@ unique(id.countB1$WCreply) #levels with country replies
 xxB1 <-CntryListfunction (id.countB1)#countries replying
 #xx?[[11]] # use to extract values directly in text
 ```
-`r length(xxB1[[2]])` countries (`r xxB1[[2]]`) replied "no" to this question, but none provided any explanation. 
+`r length(xxB1[[2]])` countries (`r xxB1[[2]]`) replied "no" to this question, but none gave any explanation. 
 
 ## BQ2. If yes, what methods do you use to calculate nutrient loads?
 ```{r BQ2, fig.height = 3, fig.width = 7.5, fig.cap="Figure 8. Number of countries responding."}
@@ -650,11 +688,11 @@ xxB2 <-CntryListfunction (id.countB2)#countries replying
 ```
 Responses reflect the wide variety of methods which are used, each with differing data requirements. `r length(xxB2[[4]])` countries (`r xxB2[[4]]`) selected "other approaches are used".  However, these `r length(xxB2[[4]])` countries also selected at least one of the other three response categories. 
 
-A combination of both approaches is usually applied, in which loads are based on measured concentrations and water discharges/flows and then combined with model estimates for different purposes. Except for a few countries (e.g. CZ, FR, DE, IE, FI, SE), little detail is given on how nutrient loads are actually calculated. However, the source and type of pollution, i.e. point or diffuse and urban/industrial or agricultural (incl. animal husbandry and fish farms), dictate the type of data used and the methods adopted  (e.g. DK, EE, FR, CY, LT). Loads derived from estimates (e.g. from models, LULC coupled with soil indices) are often used when larger assessment scales or diffuse sources are considered (e.g. CZ, DE, NL, FR, FI, SE), while for specific water uses or large watercourses as well as for point source emissions countries often include direct monitoring data (e.g. CZ, DK, FR, IE). In other cases, nutrient load is only considered if the water body status is poor or bad (e.g. EE).
+A combination of both approaches is usually applied, in which loads are based on measured concentrations and water discharges/flows and then combined with model estimates for different purposes. With a few exceptions (CZ, FR, DE, IE, FI, SE), little detail is given on how nutrient loads are actually calculated. However, the source and type of pollution, i.e. point or diffuse and urban/industrial or agricultural (including animal husbandry and fish farms), dictate the type of data used and the methods adopted  (DK, EE, FR, CY, LT). Loads derived from estimates (e.g. from models, LULC coupled with soil indices) are often used when larger assessment scales or diffuse sources are considered (CZ, DE, NL, FR, FI, SE), while for specific water uses or large watercourses as well as for point source emissions countries often include direct monitoring data (CZ, DK, FR, IE). In other cases, nutrient load is only considered if the water body status is poor or bad (EE).
 
 Details on approaches by specific countries are provided in the Appendix.
 
-## BQ3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
+## B3. Do you use catchment models that quantify the nutrient emissions/nutrient losses to surface waters?
 ```{r BQ3, fig.height = 1, fig.width= 5, fig.cap="Figure 9. Number of countries responding."}
 PartB.Q3 <- dat.PartB %>% filter(QuestionNo_b==3)
 
@@ -693,7 +731,7 @@ xxBQ3 <-CntryListfunction (id.countBQ3)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Catchment models that quantify the nutrient emissions/nutrient losses to surface waters are used by `r length(xxBQ3[[1]])` countries, namely: `r xxBQ3[[1]]`. A full list of models cited in this report is given in Table #. Based on information given, most of these are best considered as part of networks of specialised models, each passing estimates to subsequent modules (e.g. soil leaching of nutrients is estimated by one model, and these estimates are then passed to a hydrological model). As far as we can tell, few of these are explicitly modelling ecological processes, with the end result being an estimate of surface water concentrations.  These are then compared with good-moderate boundary concentrations estimated by empirical models, many of which are based on methods outlined in the BPG.
+Catchment models that quantify the nutrient emissions/nutrient losses to surface waters are used by `r length(xxBQ3[[1]])` countries, namely: `r xxBQ3[[1]]`. A full list of models cited in this report is given in Table 2. Based on information given, many of the "models" are best considered as part of networks of specialised models, each passing estimates to subsequent modules (e.g. soil leaching of nutrients is estimated by one model, and these estimates are then passed to a hydrological model). As far as we can tell, few of these are explicitly modelling ecological processes, with the end result being an estimate of surface water concentrations.  These are then compared with good-moderate boundary concentrations estimated by empirical models, many of which are based on methods outlined in the BPG.
 
 [The best way forward might be to include a table that lists all the models used, by country.  Some use more than one.   Many are specific to one country; a few (e.g. MONERIS) seem to be used more widely.  List will exclude empirical models, e.g. Vollenweider, and models covered by BPG.  Also a few references to hydrological and atmospheric models which appear to form part of decision-support systems but which do not explicitly model nutrients.  These have also been excluded.]
 
@@ -718,11 +756,9 @@ plotBQ4 <- ggplot(PartB.Q4, aes(ResponseOptionText, ResponsesPerOption)) +
 plotBQ4
 ```
 
-Once again, many countries ticked multiple boxes, perhaps reflecting regional differences within a country or that models are capable of operating at different spatial scales.   
+Once again, many countries ticked multiple boxes, perhaps reflecting regional differences within a country or that models are capable of operating at different spatial scales.   There was no indication that modelling exercises crossed national borders.
 
-Modelling is performed at a range of spatial scales.  One problem we have is that definitions of "Water body" are quite vague (e.g. CIS guidance #2), and can overlap with both "catchment" and "subcatchment".  Different countries may have different understandings of how these terms are applied.  There is no indication of whether modelling exercises cross national borders but maybe we didn't ask the right questions.
-
-## BQ5. If yes, how large are the uncertainties in these models and how do you deal with these uncertainties?
+## B5. If yes, how large are the uncertainties in these models and how do you deal with these uncertainties?
 ```{r Countries detail BQ5, include=FALSE}
 PartB.Q5 <- dat.PartB %>% filter(QuestionNo_b==6)
 
@@ -745,9 +781,9 @@ xxBQ5 <-CntryListfunction (id.countBQ5)#countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Uncertainties in the models that are used to quantify the nutrient emissions and/or nutrient losses to surface waters were addressed by `r length(xxBQ5[[1]])` countries, namely: `r xxBQ5[[1]]`. Most acknowledge that there are several different sources of uncertainty in their models which, when combined, can lead to considerable uncertainty in final outcomes.  The uncertainties themselves depend upon e.g. the size of the waterbodies being modelled, the time scale and the quality of the data on which the model is calibrated.  Uncertainties are also greater when diffuse sources dominate over point sources.  As a result, some countries (e.g. IE) noted that they did not use models for regulatory purposes, but to guide and direct further field assessments, and to target interventions.
+Uncertainties in the models that are used to quantify the nutrient emissions and/or nutrient losses to surface waters were addressed by `r length(xxBQ5[[1]])` countries (`r xxBQ5[[1]]`). Most acknowledge that there are several different sources of uncertainty in their models which, when combined, can lead to considerable uncertainty in final outcomes. Uncertainties are also greater when diffuse sources dominate over point sources.  As a result, some countries (e.g. IE) noted that they did not use models for regulatory purposes, but to guide and direct further field assessments, and to target interventions.
 
-Below we list the main sources of uncertainty in the models as identified by the countries: 
+The main sources of uncertainty in the models as identified by respondents are: 
 - the quality of model input data (e.g. use of parameters estimates versus field measurements; quality control data);
 - uncertainty on reference or baseline values, due to natural variability (e.g. geological substrates);
 - biogeographic variability when using extrapolated or transferred values;
@@ -759,7 +795,7 @@ Below we list the main sources of uncertainty in the models as identified by the
 - temporal fluctuations (yearly variation, daily variation);
 - hydrological and biogeochemical processes not explicitly represented in the models.
 
-Dealing with uncertainty in model outputs is acknowledge by most countries as a difficult task, and even when the sources of uncertainty can be identified they are not always possible to be quantified. Nonetheless, the countries referred several ways in which they attempt to reduce uncertainty associated with the main identified sources in their models. In the majority of cases these include: continuous validation of model outputs with new data; applying regional corrections; the use of experimental data, meaningful time series and long-term mean monitoring data to validate model results; run sensitivity analysis of model individual parameters; perform some pressure/impact characterization to guide expectations on model results; and compare model outputs with other evidence data.
+Dealing with uncertainty in model outputs is acknowledge by most countries as a difficult task, and even when the sources of uncertainty can be identified they are not always possible to be quantified. Nonetheless, respondents mentioned several ways in which they attempt to reduce uncertainty associated with the main identified sources in their models. In the majority of cases these include: continuous validation of model outputs with new data; applying regional corrections; the use of experimental data, meaningful time series and long-term mean monitoring data to validate model results; run sensitivity analysis of model individual parameters; perform some pressure/impact characterization to guide expectations on model results; and compare model outputs with other evidence data.
 
 Country specific uncertainty approaches can be found in the Appendix.
 
@@ -801,19 +837,9 @@ Country specific uncertainty approaches can be found in the Appendix.
 #   kableExtra::add_header_above(header = c("Country" = 2, " " = 1),align = "c")
 ```
 
-## Overview of Part B
-•	Most either calculate loads from monitoring data or from estimates of emissions or both;
-
-•	Most also link these to catchment models.  A wide variety are used, but relatively few of these models are used by more than one country;
-
-•	More significantly, there was little evidence of models operating across national boundaries; 
-
-•	Models work at a variety of spatial scales (but this may also indicate different understandings of what the question was asking for); 
-
-•	Most responses recognised that there was considerable uncertainty in these models.
 
 
-## How are measures to reach management objectives for nutrients defined? (Part C)
+## Part C: How are measures to reach management objectives for nutrients defined? 
 ```{r pre-treatment C, include=FALSE}
 dat.PartC <- type.convert(dat.PartC) #convert data automatic as appropriate
 
@@ -837,7 +863,7 @@ PartC.long <- PartC.long %>% mutate(Acronym=Country) %>%
 PartC.long$Acronym <- as.factor(PartC.long$Acronym)
 ```
 
-## CQ1. When is nutrient reduction decided to be necessary?
+## C1. When is nutrient reduction decided to be necessary?
 ```{r CQ1, fig.height = 9, fig.width = 7.5, fig.cap="Figure 11. Countries responding (n and %), overview by water category."}
 #select data CQ1
 PartC.Q1 <- dat.PartC %>% filter(QuestionNo_b==1)
@@ -904,13 +930,13 @@ xxCQ1opt2 <-CntryListfunction (id.countCQ1opt2) #countries replying
 #xx?[[11]] # use [[?]] to extract values directly in text
 ```
 
-Failing to reach good status due to nutrient concentrations at good/moderate (or not good status) boundaries is nonetheless the dominant approach in all water categories, followed by `r xxCQ1opt2[[1]]` in lakes; by `r xxCQ1opt2[[2]]` in rivers; by `r xxCQ1opt2[[3]]` in transitional waters; by `r xxCQ1opt2[[4]]` in coastal and by `r xxCQ1opt2[[5]]` in marine waters. Not all countries provided details but when they did this criterion was usually applied to both N and P. However, only few countries clearly specified that nutrient reduction is considered when any of the nutrients exceeds the proposed good/moderate boundaries, be it P or N, in a OOAO kind of approach. In some cases Phosphorus or Nitrogen may be preferentially targeted, depending on the water category (e.g. TP in lakes) and the relevant anthropogenic pressures (e.g. phosphorus compounds for point sources of pollution from discharges of wastewater from settlements and some industrial plant; nitrogen for diffuse loads from agriculture). Very few countries use the limiting nutrient as guidance, often for specific water categories (e.g. lakes, transitional) and often dependent on information availability (e.g. BE, EE, CY, IE).
+Failing to reach good status due to nutrient concentrations at good/moderate (or not good status) boundaries is nonetheless the dominant approach in all water categories, followed by `r xxCQ1opt2[[1]]` in lakes; by `r xxCQ1opt2[[2]]` in rivers; by `r xxCQ1opt2[[3]]` in transitional waters; by `r xxCQ1opt2[[4]]` in coastal waters and by `r xxCQ1opt2[[5]]` in marine waters. Not all countries provided details but when they did this criterion was usually applied to both nitrogen and phosphorus. However, few countries clearly specified that nutrient reduction is considered when any of the nutrients exceeds the proposed good/moderate boundaries, be it phosphorus or nitrogen, following a "One Out, All Out" approach. In some cases Phosphorus or Nitrogen may be preferentially targeted, depending on the water category (e.g. TP in lakes) and the relevant anthropogenic pressures (e.g. phosphorus compounds for point sources of pollution from discharges of wastewater from settlements and some industrial plant; nitrogen for diffuse loads from agriculture). Very few countries use the limiting nutrient as guidance, and then only for specific water categories (e.g. lakes, transitional) and often dependent on information availability (e.g. BE, EE, CY, IE).
 
-Where countries referred to follow "Other" approaches to decide whether or not nutrient reduction is necessary, it was often related with the implementation of other nutrient policy regulations (e.g. UWWT and Nitrate Directive) or with specific environmental and conservation objectives such as waste water re-use in agriculture or enhancement of riparian zones. The integration of nutrients with other evidence or criteria was also mentioned (e.g. eutrophication symptoms leading to primary producers shifts; compliance with additional RSC's criteria; pressure analysis).  Very rarely was nutrient pollution not being an issue in a particular water category (e.g. IS or marine waters in IE) the reason pointed out to follow other approach not based on nutrient concentrations.
+Where countries selected the "Other" option when deciding whether or not nutrient reduction was necessary, it was often related to the implementation of other nutrient policy regulations (e.g. UWWT and Nitrate Directive) or with specific environmental and conservation objectives such as waste water re-use in agriculture or enhancement of riparian zones. The integration of nutrients with other evidence or criteria was also mentioned (e.g. eutrophication symptoms leading to primary producers shifts; compliance with additional RSC's criteria; pressure analysis).  The absence of nutrient-related issues was Very rarely cited as a reason for not taking action (e.g. IS or marine waters in IE).
 
-Finally, results also showed that increasing pressures or downstream water bodies failing to reach good status due to nutrient pollution are less likely to trigger nutrient reduction actions showing that the precautionary principle is not commonly applied in the management of aquatic ecosystems in general. However, some countries expressed concerns regarding this aspect and the intention to adjust measures either targeting upstream water categories or sectoral measures to promote reduction at source and downstream aquatic systems protection (e.g. DK, FR, NL, CZ). 
+Finally, results also showed that increasing pressures or downstream water bodies failing to reach good status due to nutrient pollution are less likely to trigger nutrient reduction actions showing that the precautionary principle is not widely applied in the management of aquatic ecosystems in general. However, some countries expressed concerns regarding this aspect and an intention to adjust measures either targeting upstream water categories or sectoral measures to promote reduction at source and downstream aquatic systems protection (e.g. DK, FR, NL, CZ). 
 
-## CQ2. Are you undertaking pollution accounting to identify the sources of nutrient pollution?
+## C2. Are you undertaking pollution accounting to identify the sources of nutrient pollution?
 ```{r CQ2, fig.height = 1, fig.width= 5, fig.cap="Figure 12. Number of countries responding."}
 PartC.Q2 <- dat.PartC %>% filter(QuestionNo_b==2)
 
@@ -951,7 +977,7 @@ xxCQ2 <-CntryListfunction (id.countCQ2)#countries replying
 
 Most countries undertake some kind of pollution accounting to identify the main sources of nutrient pollution, with the exception of two countries (`r xxCQ2[[2]]`). Iceland did not reply to this question, as nutrient pollution is not considered an issue in their water bodies (see previous question CQ1).
 
-## CQ3. If yes, which point and diffuse sources are included?
+## C3. If yes, which point and diffuse sources are included?
 ```{r CQ3, fig.cap="Figure 13. Number of countries responding."}
 #select data CQ3
 PartC.Q3 <- dat.PartC %>% filter(QuestionNo_b==3)
@@ -974,13 +1000,13 @@ plotCQ3 <- ggplot(PartC.Q3,
 plotCQ3
 ```
 
-Beside the main sources identified in Figure 13, other point sources such as aquaculture/fish farming, rain water management and peat production were also pointed as relevant sources to be considered. Regarding diffuse sources, countries identified in addition other unspecified discharges and urban/rural settlements run off, in particular triggered by rainfall events, sewage systems leakage, non-collective waste water management, erosion.  Associated with agricultural practices, the use of manure as well as pasture areas were also highlighted as relevant contributors to be  considered.
+Beside the main sources identified in Figure 13, other point sources such as aquaculture/fish farming, rain water management and peat production were also identified as significant sources to be considered. Regarding diffuse sources, countries identified, in addition, other unspecified discharges and urban/rural settlements run off, in particular triggered by rainfall events, sewage systems leakage, non-collective waste water management, erosion.  Particular agricultural practices such as the use of manure as well as pasture areas were also highlighted as impportant contributors to be  considered.
 
-Methods for pollution accounting vary greatly across the 22 countries that provided details on their approaches, which may also differ by region or RBMP. Methods presented integrate usually rely on a wide range of distinct information but they can primarily be distinguished according to if point or diffuse source of pollution is being considered.  Point sources accounting takes complementary data and /or information often gathered from e.g. national databases, historical data, administrative information (such as e.g. sectoral declared emissions, users permits data, type of discharge characteristics), discharge monitoring or measured loads from point sources, as well as land use and land cover typologies, areal info, which are all integrated into a final accounting.  Modeling approaches are more frequently considered to account for diffuse pollution sources and used e.g. to model rainwater flows; to predict atmospheric deposition from monitoring data incorporated into transport and diffusion models coupled with atmospheric hindcasting modeling; to estimate nutrient flows and/ or loads from diffuse source (e.g. agriculture) considering data such as e.g. users permit values and discharge monitoring data, LU classes for determining characteristic exportation values through run off, etc... The spatial scale of the models also varies greatly.  Other approaches include e.g. RBMP risk analysis and the identification of anthropogenic pressures and their impacts, and expert analysis is also often considered.
+Methods for pollution accounting vary greatly across the 22 countries that provided details on their approaches, which may also differ by region or RBMP. Methods presented usually rely on a wide range of distinct information but they can primarily be distinguished according to  whether a point or diffuse source of pollution is being considered.  Point sources accounting takes complementary data and /or information often gathered from national databases, historical data, administrative information (such as  sectoral declared emissions, user's permits data, type of discharge characteristics), discharge monitoring or measured loads from point sources, as well as land use and land cover typologies and areal information, which are all integrated into a final account.  Modeling approaches are more frequently considered to account for diffuse pollution sources and used to model rainwater flows; to predict atmospheric deposition from monitoring data incorporated into transport and diffusion models coupled with atmospheric hindcasting modeling; to estimate nutrient flows and/ or loads from diffuse source (e.g. agriculture) considering data such as user's permit values and discharge monitoring data, land use classes for determining characteristic exportation values through run off, etc. The spatial scale of the models also varies greatly.  Other approaches include RBMP risk analysis and the identification of anthropogenic pressures and their impacts, and expert analysis is also often considered.
 
 Details on each country approach are available in the Appendix.
 
-## CQ4. What criteria and considerations do you use to select which measures to implement in order to reduce nutrient inputs?
+## C4. What criteria and considerations do you use to select which measures to implement in order to reduce nutrient inputs?
 ```{r CQ4, fig.height = 3, fig.width = 7.5, fig.cap="Figure 14. Number of countries responding."}
 #select data CQ4
 PartC.Q4 <- dat.PartC %>% filter(QuestionNo_b==5)
@@ -1002,11 +1028,11 @@ plotCQ4 <- ggplot(PartC.Q4,
 plotCQ4
 ```
 
-Cost-efficiency analysis helps to prioritise measures to be included in the PoMs of RBMPs and is a formal requirement of the WFD and also of the MSFD, so it is no surprise that most countries consider this criterion when selecting which measures to implement in order to reduce nutrient inputs. Nonetheless countries often select more than one option, reflecting the need to consider other criteria driven by constraints associated with e.g. sectoral priorites, economic context, institutional capacity to implement measures, full implementation and synergies across European Union Directives, but also with regional and national policies, and with the need to adapt to climate change. The scope of the measure such as for e.g. the impact on other waterbodies or the fact that a measure is likely to impact more than one target are also mentioned as positive criteria influencing measure selection.
+Cost-efficiency analysis helps to prioritise measures to be included in the PoMs of RBMPs and is a formal requirement of the WFD and also of the MSFD, so it is no surprise that most countries consider this criterion when selecting which measures to implement in order to reduce nutrient inputs. Nonetheless countries often selected more than one option, reflecting the need to consider other criteria driven by constraints associated with sectoral priorities, economic context, institutional capacity to implement measures, full implementation and synergies across European Union Directives, but also with regional and national policies, and with the need to adapt to climate change. The scope of the measure such as the impact on other waterbodies or the fact that a measure is likely to impact more than one target are also mentioned as positive criteria influencing measure selection.
 
 Details on each country approach are available in the Appendix.
 
-## CQ5. Are past policy measures taken into account when planning new measures?
+## C5. Are past policy measures taken into account when planning new measures?
 ```{r CQ5, fig.height = 1, fig.width= 5, fig.cap="Figure 15. Number of countries responding."}
 #select data CQ5
 PartC.Q5 <- dat.PartC %>% filter(QuestionNo_b==6)
@@ -1026,11 +1052,11 @@ PartCQ5 <- ggplot(PartC.Q5, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ5 + theme(legend.position = "none") 
 ```
 
-Most countries consider the influence of past policy measures (e.g. a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture) when planning new measures (Figure 15), in an attempt to achieve a fair sharing of the nutrient reductions between different sectors in a pollution account system. While seeking to share responsibility across sectors for managing reduction efforts and achieve the environmental objectives, countries recognise that the main efforts are still mainly focused on measures for industrial sectors and urban waste water treatment and in optimizing the contribution of WWTP to further reduce inputs from these point sources. Although many also recognise that the agriculture sector is a major contributor to a significant share of nutrient inputs in aquatic ecosystems, the difficulties in putting into practice measures targeting agricultural areas are often mentioned. Despite this challenge, and given the observed improvement on point sources management, many countries expressed the intention to shift efforts to further invest on treating diffuse sources of pollution, through for e.g. increasing the number of potential reduction measures, or revise fertiliser ordinances.
+Most countries consider the influence of past policy measures (e.g. a focus on urban waste water treatment plants as opposed to diffuse pollution from agriculture) when planning new measures (Figure 15), in an attempt to achieve a fair sharing of the nutrient reductions between different sectors in a pollution account system. While seeking to share responsibility across sectors for managing reduction efforts and achieve environmental objectives, countries recognise that the main efforts are still mainly focused on measures for industrial sectors and urban waste water treatment and in optimizing the contribution of WWTP to further reduce inputs from these point sources. Although many also recognise that the agriculture sector is a major source of nutrient inputs in aquatic ecosystems, the difficulties in putting into practice measures targeting agricultural areas were often mentioned. Despite this challenge, and given the observed improvement on point source management, many countries expressed an intention to shift efforts to focus more on treating diffuse sources of pollution through, for example, increasing the number of potential reduction measures, or revising fertiliser ordinances.
 
-Even countries replying "No" still refer that past policies are considered but not to meet specific environmental objectives on a policy-by-policy basis but rather to consider all sources of pollution and select measures on the basis of the most relevant criteria (see Figure 14 for details).
+Even countries replying "No" still agreed that past policies were important, if not to meet specific environmental objectives on a policy-by-policy basis, then as part of a consideration of all sources of pollution and  for selecting measures based on the most relevant criteria (see Figure 14 for details).
 
-## CQ6. Is the delay in the response of the ecosystem to reduced nutrient inputs taken into account when planning new measures?
+## C6. Is the delay in the response of the ecosystem to reduced nutrient inputs taken into account when planning new measures?
 ```{r CQ6, fig.height = 1, fig.width= 5, fig.cap="Figure 16. Number of countries responding."}
 #select data CQ6
 PartC.Q6 <- dat.PartC %>% filter(QuestionNo_b==7)
@@ -1050,11 +1076,11 @@ PartCQ6 <- ggplot(PartC.Q6, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ6 + theme(legend.position = "none") 
 ```
 
-Overall countries acknowledge a time-lag in the ecological response following nutrient reduction measures, which can differ widely across water categories (e.g. lakes vs. rivers) and typologies. This may be less influential for well-studied/monitored systems but may produce unexpected outcomes in other water bodies. In addition, from the uptake to the implementation of measures proposed for a WFD six-year cycle these may only reflect in a water body improvement in the subsequent cycle, and expected biophysical recovery delays should be considered at the water body status assessment and reporting stages and also when reviewing of the next programme of measures (PoMs).
+Overall, most countries acknowledge a time-lag in the ecological response following nutrient reduction measures, which can differ widely across water categories (e.g. lakes vs. rivers) and typologies. This may be less important in well-studied/monitored systems but may produce unexpected outcomes in other water bodies. In addition, the six-year reporting cycles of the WFD mean that effects of measures may only be reflected in water body improvement in the subsequent cycle.  Expected biophysical recovery delays should be considered at the water body status assessment and reporting stages and also when reviewing of the next programme of measures (PoMs).
 
-The fact that the delay in the response is highly system-dependent was indicated as reason to disregard time-lag of the response when planning new measures. The geographical scope of the actions to be carried out, the economic and social impacts were additional aspects mentioned to interfere with PoMs implementation and influencing system recovery time.
+Countries noted that delays in the response was highly system-dependent, and this was cited as a reason to disregard time-lag of responses when planning new measures. The geographical scope of the actions to be carried out and economic and social impacts were additional aspects mentioned as interfering with implementation of PoMs and influencing system recovery time.
 
-Given the status of EU waters, this is a key aspect in order to understand whether or not enough and effective measures are being put forward to revert the current situation across Europe within the expected time-frame or if additional focus should be placed on the implementation of measures.  
+Given the status of EU waters, these are important factors that need to be part of a consideration of whether adequate and effective measures are being put forward to reverse the current situation across Europe within the expected time-frame, or if a greater focus should be placed on the implementation of measures.  
 
 ## CQ7. Do you estimate the effect of measures on the reduction of the nutrient load or concentration in water? 
 ```{r CQ7, fig.height = 1, fig.width= 5, fig.cap="Figure 17. Number of countries responding."}
@@ -1076,11 +1102,11 @@ PartCQ7 <- ggplot(PartC.Q7, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ7 + theme(legend.position = "none") 
 ```
 
-Most countries say they estimate the effect of the measures implemented on the reduction of the nutrient load or concentration in water. Most state that the observed result (e.g. loads and/or concentrations, or other measure specific target such as BQE improvement) should be possible to be measured and compared with the estimated value expected from the planned measures effect, however the effect of measures is difficult to quantify.  The effectiveness of measures is a complex exercise as it depends on multiple factors which may be difficult to understand due to e.g. the lack of reliable data or the effects of multiple (interacting) stressors masking the biological effects of nutrient reduction. To better deal with this, some countries use models under different scenarios to better understand the impact of measures on overall water quality. Many countries adopt thus a holistic approach, where nutrient reduction is an integral part to reach the biggest effects and, eventually, all environmental objectives.
+Most countries say they estimate the effect of the measures implemented on the reduction of the nutrient load or concentration in water. Most state that the observed result (e.g. loads and/or concentrations, or other measure-specific targets such as BQE improvement) should measured and compared with the values predicted at the planning stages; however the effect of measures is difficult to quantify.  Predicting the effectiveness of measures is a complex exercise as it depends on multiple factors which may be difficult to understand due to a lack of reliable data or the effects of multiple (interacting) stressors masking the biological effects of nutrient reduction. To better deal with this, some countries use models under different scenarios to better understand the impact of measures on overall water quality. For these reasons, many countries adopt a holistic approach, within which nutrient reduction is an integral part to obtain the biggest effects.
  
-Besides evaluating measures against environmental targets, other countries are in addition developing methodologies to evaluate measures themselves, for e.g. (from HELCOM) a “sufficiency of measures” (SOM) seeking to gain understanding of where measures have failed; or proposing a scale of effectiveness of the measure (e.g.: very effective, moderately effective, etc.).
+Besides evaluating measures to achieve environmental targets, other countries are developing additioal methods to evaluate measures themselves, for example, Helcom has proposed a “sufficiency of measures” (SOM) seeking to gain understanding of where measures have failed; or proposing a scale of effectiveness of the measure (e.g. "very effective", "moderately effective", etc.).
 
-## CQ8. Do you have mechanisms for managing management objectives for nutrients across political boundaries (either within or between Member States)? 
+## C8. Do you have mechanisms for managing management objectives for nutrients across political boundaries (either within or between Member States)? 
 ```{r CQ8, fig.height = 1, fig.width= 5, fig.cap="Figure 18. Number of countries responding."}
 #select data CQ8
 PartC.Q8 <- dat.PartC %>% filter(QuestionNo_b==9)
@@ -1100,11 +1126,11 @@ PartCQ8 <- ggplot(PartC.Q8, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ8 + theme(legend.position = "none") 
 ```
 
-Most countries refer the relevance of the role and the importance of the work done by many and diverse cross-border working groups within international initiatives in place (e.g. international commissions for transboundary rivers and lakes; cross border catchment R&D projects; countries special agreements within transboundary river basins; international catchment co-governance; regional sea conventions; bilateral cooperation) and within the nationally coordinated working groups (e.g. in federal states, across RBMPs). These cooperation is critical to discuss and evaluate management objectives across political-administrative borders that influence the status of water bodies. Within these working groups, management targets at the "limnic-marine boundary" have also been set by some countries to protect downstream waters.
+Most countries emphasise the relevance of the role and the importance of the work done by many and diverse cross-border working groups within international initiatives (e.g. international commissions for transboundary rivers and lakes; cross border catchment R&D projects; countries special agreements within transboundary river basins; international catchment co-governance; regional sea conventions; bilateral cooperation) and within the nationally coordinated working groups (e.g. in federal states, across RBMPs). These cooperation is critical to discuss and evaluate management objectives across political-administrative borders that influence the status of water bodies. Within these working groups, management targets at the "limnic-marine boundary" have also been set by some countries to protect downstream waters.
 
-Small and with government centralised administration countries such as CY or non-EU Member States such as TR, do not consider transboundary issues. Other countries not referring explicit mechanisms to deal with transboundary issues were: BE (WA region), BG, DK, EE, 3 water agencies in FR for continental waters, IT, and LV.
+Island countries suchas CY do not need to consider international transboundary issues, and those with centralised administrations may not need to consider internal co-ordination.  Non-EU Member States such as TR, do not consider transboundary issues. Other countries not referring explicit mechanisms to deal with transboundary issues were: BE (WA region), BG, DK, EE, 3 water agencies in FR for continental waters, IT, and LV.
 
-## CQ9. Do you consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning the nutrient reduction measures?
+## C9. Do you consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning the nutrient reduction measures?
 ```{r CQ9, fig.height = 1, fig.width= 5, fig.cap="Figure 19. Number of countries responding."}
 #select data CQ9
 PartC.Q9 <- dat.PartC %>% filter(QuestionNo_b==10)
@@ -1124,9 +1150,9 @@ PartCQ9 <- ggplot(PartC.Q9, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ9 + theme(legend.position = "none") 
 ```
 
-Climate change is an emerging priority of the EU COM. It is expected to have significant influence in shaping the environmental conditions in aquatic ecosystems and influence relevant phenomenons for water quality such as sea-level rise, flash floods and run_off. Despite being a challenging issue, 15 countries already consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning their nutrient reduction measures. Approaches are quite diverse, with some reflected e.g. on the revisions of targets/quality objectives; CC included in models; and others foreseeing new measures for dealing with draining large amounts of torrential rainwater and control with pollution loads. BUt most are at the stage of developing approaches to accommodate CC.
+Climate change is an emerging priority of the EU. It is expected to have significant influence in shaping environmental conditions in aquatic ecosystems and influence  phenomena relevant to water quality such as sea-level rise, flash floods and run-off. Despite being a challenging issue, 15 countries already consider climate change impacts on nutrient emissions and/or on biological quality elements/MSFD criterion responses to nutrients when planning their nutrient reduction measures. Approaches are quite diverse, with some built into existing approaches (e.g. revisions of targets/quality objectives; including climate change in models) whilst others foresee new measures for dealing with draining large amounts of torrential rainwater and control with pollution loads. BUt most are at the stage of developing approaches to accommodate climate change.
 
-## CQ10. Do you consider nature-based solutions (restoring riparian zones, wetlands, flood plains etc.) when planning the nutrient reduction measures? 
+## C10. Do you consider nature-based solutions (restoring riparian zones, wetlands, flood plains etc.) when planning the nutrient reduction measures? 
 ```{r CQ10, fig.height = 1, fig.width= 5, fig.cap="Figure 20. Number of countries responding."}
 #select data CQ10
 PartC.Q10 <- dat.PartC %>% filter(QuestionNo_b==11)
@@ -1154,12 +1180,11 @@ PartCQ10 <- ggplot(PartC.Q10, aes(ResponseOptionText, ResponsesPerOption)) +
 
 PartCQ10 + theme(legend.position = "none") 
 ```
-Nature-based solutions are considered by most countries, and a wide varied of approaches has been described. Landscape interventions that go from green strips along the rivers to strengthen the ban on the use of fertilizers and pesticides; temporary flood zones; riparian and wetlands rehabilitation; grass belts; river course re-shape; anti-erosion sediment reservoirs.
+Nature-based solutions are considered by most countries, and a wide variety of approaches has been described. Landscape interventions that go from green strips along the rivers to strengthening the ban on the use of fertilizers and pesticides; temporary flood zones; riparian and wetlands rehabilitation; grass belts; river course re-shape; anti-erosion sediment reservoirs.
 
-Details of country specific solutions described in the Appendix.
+Details of country-specific solutions described in the Appendix.
 
 ## CQ11. Do you consider technical/biological manipulative solutions when planning the nutrient reduction measures? 
-By technical/biological manipulative solutions consider as example the removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, management fisheries, etc.
 
 ```{r CQ11, fig.height = 1, fig.width= 5, fig.cap="Figure 21. Number of countries responding."}
 #select data CQ11
@@ -1180,11 +1205,13 @@ PartCQ11 <- ggplot(PartC.Q11, aes(ResponseOptionText, ResponsesPerOption)) +
 PartCQ11 + theme(legend.position = "none") 
 ```
 
-Only slightly above half of the countries referred to consider technical and/or biological manipulative solutions when planning the nutrient reduction measures.  Among the most common solutions considered by countries are:
+Examples of such aspproaches include the removal of nutrient-rich sediment, oxygenation of bottom water, adding chemicals to the sediment to bind phosphorus, extractive aquaculture using mussels or seaweeds, fisheries management etc.
+
+Only slightly above half of the countries answered "yes" to this question.  Among the most common solutions considered by countries are:
 -	Aeration and/or destratification of bottom waters
 -	Precipitation of phosphorus in the tributaries of the reservoir
 -	Biomanipulation with fish stock (e.g. removal of planktivore fish; introducing predatory fish)
--	Addition of phosphorus binding chemical (although some consider a politically unacceptable measure)
+-	Addition of phosphorus-binding chemical (although some consider this to be a politically unacceptable measure)
 - Removal of nutrient rich sediment 
 - Removal of macrophyte vegetation periodically
 - Mussel substrate introduction
@@ -1194,12 +1221,5 @@ Only slightly above half of the countries referred to consider technical and/or 
 
 Details of country specific solutions described in the Appendix.
 
-## Overview of Part C
-•	A wide variety of measures is in place to reach management objectives for nutrients;
 
-•	Measures effectiveness is in general assumed very difficult to evaluate directly;
-
-•	Ecological time-lag response is often difficult to incorporate or predict and likely to miss single WFD cycles and thus require PoMs adjustment.
-
-•	Countries are devoting great efforts to develop new measures that can better accommodate CC effects and which will be more effective in restoring ecosystems, namely focussing on nature-based and advanced technical/biological manipulative solutions. 
 
