@@ -12,7 +12,8 @@ revisedfile = here::here("NutTarget_template","NutTarget_revised.docx")
 pandoc_convert(revisedfile,to="markdown",output = "NutTarget_revised-2.rmd", 
                options=c("--extract-media=."))
 
-#note to self: before rendering html check newly generated rmd file for edits needed!
+#note to self: before rendering html check newly generated rmd file "NutTarget_revised-2.rmd" for edits needed!
+#and save as "NutTarget_revised.rmd"
 #render html
 render(here::here("NutTarget_template","NutTarget_revised.rmd"),"html_document")
 
