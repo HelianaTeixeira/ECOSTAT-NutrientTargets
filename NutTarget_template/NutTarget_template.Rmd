@@ -902,7 +902,7 @@ plotCQ1 <- ggplot(PartC.Q1long,
   scale_x_reordered() +
   geom_bar(mapping = aes(y = ..prop.., group = 1), stat = "count", width = 0.6) +
   geom_bar(position = position_dodge2(preserve = "single")) +
-  scale_y_continuous(labels = scales::label_percent(accuracy=1), limits = c(-0.05,1) , breaks=seq(0,1,by=0.2))+
+  scale_y_continuous(labels = scales::label_percent(accuracy=1), limits = c(-0.05,0.4) , breaks=seq(0,1,by=0.1))+
   facet_wrap(.~WaterCategory,ncol=1,scales = 'free') +
   labs (y = expression(paste("% countries")),x = NULL) +
   coord_flip() + 
